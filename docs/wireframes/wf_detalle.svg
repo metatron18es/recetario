@@ -1,0 +1,65 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 826' width='100%' font-family="'Liberation Sans','Arial',sans-serif">
+<rect x='0' y='0' width='1200' height='826' fill='#f0ede6'/>
+<rect x='0' y='0' width='1200' height='780' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.5'/>
+<rect x='0' y='0' width='1200' height='34' fill='#e4e4e4'/>
+<circle cx='20' cy='17' r='5' fill='#9a9a9a'/>
+<circle cx='38' cy='17' r='5' fill='#9a9a9a'/>
+<circle cx='56' cy='17' r='5' fill='#9a9a9a'/>
+<rect x='90' y='8' width='1020' height='18' rx='9' fill='#ffffff' stroke='#9a9a9a'/>
+<text x='600.0' y='20' text-anchor='middle' font-size='10' fill='#6b6b6b' font-family="'Liberation Mono',monospace">recetario.app/recetas/123</text>
+<rect x='0' y='88' width='1200' height='692' rx='0' fill='#f4f4f4' stroke='none' stroke-width='1.3' />
+<rect x='0' y='34' width='1200' height='54' rx='0' fill='#ffffff' stroke='#9a9a9a' stroke-width='1' />
+<rect x='24' y='50' width='22' height='22' rx='5' fill='#6b6b6b'/>
+<rect x='56' y='56' width='90' height='10' rx='5.0' fill='#6b6b6b'/>
+<rect x='220' y='46' width='84.2' height='30' rx='15' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='262.1' y='65' text-anchor='middle' font-size='10.5' font-weight='700' fill='#333333'>Mis recetas</text>
+<text x='357.2' y='65' text-anchor='middle' font-size='10.5' fill='#6b6b6b'>Calendario</text>
+<text x='455.4' y='65' text-anchor='middle' font-size='10.5' fill='#6b6b6b'>Preferencias</text>
+<circle cx='1150' cy='61' r='16' fill='#cfcfcf' stroke='#9a9a9a'/>
+<text x='40' y='122' text-anchor='start' font-size='9.5' fill='#6b6b6b' >← Volver a mis recetas</text>
+<rect x='40' y='140' width='520' height='300' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='40' y1='140' x2='560' y2='440' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='560' y1='140' x2='40' y2='440' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='600' y='160' width='260' height='16' rx='8.0' fill='#6b6b6b'/>
+<rect x='600' y='188' width='70' height='22' rx='11' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='635' y='203' text-anchor='middle' font-size='8' fill='#6b6b6b' >Desayuno</text>
+<rect x='680' y='188' width='90' height='22' rx='11' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='725' y='203' text-anchor='middle' font-size='8' fill='#6b6b6b' >420 kcal</text>
+<rect x='780' y='188' width='90' height='22' rx='11' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='825' y='203' text-anchor='middle' font-size='8' fill='#6b6b6b' >15 min</text>
+<text x='600' y='236' text-anchor='start' font-size='8' fill='#6b6b6b' font-weight='700'>DESCRIPCIÓN</text>
+<rect x='600' y='250' width='420' height='8' rx='4.0' fill='#cfcfcf'/>
+<rect x='600' y='264' width='360' height='8' rx='4.0' fill='#cfcfcf'/>
+<rect x='600' y='278' width='300' height='8' rx='4.0' fill='#cfcfcf'/>
+<text x='600' y='320' text-anchor='start' font-size='8' fill='#6b6b6b' font-weight='700'>INGREDIENTES</text>
+<circle cx='604' cy='335' r='2.5' fill='#6b6b6b'/>
+<rect x='616' y='330' width='200' height='8' rx='4.0' fill='#cfcfcf'/>
+<circle cx='604' cy='357' r='2.5' fill='#6b6b6b'/>
+<rect x='616' y='352' width='200' height='8' rx='4.0' fill='#cfcfcf'/>
+<circle cx='604' cy='379' r='2.5' fill='#6b6b6b'/>
+<rect x='616' y='374' width='200' height='8' rx='4.0' fill='#cfcfcf'/>
+<circle cx='604' cy='401' r='2.5' fill='#6b6b6b'/>
+<rect x='616' y='396' width='200' height='8' rx='4.0' fill='#cfcfcf'/>
+<circle cx='604' cy='423' r='2.5' fill='#6b6b6b'/>
+<rect x='616' y='418' width='200' height='8' rx='4.0' fill='#cfcfcf'/>
+<rect x='600' y='460' width='220' height='36' rx='18.0' fill='#6b6b6b' stroke='#6b6b6b' stroke-width='1.3' />
+<text x='710.0' y='482.0' text-anchor='middle' font-size='11' font-weight='700' fill='#ffffff'>Añadir al calendario</text>
+<text x='40' y='470' text-anchor='start' font-size='10' fill='#333333' font-weight='700'>PASOS DE PREPARACIÓN</text>
+<circle cx='56' cy='490' r='14' fill='#6b6b6b'/>
+<text x='56' y='494' text-anchor='middle' font-size='10' fill='white' font-weight='700'>1</text>
+<rect x='84' y='480' width='470' height='8' rx='4.0' fill='#cfcfcf'/>
+<rect x='84' y='496' width='380' height='8' rx='4.0' fill='#e4e4e4'/>
+<circle cx='56' cy='538' r='14' fill='#6b6b6b'/>
+<text x='56' y='542' text-anchor='middle' font-size='10' fill='white' font-weight='700'>2</text>
+<rect x='84' y='528' width='470' height='8' rx='4.0' fill='#cfcfcf'/>
+<rect x='84' y='544' width='380' height='8' rx='4.0' fill='#e4e4e4'/>
+<circle cx='56' cy='586' r='14' fill='#6b6b6b'/>
+<text x='56' y='590' text-anchor='middle' font-size='10' fill='white' font-weight='700'>3</text>
+<rect x='84' y='576' width='470' height='8' rx='4.0' fill='#cfcfcf'/>
+<rect x='84' y='592' width='380' height='8' rx='4.0' fill='#e4e4e4'/>
+<circle cx='56' cy='634' r='14' fill='#6b6b6b'/>
+<text x='56' y='638' text-anchor='middle' font-size='10' fill='white' font-weight='700'>4</text>
+<rect x='84' y='624' width='470' height='8' rx='4.0' fill='#cfcfcf'/>
+<rect x='84' y='640' width='380' height='8' rx='4.0' fill='#e4e4e4'/>
+<text x='600.0' y='810' text-anchor='middle' font-size='12' fill='#5b6358' letter-spacing='.5'>WIREFRAME · Detalle de receta</text>
+</svg>
