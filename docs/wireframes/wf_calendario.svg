@@ -1,0 +1,216 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 826' width='100%' font-family="'Liberation Sans','Arial',sans-serif">
+<rect x='0' y='0' width='1200' height='826' fill='#f0ede6'/>
+<rect x='0' y='0' width='1200' height='780' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.5'/>
+<rect x='0' y='0' width='1200' height='34' fill='#e4e4e4'/>
+<circle cx='20' cy='17' r='5' fill='#9a9a9a'/>
+<circle cx='38' cy='17' r='5' fill='#9a9a9a'/>
+<circle cx='56' cy='17' r='5' fill='#9a9a9a'/>
+<rect x='90' y='8' width='1020' height='18' rx='9' fill='#ffffff' stroke='#9a9a9a'/>
+<text x='600.0' y='20' text-anchor='middle' font-size='10' fill='#6b6b6b' font-family="'Liberation Mono',monospace">recetario.app/calendario</text>
+<rect x='0' y='88' width='1200' height='692' rx='0' fill='#f4f4f4' stroke='none' stroke-width='1.3' />
+<rect x='0' y='34' width='1200' height='54' rx='0' fill='#ffffff' stroke='#9a9a9a' stroke-width='1' />
+<rect x='24' y='50' width='22' height='22' rx='5' fill='#6b6b6b'/>
+<rect x='56' y='56' width='90' height='10' rx='5.0' fill='#6b6b6b'/>
+<text x='262.1' y='65' text-anchor='middle' font-size='10.5' fill='#6b6b6b'>Mis recetas</text>
+<rect x='318.2' y='46' width='78.0' height='30' rx='15' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='357.2' y='65' text-anchor='middle' font-size='10.5' font-weight='700' fill='#333333'>Calendario</text>
+<text x='455.4' y='65' text-anchor='middle' font-size='10.5' fill='#6b6b6b'>Preferencias</text>
+<circle cx='1150' cy='61' r='16' fill='#cfcfcf' stroke='#9a9a9a'/>
+<text x='40' y='122' text-anchor='start' font-size='14' fill='#333333' font-weight='700'>CALENDARIO SEMANAL</text>
+<text x='40' y='142' text-anchor='start' font-size='9' fill='#6b6b6b' >Semana del 26 de octubre al 1 de noviembre</text>
+<rect x='880' y='110' width='140' height='32' rx='16.0' fill='#ffffff' stroke='#6b6b6b' stroke-width='1.3' />
+<text x='950.0' y='130.0' text-anchor='middle' font-size='11' font-weight='700' fill='#333333'>← Semana ant.</text>
+<rect x='1030' y='110' width='130' height='32' rx='16.0' fill='#6b6b6b' stroke='#6b6b6b' stroke-width='1.3' />
+<text x='1095.0' y='130.0' text-anchor='middle' font-size='11' font-weight='700' fill='#ffffff'>Generar auto.</text>
+<rect x='160.0' y='170' width='136.85714285714286' height='30' rx='4' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='228.42857142857144' y='189' text-anchor='middle' font-size='10' fill='#333333' font-weight='700'>Lun</text>
+<rect x='302.8571428571429' y='170' width='136.85714285714286' height='30' rx='4' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='371.28571428571433' y='189' text-anchor='middle' font-size='10' fill='#333333' font-weight='700'>Mar</text>
+<rect x='445.7142857142857' y='170' width='136.85714285714286' height='30' rx='4' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='514.1428571428571' y='189' text-anchor='middle' font-size='10' fill='#333333' font-weight='700'>Mié</text>
+<rect x='588.5714285714286' y='170' width='136.85714285714286' height='30' rx='4' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='657.0' y='189' text-anchor='middle' font-size='10' fill='#333333' font-weight='700'>Jue</text>
+<rect x='731.4285714285714' y='170' width='136.85714285714286' height='30' rx='4' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='799.8571428571429' y='189' text-anchor='middle' font-size='10' fill='#333333' font-weight='700'>Vie</text>
+<rect x='874.2857142857143' y='170' width='136.85714285714286' height='30' rx='4' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='942.7142857142858' y='189' text-anchor='middle' font-size='10' fill='#333333' font-weight='700'>Sáb</text>
+<rect x='1017.1428571428571' y='170' width='136.85714285714286' height='30' rx='4' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='1085.5714285714284' y='189' text-anchor='middle' font-size='10' fill='#333333' font-weight='700'>Dom</text>
+<rect x='40' y='210' width='110' height='102' rx='4' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='95' y='265.0' text-anchor='middle' font-size='9.5' fill='#333333' font-weight='700'>Desayuno</text>
+<rect x='160.0' y='210' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='168.0' y='218' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='168.0' y1='218' x2='288.8571428571429' y2='258' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='288.8571428571429' y1='218' x2='168.0' y2='258' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='168.0' y='266' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='168.0' y='278' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='302.8571428571429' y='210' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='310.8571428571429' y='218' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='310.8571428571429' y1='218' x2='431.7142857142858' y2='258' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='431.7142857142858' y1='218' x2='310.8571428571429' y2='258' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='310.8571428571429' y='266' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='310.8571428571429' y='278' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='445.7142857142857' y='210' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='453.7142857142857' y='218' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='453.7142857142857' y1='218' x2='574.5714285714286' y2='258' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='574.5714285714286' y1='218' x2='453.7142857142857' y2='258' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='453.7142857142857' y='266' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='453.7142857142857' y='278' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='588.5714285714286' y='210' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='596.5714285714286' y='218' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='596.5714285714286' y1='218' x2='717.4285714285714' y2='258' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='717.4285714285714' y1='218' x2='596.5714285714286' y2='258' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='596.5714285714286' y='266' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='596.5714285714286' y='278' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='731.4285714285714' y='210' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='739.4285714285714' y='218' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='739.4285714285714' y1='218' x2='860.2857142857143' y2='258' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='860.2857142857143' y1='218' x2='739.4285714285714' y2='258' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='739.4285714285714' y='266' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='739.4285714285714' y='278' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='874.2857142857143' y='210' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='882.2857142857143' y='218' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='882.2857142857143' y1='218' x2='1003.1428571428572' y2='258' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='1003.1428571428572' y1='218' x2='882.2857142857143' y2='258' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='882.2857142857143' y='266' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='882.2857142857143' y='278' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='1017.1428571428571' y='210' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='1025.142857142857' y='218' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='1025.142857142857' y1='218' x2='1146.0' y2='258' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='1146.0' y1='218' x2='1025.142857142857' y2='258' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='1025.142857142857' y='266' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='1025.142857142857' y='278' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='40' y='320' width='110' height='102' rx='4' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='95' y='375.0' text-anchor='middle' font-size='9.5' fill='#333333' font-weight='700'>Comida</text>
+<rect x='160.0' y='320' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='168.0' y='328' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='168.0' y1='328' x2='288.8571428571429' y2='368' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='288.8571428571429' y1='328' x2='168.0' y2='368' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='168.0' y='376' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='168.0' y='388' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='302.8571428571429' y='320' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='310.8571428571429' y='328' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='310.8571428571429' y1='328' x2='431.7142857142858' y2='368' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='431.7142857142858' y1='328' x2='310.8571428571429' y2='368' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='310.8571428571429' y='376' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='310.8571428571429' y='388' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='445.7142857142857' y='320' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='453.7142857142857' y='328' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='453.7142857142857' y1='328' x2='574.5714285714286' y2='368' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='574.5714285714286' y1='328' x2='453.7142857142857' y2='368' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='453.7142857142857' y='376' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='453.7142857142857' y='388' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='588.5714285714286' y='320' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='596.5714285714286' y='328' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='596.5714285714286' y1='328' x2='717.4285714285714' y2='368' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='717.4285714285714' y1='328' x2='596.5714285714286' y2='368' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='596.5714285714286' y='376' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='596.5714285714286' y='388' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='731.4285714285714' y='320' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='739.4285714285714' y='328' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='739.4285714285714' y1='328' x2='860.2857142857143' y2='368' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='860.2857142857143' y1='328' x2='739.4285714285714' y2='368' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='739.4285714285714' y='376' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='739.4285714285714' y='388' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='874.2857142857143' y='320' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='882.2857142857143' y='328' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='882.2857142857143' y1='328' x2='1003.1428571428572' y2='368' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='1003.1428571428572' y1='328' x2='882.2857142857143' y2='368' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='882.2857142857143' y='376' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='882.2857142857143' y='388' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='1017.1428571428571' y='320' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='1025.142857142857' y='328' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='1025.142857142857' y1='328' x2='1146.0' y2='368' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='1146.0' y1='328' x2='1025.142857142857' y2='368' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='1025.142857142857' y='376' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='1025.142857142857' y='388' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='40' y='430' width='110' height='102' rx='4' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='95' y='485.0' text-anchor='middle' font-size='9.5' fill='#333333' font-weight='700'>Cena</text>
+<rect x='160.0' y='430' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='168.0' y='438' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='168.0' y1='438' x2='288.8571428571429' y2='478' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='288.8571428571429' y1='438' x2='168.0' y2='478' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='168.0' y='486' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='168.0' y='498' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='302.8571428571429' y='430' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='310.8571428571429' y='438' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='310.8571428571429' y1='438' x2='431.7142857142858' y2='478' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='431.7142857142858' y1='438' x2='310.8571428571429' y2='478' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='310.8571428571429' y='486' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='310.8571428571429' y='498' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='445.7142857142857' y='430' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='453.7142857142857' y='438' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='453.7142857142857' y1='438' x2='574.5714285714286' y2='478' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='574.5714285714286' y1='438' x2='453.7142857142857' y2='478' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='453.7142857142857' y='486' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='453.7142857142857' y='498' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='588.5714285714286' y='430' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='596.5714285714286' y='438' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='596.5714285714286' y1='438' x2='717.4285714285714' y2='478' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='717.4285714285714' y1='438' x2='596.5714285714286' y2='478' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='596.5714285714286' y='486' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='596.5714285714286' y='498' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='731.4285714285714' y='430' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='739.4285714285714' y='438' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='739.4285714285714' y1='438' x2='860.2857142857143' y2='478' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='860.2857142857143' y1='438' x2='739.4285714285714' y2='478' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='739.4285714285714' y='486' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='739.4285714285714' y='498' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='874.2857142857143' y='430' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='882.2857142857143' y='438' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='882.2857142857143' y1='438' x2='1003.1428571428572' y2='478' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='1003.1428571428572' y1='438' x2='882.2857142857143' y2='478' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='882.2857142857143' y='486' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='882.2857142857143' y='498' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='1017.1428571428571' y='430' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='1025.142857142857' y='438' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='1025.142857142857' y1='438' x2='1146.0' y2='478' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='1146.0' y1='438' x2='1025.142857142857' y2='478' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='1025.142857142857' y='486' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='1025.142857142857' y='498' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='40' y='540' width='110' height='102' rx='4' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='95' y='595.0' text-anchor='middle' font-size='9.5' fill='#333333' font-weight='700'>Snack</text>
+<rect x='160.0' y='540' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='168.0' y='548' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='168.0' y1='548' x2='288.8571428571429' y2='588' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='288.8571428571429' y1='548' x2='168.0' y2='588' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='168.0' y='596' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='168.0' y='608' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='302.8571428571429' y='540' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='310.8571428571429' y='548' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='310.8571428571429' y1='548' x2='431.7142857142858' y2='588' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='431.7142857142858' y1='548' x2='310.8571428571429' y2='588' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='310.8571428571429' y='596' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='310.8571428571429' y='608' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='445.7142857142857' y='540' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='453.7142857142857' y='548' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='453.7142857142857' y1='548' x2='574.5714285714286' y2='588' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='574.5714285714286' y1='548' x2='453.7142857142857' y2='588' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='453.7142857142857' y='596' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='453.7142857142857' y='608' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='588.5714285714286' y='540' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='596.5714285714286' y='548' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='596.5714285714286' y1='548' x2='717.4285714285714' y2='588' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='717.4285714285714' y1='548' x2='596.5714285714286' y2='588' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='596.5714285714286' y='596' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='596.5714285714286' y='608' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='731.4285714285714' y='540' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='739.4285714285714' y='548' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='739.4285714285714' y1='548' x2='860.2857142857143' y2='588' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='860.2857142857143' y1='548' x2='739.4285714285714' y2='588' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='739.4285714285714' y='596' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='739.4285714285714' y='608' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='874.2857142857143' y='540' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='882.2857142857143' y='548' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='882.2857142857143' y1='548' x2='1003.1428571428572' y2='588' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='1003.1428571428572' y1='548' x2='882.2857142857143' y2='588' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='882.2857142857143' y='596' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='882.2857142857143' y='608' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<rect x='1017.1428571428571' y='540' width='136.85714285714286' height='102' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='1025.142857142857' y='548' width='120.85714285714286' height='40' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='1025.142857142857' y1='548' x2='1146.0' y2='588' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='1146.0' y1='548' x2='1025.142857142857' y2='588' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='1025.142857142857' y='596' width='102.85714285714286' height='7' rx='3.5' fill='#6b6b6b'/>
+<rect x='1025.142857142857' y='608' width='40' height='6' rx='3.0' fill='#cfcfcf'/>
+<text x='600.0' y='810' text-anchor='middle' font-size='12' fill='#5b6358' letter-spacing='.5'>WIREFRAME · Calendario semanal</text>
+</svg>

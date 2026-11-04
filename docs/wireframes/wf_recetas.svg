@@ -1,0 +1,99 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 826' width='100%' font-family="'Liberation Sans','Arial',sans-serif">
+<rect x='0' y='0' width='1200' height='826' fill='#f0ede6'/>
+<rect x='0' y='0' width='1200' height='780' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.5'/>
+<rect x='0' y='0' width='1200' height='34' fill='#e4e4e4'/>
+<circle cx='20' cy='17' r='5' fill='#9a9a9a'/>
+<circle cx='38' cy='17' r='5' fill='#9a9a9a'/>
+<circle cx='56' cy='17' r='5' fill='#9a9a9a'/>
+<rect x='90' y='8' width='1020' height='18' rx='9' fill='#ffffff' stroke='#9a9a9a'/>
+<text x='600.0' y='20' text-anchor='middle' font-size='10' fill='#6b6b6b' font-family="'Liberation Mono',monospace">recetario.app/recetas</text>
+<rect x='0' y='88' width='1200' height='692' rx='0' fill='#f4f4f4' stroke='none' stroke-width='1.3' />
+<rect x='0' y='34' width='1200' height='54' rx='0' fill='#ffffff' stroke='#9a9a9a' stroke-width='1' />
+<rect x='24' y='50' width='22' height='22' rx='5' fill='#6b6b6b'/>
+<rect x='56' y='56' width='90' height='10' rx='5.0' fill='#6b6b6b'/>
+<rect x='220' y='46' width='84.2' height='30' rx='15' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='262.1' y='65' text-anchor='middle' font-size='10.5' font-weight='700' fill='#333333'>Mis recetas</text>
+<text x='357.2' y='65' text-anchor='middle' font-size='10.5' fill='#6b6b6b'>Calendario</text>
+<text x='455.4' y='65' text-anchor='middle' font-size='10.5' fill='#6b6b6b'>Preferencias</text>
+<circle cx='1150' cy='61' r='16' fill='#cfcfcf' stroke='#9a9a9a'/>
+<text x='40' y='150' text-anchor='start' font-size='16' fill='#333333' font-weight='700'>MIS RECETAS</text>
+<rect x='40' y='170' width='320' height='34' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='54' y='192' text-anchor='start' font-size='9' fill='#6b6b6b' >Buscar receta…</text>
+<rect x='380' y='170' width='48.5' height='34' rx='17' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='404.25' y='192' text-anchor='middle' font-size='9' fill='#6b6b6b' font-weight='700'>Todas</text>
+<rect x='438.5' y='170' width='68.0' height='34' rx='17' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='472.5' y='192' text-anchor='middle' font-size='9' fill='#6b6b6b' >Desayuno</text>
+<rect x='516.5' y='170' width='55.0' height='34' rx='17' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='544.0' y='192' text-anchor='middle' font-size='9' fill='#6b6b6b' >Comida</text>
+<rect x='581.5' y='170' width='42.0' height='34' rx='17' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='602.5' y='192' text-anchor='middle' font-size='9' fill='#6b6b6b' >Cena</text>
+<rect x='633.5' y='170' width='48.5' height='34' rx='17' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='657.75' y='192' text-anchor='middle' font-size='9' fill='#6b6b6b' >Snack</text>
+<rect x='1000' y='170' width='160' height='34' rx='17.0' fill='#6b6b6b' stroke='#6b6b6b' stroke-width='1.3' />
+<text x='1080.0' y='191.0' text-anchor='middle' font-size='11' font-weight='700' fill='#ffffff'>+ Nueva receta</text>
+<rect x='40' y='230' width='260' height='230' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='54' y='244' width='232' height='120' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='54' y1='244' x2='286' y2='364' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='286' y1='244' x2='54' y2='364' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='54' y='378' width='200' height='11' rx='5.5' fill='#6b6b6b'/>
+<rect x='54' y='398' width='90' height='8' rx='4.0' fill='#cfcfcf'/>
+<rect x='54' y='420' width='70' height='20' rx='10' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='89' y='434' text-anchor='middle' font-size='7.5' fill='#6b6b6b' >420 kcal</text>
+<rect x='324' y='230' width='260' height='230' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='338' y='244' width='232' height='120' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='338' y1='244' x2='570' y2='364' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='570' y1='244' x2='338' y2='364' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='338' y='378' width='200' height='11' rx='5.5' fill='#6b6b6b'/>
+<rect x='338' y='398' width='90' height='8' rx='4.0' fill='#cfcfcf'/>
+<rect x='338' y='420' width='70' height='20' rx='10' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='373' y='434' text-anchor='middle' font-size='7.5' fill='#6b6b6b' >420 kcal</text>
+<rect x='608' y='230' width='260' height='230' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='622' y='244' width='232' height='120' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='622' y1='244' x2='854' y2='364' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='854' y1='244' x2='622' y2='364' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='622' y='378' width='200' height='11' rx='5.5' fill='#6b6b6b'/>
+<rect x='622' y='398' width='90' height='8' rx='4.0' fill='#cfcfcf'/>
+<rect x='622' y='420' width='70' height='20' rx='10' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='657' y='434' text-anchor='middle' font-size='7.5' fill='#6b6b6b' >420 kcal</text>
+<rect x='892' y='230' width='260' height='230' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='906' y='244' width='232' height='120' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='906' y1='244' x2='1138' y2='364' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='1138' y1='244' x2='906' y2='364' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='906' y='378' width='200' height='11' rx='5.5' fill='#6b6b6b'/>
+<rect x='906' y='398' width='90' height='8' rx='4.0' fill='#cfcfcf'/>
+<rect x='906' y='420' width='70' height='20' rx='10' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='941' y='434' text-anchor='middle' font-size='7.5' fill='#6b6b6b' >420 kcal</text>
+<rect x='40' y='484' width='260' height='230' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='54' y='498' width='232' height='120' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='54' y1='498' x2='286' y2='618' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='286' y1='498' x2='54' y2='618' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='54' y='632' width='200' height='11' rx='5.5' fill='#6b6b6b'/>
+<rect x='54' y='652' width='90' height='8' rx='4.0' fill='#cfcfcf'/>
+<rect x='54' y='674' width='70' height='20' rx='10' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='89' y='688' text-anchor='middle' font-size='7.5' fill='#6b6b6b' >420 kcal</text>
+<rect x='324' y='484' width='260' height='230' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='338' y='498' width='232' height='120' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='338' y1='498' x2='570' y2='618' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='570' y1='498' x2='338' y2='618' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='338' y='632' width='200' height='11' rx='5.5' fill='#6b6b6b'/>
+<rect x='338' y='652' width='90' height='8' rx='4.0' fill='#cfcfcf'/>
+<rect x='338' y='674' width='70' height='20' rx='10' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='373' y='688' text-anchor='middle' font-size='7.5' fill='#6b6b6b' >420 kcal</text>
+<rect x='608' y='484' width='260' height='230' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='622' y='498' width='232' height='120' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='622' y1='498' x2='854' y2='618' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='854' y1='498' x2='622' y2='618' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='622' y='632' width='200' height='11' rx='5.5' fill='#6b6b6b'/>
+<rect x='622' y='652' width='90' height='8' rx='4.0' fill='#cfcfcf'/>
+<rect x='622' y='674' width='70' height='20' rx='10' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='657' y='688' text-anchor='middle' font-size='7.5' fill='#6b6b6b' >420 kcal</text>
+<rect x='892' y='484' width='260' height='230' rx='4' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.3' />
+<rect x='906' y='498' width='232' height='120' rx='4' fill='#ededed' stroke='#9a9a9a' stroke-width='1.3' stroke-dasharray='4 3'/>
+<line x1='906' y1='498' x2='1138' y2='618' stroke='#9a9a9a' stroke-width='1'/>
+<line x1='1138' y1='498' x2='906' y2='618' stroke='#9a9a9a' stroke-width='1'/>
+<rect x='906' y='632' width='200' height='11' rx='5.5' fill='#6b6b6b'/>
+<rect x='906' y='652' width='90' height='8' rx='4.0' fill='#cfcfcf'/>
+<rect x='906' y='674' width='70' height='20' rx='10' fill='#eee' stroke='#9a9a9a' stroke-width='1.3' />
+<text x='941' y='688' text-anchor='middle' font-size='7.5' fill='#6b6b6b' >420 kcal</text>
+<text x='600.0' y='810' text-anchor='middle' font-size='12' fill='#5b6358' letter-spacing='.5'>WIREFRAME · Listado de recetas</text>
+</svg>
