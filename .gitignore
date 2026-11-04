@@ -1,0 +1,16 @@
+# Dependencias y builds
+node_modules/
+dist/
+
+# Entorno local
+.env
+
+# Herramientas locales
+.claude/
+.impeccable/hook.cache.json
+
+# Material del curso (no forma parte del código)
+*.pdf
+
+# Logs de make dev
+.logs/
