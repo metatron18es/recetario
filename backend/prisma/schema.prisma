@@ -1,0 +1,160 @@
+// Modelo de datos del Recetario — 10 entidades, tres bloques:
+// identidad y preferencias, catálogo de recetas, planificación semanal.
+// Ver Recetario_Entrega2_Planificacion_y_Tecnologias.pdf (diagrama entidad-relación).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --- Identidad y preferencias ---------------------------------------------
+
+model Usuario {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  nombre       String
+  creadoEn     DateTime @default(now()) @map("creado_en")
+
+  preferencia      PreferenciaNutricional?
+  alergias         UsuarioAlergia[]
+  recetas          Receta[]
+  calendarios      CalendarioSemanal[]
+
+  @@map("usuario")
+}
+
+model PreferenciaNutricional {
+  id                     Int    @id @default(autoincrement())
+  usuarioId              Int    @unique @map("usuario_id")
+  tipoDieta              String @map("tipo_dieta")
+  objetivoCaloricoDiario Int    @map("objetivo_calorico_diario")
+
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@map("preferencia_nutricional")
+}
+
+model Alergia {
+  id     Int    @id @default(autoincrement())
+  nombre String @unique
+
+  usuarios     UsuarioAlergia[]
+  ingredientes IngredienteAlergia[]
+
+  @@map("alergia")
+}
+
+model UsuarioAlergia {
+  usuarioId Int @map("usuario_id")
+  alergiaId Int @map("alergia_id")
+
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  alergia Alergia @relation(fields: [alergiaId], references: [id], onDelete: Cascade)
+
+  @@id([usuarioId, alergiaId])
+  @@map("usuario_alergia")
+}
+
+// --- Catálogo de recetas ----------------------------------------------------
+
+model Ingrediente {
+  id             Int    @id @default(autoincrement())
+  nombre         String @unique
+  calorias100g   Int    @map("calorias_100g")
+  // Dieta más restrictiva que admite este ingrediente: Vegana < Vegetariana <
+  // Pescetariana < Omnívora. La dieta de una receta es la más restrictiva de
+  // sus ingredientes (ver docs/decisiones). Por defecto Omnívora: ante la duda
+  // el motor de reglas no ofrece el ingrediente a dietas restrictivas.
+  dietaMinima    String @default("Omnívora") @map("dieta_minima")
+
+  alergiasDe IngredienteAlergia[]
+  usosEnRecetas RecetaIngrediente[] @relation("ingrediente_usos")
+
+  @@map("ingrediente")
+}
+
+model IngredienteAlergia {
+  ingredienteId Int @map("ingrediente_id")
+  alergiaId     Int @map("alergia_id")
+
+  ingrediente Ingrediente @relation(fields: [ingredienteId], references: [id], onDelete: Cascade)
+  alergia     Alergia     @relation(fields: [alergiaId], references: [id], onDelete: Cascade)
+
+  @@id([ingredienteId, alergiaId])
+  @@map("ingrediente_alergia")
+}
+
+model Receta {
+  id                    Int    @id @default(autoincrement())
+  usuarioId             Int    @map("usuario_id")
+  nombre                String
+  tipoComida            String @map("tipo_comida")
+  tiempoPreparacionMin  Int    @map("tiempo_preparacion_min")
+  descripcion           String @default("")
+
+  usuario      Usuario             @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  ingredientes RecetaIngrediente[]
+  pasos        PasoReceta[]
+  entradas     EntradaCalendario[]
+
+  @@map("receta")
+}
+
+model RecetaIngrediente {
+  recetaId      Int    @map("receta_id")
+  ingredienteId Int    @map("ingrediente_id")
+  cantidad      Float
+  unidad        String
+
+  receta      Receta      @relation(fields: [recetaId], references: [id], onDelete: Cascade)
+  ingrediente Ingrediente @relation("ingrediente_usos", fields: [ingredienteId], references: [id], onDelete: Cascade)
+
+  @@id([recetaId, ingredienteId])
+  @@map("receta_ingrediente")
+}
+
+// Paso a paso de preparación; no estaba en el diagrama de la memoria como tabla
+// aparte, se modela así para no meter texto libre multilinea en Receta.
+model PasoReceta {
+  id       Int    @id @default(autoincrement())
+  recetaId Int    @map("receta_id")
+  orden    Int
+  texto    String
+
+  receta Receta @relation(fields: [recetaId], references: [id], onDelete: Cascade)
+
+  @@unique([recetaId, orden])
+  @@map("paso_receta")
+}
+
+// --- Planificación semanal --------------------------------------------------
+
+model CalendarioSemanal {
+  id          Int      @id @default(autoincrement())
+  usuarioId   Int      @map("usuario_id")
+  fechaInicio DateTime @map("fecha_inicio")
+
+  usuario  Usuario             @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  entradas EntradaCalendario[]
+
+  @@map("calendario_semanal")
+}
+
+model EntradaCalendario {
+  id            Int     @id @default(autoincrement())
+  calendarioId  Int     @map("calendario_id")
+  diaSemana     String  @map("dia_semana")
+  tipoComida    String  @map("tipo_comida")
+  recetaId      Int?    @map("receta_id")
+
+  calendario CalendarioSemanal @relation(fields: [calendarioId], references: [id], onDelete: Cascade)
+  receta     Receta?           @relation(fields: [recetaId], references: [id], onDelete: SetNull)
+
+  @@unique([calendarioId, diaSemana, tipoComida])
+  @@map("entrada_calendario")
+}
