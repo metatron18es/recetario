@@ -1,0 +1,74 @@
+:root {
+  --ink: #20261f;
+  --ink-soft: #5b6358;
+  --paper: #ffffff;
+  --cream: #faf6ef;
+  --green: #3a5a40;
+  --green-dark: #1f3821;
+  --sage: #55795c;
+  --terracotta: #c1622d;
+  --terracotta-soft: #e8a97e;
+  --line: #e4e1d8;
+  --chip-bg: #f3efe6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--cream);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Fraunces', serif;
+  margin: 0;
+  font-weight: 600;
+}
+
+a {
+  color: var(--terracotta);
+}
+a:hover {
+  color: var(--green-dark);
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.empty {
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
