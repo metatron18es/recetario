@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: recetario-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: recetario
+      POSTGRES_PASSWORD: recetario
+      POSTGRES_DB: recetario
+    ports:
+      - '5434:5432'
+    volumes:
+      - recetario-db-data:/var/lib/postgresql/data
+
+volumes:
+  recetario-db-data:
