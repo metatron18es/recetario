@@ -16,3 +16,6 @@ export function createApp() {
 
   return app
 }
+
+// Vercel ejecuta la app Express exportada por defecto como función serverless.
+export default createApp()
