@@ -16,3 +16,5 @@ dist/
 .logs/
 .neon
 .env.local
+
+!docs/entregas/*.pdf
