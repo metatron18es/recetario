@@ -77,6 +77,7 @@ Las imágenes (de receta y de cada paso) viven solo en el frontend (mock, `strin
 - **Si un usuario se da de baja, sus recetas se conservan** (el autor queda vacío: `usuarioId` con `onDelete: SetNull`).
 - **Ingredientes nuevos:** un usuario puede proponerlos al crear una receta; entran con `validado = false` y no se ofrecen al motor de reglas hasta que el administrador los valida. El administrador los valida desde un panel de administración que se construirá más adelante.
 - **Rol de administrador:** `Usuario.rol = 'admin'`. Hay un único administrador (el autor del proyecto).
+- **Tipos de comida:** desayuno, almuerzo, comida, merienda y cena (5 por día, 35 celdas por semana). No se usa «snack», que no es un término de uso en España. `tipo_comida` es texto libre en el esquema; la lista cerrada se valida en el backend.
 
 ## Diseño visual
 
@@ -118,6 +119,7 @@ Todas menos `/login` cuelgan del layout `AppShell` (nav superior + badge de esta
 
 ## Pendiente (fase "Prototipo" del roadmap académico)
 
+- Al incorporar el prototipo del frontend, sustituir «Snack» por «Almuerzo» y «Merienda» (tipos de comida, filtros, calendario de 5 filas, datos de ejemplo y generación automática).
 - Autenticación real: endpoints de registro/login, JWT + bcrypt contra la tabla `Usuario`, con el rol de administrador.
 - Panel de administración (fase futura): validar ingredientes propuestos y borrar recetas.
 - CRUD real contra Postgres (recetas, calendario, preferencias, alérgenos) sustituyendo el store mock de Pinia.
