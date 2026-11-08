@@ -24,11 +24,11 @@ h1::after { content: ''; flex: 1; height: 1px; background: #e4e1d8; margin-top: 
 <div class="wrap fig"><img src="../diagrams/diagrama-entidad-relacion.svg" alt="Diagrama entidad-relación"></div>
 <div class="wrap cap">Diagrama entidad-relación · 11 entidades</div>
 <div class="wrap leg">
-<div><b>Usuario</b> — cuenta y autenticación</div>
+<div><b>Usuario</b> — cuenta, autenticación y rol (usuario o administrador)</div>
 <div><b>PreferenciaNutricional</b> — dieta y objetivo calórico (1:1 con Usuario)</div>
 <div><b>Alergia</b> — catálogo de alergias/intolerancias</div>
-<div><b>Ingrediente</b> — catálogo con calorías por 100g y dieta mínima que lo admite</div>
-<div><b>Receta</b> — autoría, tipo de comida, tiempo y descripción</div>
+<div><b>Ingrediente</b> — catálogo con calorías por 100g, dieta mínima que lo admite y estado de validación (los que propone un usuario los valida el administrador)</div>
+<div><b>Receta</b> — pública para todos los usuarios; guarda su autor (se conserva aunque el autor se dé de baja), tipo de comida, tiempo y descripción</div>
 <div><b>PasoReceta</b> — pasos de preparación ordenados de cada receta</div>
 <div><b>CalendarioSemanal</b> — una semana por usuario</div>
 <div><b>EntradaCalendario</b> — celda día × tipo de comida</div>

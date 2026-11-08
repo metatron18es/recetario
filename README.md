@@ -9,6 +9,15 @@ Aplicación web para guardar recetas, planificar la semana y generar la lista de
 - Integración en `main` mediante pull request que cierre su issue (`Closes #N`).
 - `main` no recibe commits directos.
 
+## Reglas de negocio
+
+- Las recetas son públicas: las ve cualquier usuario, y se guarda quién las sube.
+- Solo el autor edita su receta. Los usuarios no pueden borrar recetas: solo el administrador, y al borrarlas desaparecen para todos (las celdas de calendario que las usaban quedan vacías).
+- Si un usuario se da de baja, sus recetas se conservan.
+- Los ingredientes nuevos que propone un usuario los valida el administrador, desde un panel de administración que se construirá más adelante.
+
+Más detalle en [`docs/DECISIONES_PROYECTO.md`](docs/DECISIONES_PROYECTO.md).
+
 ## Cómo arrancar
 
 Requisitos: Node 22, Docker y un `backend/.env` (copia de `backend/.env.example`).

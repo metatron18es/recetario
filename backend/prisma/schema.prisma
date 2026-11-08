@@ -7,7 +7,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider  = "postgresql"
   url       = env("DATABASE_URL")
   directUrl = env("DATABASE_URL_UNPOOLED")
 }
@@ -19,12 +19,15 @@ model Usuario {
   email        String   @unique
   passwordHash String   @map("password_hash")
   nombre       String
+  // "usuario" o "admin". Solo el administrador puede borrar recetas y validar ingredientes.
+  rol          String   @default("usuario")
   creadoEn     DateTime @default(now()) @map("creado_en")
 
-  preferencia      PreferenciaNutricional?
-  alergias         UsuarioAlergia[]
-  recetas          Receta[]
-  calendarios      CalendarioSemanal[]
+  preferencia            PreferenciaNutricional?
+  alergias               UsuarioAlergia[]
+  recetas                Receta[]
+  ingredientesPropuestos Ingrediente[]           @relation("ingrediente_propuesto_por")
+  calendarios            CalendarioSemanal[]
 
   @@map("usuario")
 }
@@ -64,17 +67,23 @@ model UsuarioAlergia {
 // --- Catálogo de recetas ----------------------------------------------------
 
 model Ingrediente {
-  id             Int    @id @default(autoincrement())
-  nombre         String @unique
-  calorias100g   Int    @map("calorias_100g")
+  id             Int     @id @default(autoincrement())
+  nombre         String  @unique
+  calorias100g   Int     @map("calorias_100g")
   // Dieta más restrictiva que admite este ingrediente: Vegana < Vegetariana <
   // Pescetariana < Omnívora. La dieta de una receta es la más restrictiva de
   // sus ingredientes (ver docs/decisiones). Por defecto Omnívora: ante la duda
   // el motor de reglas no ofrece el ingrediente a dietas restrictivas.
-  dietaMinima    String @default("Omnívora") @map("dieta_minima")
+  dietaMinima    String  @default("Omnívora") @map("dieta_minima")
+  // Los ingredientes que propone un usuario entran con validado = false y no se ofrecen al motor de
+  // reglas hasta que el administrador los valida (panel de administración, fase futura).
+  validado       Boolean @default(true)
+  propuestoPorId Int?    @map("propuesto_por_id")
 
-  alergiasDe IngredienteAlergia[]
-  usosEnRecetas RecetaIngrediente[] @relation("ingrediente_usos")
+  propuestoPor Usuario? @relation("ingrediente_propuesto_por", fields: [propuestoPorId], references: [id], onDelete: SetNull)
+
+  alergiasDe    IngredienteAlergia[]
+  usosEnRecetas RecetaIngrediente[]  @relation("ingrediente_usos")
 
   @@map("ingrediente")
 }
@@ -90,15 +99,17 @@ model IngredienteAlergia {
   @@map("ingrediente_alergia")
 }
 
+// Las recetas son públicas: las ve cualquier usuario. `usuarioId` guarda el autor; si el autor se da
+// de baja, la receta se conserva (queda sin autor). Solo el administrador puede borrarlas.
 model Receta {
-  id                    Int    @id @default(autoincrement())
-  usuarioId             Int    @map("usuario_id")
-  nombre                String
-  tipoComida            String @map("tipo_comida")
-  tiempoPreparacionMin  Int    @map("tiempo_preparacion_min")
-  descripcion           String @default("")
+  id                   Int    @id @default(autoincrement())
+  usuarioId            Int?   @map("usuario_id")
+  nombre               String
+  tipoComida           String @map("tipo_comida")
+  tiempoPreparacionMin Int    @map("tiempo_preparacion_min")
+  descripcion          String @default("")
 
-  usuario      Usuario             @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuario      Usuario?            @relation(fields: [usuarioId], references: [id], onDelete: SetNull)
   ingredientes RecetaIngrediente[]
   pasos        PasoReceta[]
   entradas     EntradaCalendario[]
@@ -147,11 +158,11 @@ model CalendarioSemanal {
 }
 
 model EntradaCalendario {
-  id            Int     @id @default(autoincrement())
-  calendarioId  Int     @map("calendario_id")
-  diaSemana     String  @map("dia_semana")
-  tipoComida    String  @map("tipo_comida")
-  recetaId      Int?    @map("receta_id")
+  id           Int    @id @default(autoincrement())
+  calendarioId Int    @map("calendario_id")
+  diaSemana    String @map("dia_semana")
+  tipoComida   String @map("tipo_comida")
+  recetaId     Int?   @map("receta_id")
 
   calendario CalendarioSemanal @relation(fields: [calendarioId], references: [id], onDelete: Cascade)
   receta     Receta?           @relation(fields: [recetaId], references: [id], onDelete: SetNull)
