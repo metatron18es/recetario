@@ -32,13 +32,13 @@
 <rect x='250.0' y='486' width='440' height='56' rx='8' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
 <rect x='250.0' y='486' width='8' height='56' rx='4' fill='#3a5a40'/>
 <text x='476' y='503.0' text-anchor='middle' font-size='11' font-weight='600' fill='#20261f'>Agrupar recetas válidas por tipo de</text>
-<text x='476' y='518.0' text-anchor='middle' font-size='11' font-weight='600' fill='#20261f'>comida (desayuno · comida · cena ·</text>
-<text x='476' y='533.0' text-anchor='middle' font-size='11' font-weight='600' fill='#20261f'>snack)</text>
+<text x='476' y='518.0' text-anchor='middle' font-size='11' font-weight='600' fill='#20261f'>comida (desayuno · almuerzo · comida ·</text>
+<text x='476' y='533.0' text-anchor='middle' font-size='11' font-weight='600' fill='#20261f'>merienda · cena)</text>
 <line x1='470' y1='542' x2='470' y2='582' stroke='#5b6358' stroke-width='1.5' marker-end='url(#arrow)'/>
 <rect x='250.0' y='582' width='440' height='64' rx='8' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
 <rect x='250.0' y='582' width='8' height='64' rx='4' fill='#3a5a40'/>
 <text x='476' y='610.5' text-anchor='middle' font-size='11' font-weight='600' fill='#20261f'>Asignar una receta a cada celda del</text>
-<text x='476' y='625.5' text-anchor='middle' font-size='11' font-weight='600' fill='#20261f'>calendario (7 días × 4 comidas)</text>
+<text x='476' y='625.5' text-anchor='middle' font-size='11' font-weight='600' fill='#20261f'>calendario (7 días × 5 comidas)</text>
 <line x1='470' y1='646' x2='470' y2='686' stroke='#5b6358' stroke-width='1.5' marker-end='url(#arrow)'/>
 <polygon points='470,686 690.0,751.0 470,816 250.0,751.0' fill='#faf6ef' stroke='#c1622d' stroke-width='1.8'/>
 <text x='470' y='748.0' text-anchor='middle' font-size='10.6' font-weight='700' fill='#20261f'>¿Calorías diarias dentro del</text>
