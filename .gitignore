@@ -18,3 +18,4 @@ dist/
 .env.local
 
 !docs/entregas/*.pdf
+skills-lock.json
