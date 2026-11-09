@@ -1,0 +1,81 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 940 498' width='100%' font-family="'Liberation Sans','Arial',sans-serif">
+<rect x='0' y='0' width='940' height='498' fill='#faf6ef'/>
+<defs><marker id='arrow' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#5b6358'/></marker><marker id='arrowT' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#c1622d'/></marker><marker id='tri' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='9' markerHeight='9' orient='auto'><path d='M0,0 L10,5 L0,10 z' fill='#ffffff' stroke='#5b6358' stroke-width='1.3'/></marker></defs>
+<text x='30' y='28' font-size='11' fill='#5b6358' text-anchor='start' letter-spacing='1.5' font-weight='700'>ROADMAP · ÉPICAS DEL PROYECTO (GITHUB PROJECTS)</text>
+<rect x='190.0' y='46' width='183.39622641509436' height='22' rx='0' fill='#3a5a40' stroke='#ffffff' stroke-width='1'/>
+<text x='281.6981132075472' y='62' font-size='10.5' fill='#ffffff' text-anchor='middle' letter-spacing='1' font-weight='700'>OCT</text>
+<rect x='373.39622641509436' y='46' width='203.7735849056603' height='22' rx='0' fill='#3a5a40' stroke='#ffffff' stroke-width='1'/>
+<text x='475.2830188679245' y='62' font-size='10.5' fill='#ffffff' text-anchor='middle' letter-spacing='1' font-weight='700'>NOV</text>
+<rect x='577.1698113207547' y='46' width='210.56603773584914' height='22' rx='0' fill='#3a5a40' stroke='#ffffff' stroke-width='1'/>
+<text x='682.4528301886792' y='62' font-size='10.5' fill='#ffffff' text-anchor='middle' letter-spacing='1' font-weight='700'>DIC</text>
+<rect x='787.7358490566038' y='46' width='122.2641509433962' height='22' rx='0' fill='#3a5a40' stroke='#ffffff' stroke-width='1'/>
+<text x='848.867924528302' y='62' font-size='10.5' fill='#ffffff' text-anchor='middle' letter-spacing='1' font-weight='700'>ENE</text>
+<line x1='190.0' y1='70' x2='190.0' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<line x1='237.54716981132077' y1='70' x2='237.54716981132077' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<line x1='285.09433962264154' y1='70' x2='285.09433962264154' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<line x1='332.64150943396226' y1='70' x2='332.64150943396226' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<line x1='380.188679245283' y1='70' x2='380.188679245283' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<line x1='427.7358490566038' y1='70' x2='427.7358490566038' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<line x1='475.28301886792457' y1='70' x2='475.28301886792457' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<line x1='522.8301886792453' y1='70' x2='522.8301886792453' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<line x1='570.377358490566' y1='70' x2='570.377358490566' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<line x1='617.9245283018868' y1='70' x2='617.9245283018868' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<line x1='665.4716981132076' y1='70' x2='665.4716981132076' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<line x1='713.0188679245283' y1='70' x2='713.0188679245283' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<line x1='760.5660377358491' y1='70' x2='760.5660377358491' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<line x1='808.1132075471698' y1='70' x2='808.1132075471698' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<line x1='855.6603773584906' y1='70' x2='855.6603773584906' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<line x1='903.2075471698113' y1='70' x2='903.2075471698113' y2='424' stroke='#e4e1d8' stroke-width='1'/>
+<rect x='24' y='80' width='892' height='30' rx='4' fill='#f3efe6' stroke='none' stroke-width='0'/>
+<rect x='30' y='87' width='8' height='14' rx='2' fill='#3a5a40' stroke='#3a5a40' stroke-width='0'/>
+<text x='46' y='99' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>analisis-diseno</text>
+<rect x='203.58490566037736' y='85' width='414.33962264150944' height='18' rx='5' fill='#3a5a40' stroke='#3a5a40' stroke-width='0'/>
+<rect x='203.58490566037736' y='85' width='362.54716981132077' height='18' rx='5' fill='#00000033' stroke='none' stroke-width='0'/>
+<text x='211.58490566037736' y='98' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>7/8 hechas</text>
+<rect x='24' y='116' width='892' height='30' rx='4' fill='#faf6ef' stroke='none' stroke-width='0'/>
+<rect x='30' y='123' width='8' height='14' rx='2' fill='#8a9a86' stroke='#8a9a86' stroke-width='0'/>
+<text x='46' y='135' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>memoria</text>
+<rect x='203.58490566037736' y='121' width='706.4150943396227' height='18' rx='5' fill='#8a9a86' stroke='#8a9a86' stroke-width='0'/>
+<rect x='203.58490566037736' y='121' width='235.47169811320754' height='18' rx='5' fill='#00000033' stroke='none' stroke-width='0'/>
+<text x='211.58490566037736' y='134' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>3/9 hechas</text>
+<rect x='24' y='152' width='892' height='30' rx='4' fill='#f3efe6' stroke='none' stroke-width='0'/>
+<rect x='30' y='159' width='8' height='14' rx='2' fill='#2f6f6a' stroke='#2f6f6a' stroke-width='0'/>
+<text x='46' y='171' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>despliegue</text>
+<rect x='332.64150943396226' y='157' width='523.0188679245283' height='18' rx='5' fill='#2f6f6a' stroke='#2f6f6a' stroke-width='0'/>
+<rect x='332.64150943396226' y='157' width='523.0188679245283' height='18' rx='5' fill='#00000033' stroke='none' stroke-width='0'/>
+<text x='340.64150943396226' y='170' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>4/4 hechas</text>
+<rect x='24' y='188' width='892' height='30' rx='4' fill='#faf6ef' stroke='none' stroke-width='0'/>
+<rect x='30' y='195' width='8' height='14' rx='2' fill='#c1622d' stroke='#c1622d' stroke-width='0'/>
+<text x='46' y='207' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>auth</text>
+<rect x='427.7358490566038' y='193' width='427.92452830188677' height='18' rx='5' fill='#c1622d' stroke='#c1622d' stroke-width='0'/>
+<text x='435.7358490566038' y='206' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>0/7 hechas</text>
+<rect x='24' y='224' width='892' height='30' rx='4' fill='#f3efe6' stroke='none' stroke-width='0'/>
+<rect x='30' y='231' width='8' height='14' rx='2' fill='#b8892b' stroke='#b8892b' stroke-width='0'/>
+<text x='46' y='243' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>recetas</text>
+<rect x='427.7358490566038' y='229' width='190.18867924528297' height='18' rx='5' fill='#b8892b' stroke='#b8892b' stroke-width='0'/>
+<text x='435.7358490566038' y='242' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>0/5 hechas</text>
+<rect x='24' y='260' width='892' height='30' rx='4' fill='#faf6ef' stroke='none' stroke-width='0'/>
+<rect x='30' y='267' width='8' height='14' rx='2' fill='#6b8f71' stroke='#6b8f71' stroke-width='0'/>
+<text x='46' y='279' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>preferencias</text>
+<rect x='427.7358490566038' y='265' width='190.18867924528297' height='18' rx='5' fill='#6b8f71' stroke='#6b8f71' stroke-width='0'/>
+<text x='435.7358490566038' y='278' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>0/2 hechas</text>
+<rect x='24' y='296' width='892' height='30' rx='4' fill='#f3efe6' stroke='none' stroke-width='0'/>
+<rect x='30' y='303' width='8' height='14' rx='2' fill='#8c4a2f' stroke='#8c4a2f' stroke-width='0'/>
+<text x='46' y='315' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>motor-reglas</text>
+<rect x='427.7358490566038' y='301' width='190.18867924528297' height='18' rx='5' fill='#8c4a2f' stroke='#8c4a2f' stroke-width='0'/>
+<text x='435.7358490566038' y='314' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>0/2 hechas</text>
+<rect x='24' y='332' width='892' height='30' rx='4' fill='#faf6ef' stroke='none' stroke-width='0'/>
+<rect x='30' y='339' width='8' height='14' rx='2' fill='#4f7a86' stroke='#4f7a86' stroke-width='0'/>
+<text x='46' y='351' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>calendario</text>
+<rect x='617.9245283018868' y='337' width='237.7358490566038' height='18' rx='5' fill='#4f7a86' stroke='#4f7a86' stroke-width='0'/>
+<text x='625.9245283018868' y='350' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>0/3 hechas</text>
+<rect x='24' y='368' width='892' height='30' rx='4' fill='#f3efe6' stroke='none' stroke-width='0'/>
+<rect x='30' y='375' width='8' height='14' rx='2' fill='#7a6a9a' stroke='#7a6a9a' stroke-width='0'/>
+<text x='46' y='387' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>calidad</text>
+<rect x='427.7358490566038' y='373' width='427.92452830188677' height='18' rx='5' fill='#7a6a9a' stroke='#7a6a9a' stroke-width='0'/>
+<text x='435.7358490566038' y='386' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>0/3 hechas</text>
+<line x1='427.7358490566038' y1='70' x2='427.7358490566038' y2='424' stroke='#c1622d' stroke-width='2'/>
+<rect x='407.7358490566038' y='424' width='40' height='17' rx='3' fill='#c1622d' stroke='#c1622d' stroke-width='0'/>
+<text x='427.7358490566038' y='436.5' font-size='10' fill='#ffffff' text-anchor='middle' font-weight='700'>HOY</text>
+<text x='30' y='486' font-size='10' fill='#5b6358' text-anchor='start'>Cada barra va de la fecha de inicio más temprana a la de fin más tardía de las issues de la épica (campos Fecha inicio y Fecha fin del proyecto); la parte oscura es lo ya hecho.</text>
+</svg>
