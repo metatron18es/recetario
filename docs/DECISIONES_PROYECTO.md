@@ -6,7 +6,7 @@ _Última actualización: 8 nov 2026. Documento de contexto del proyecto (decisio
 
 Recetario es una app de planificación de recetas y menús semanales (TFG/proyecto DAW). Este documento recoge las decisiones de arquitectura, stack y producto ya tomadas durante el desarrollo del esqueleto con Claude Code, para poder retomar el trabajo en otra herramienta (orca) sin perder contexto.
 
-Estado actual (8 nov 2026): esqueleto desplegado de extremo a extremo — frontend en Vercel, API Express en Vercel y PostgreSQL en Neon, con CI en GitHub Actions y trabajo por rama y pull request. La API solo expone comprobaciones de salud (`/api/health` y `/api/health/db`); la funcionalidad (autenticación, recetas, preferencias, motor de reglas) se implementa en la fase de prototipo. El prototipo visual del frontend (componentes, vistas con datos de ejemplo, Storybook) está pendiente de incorporarse al repositorio por PRs; las secciones de más abajo sobre estructura del frontend, diseño visual, rutas y funcionalidades describen ese prototipo.
+Estado actual (8 nov 2026): esqueleto desplegado de extremo a extremo — frontend en Vercel, API Express en Vercel y PostgreSQL en Neon, con CI en GitHub Actions y trabajo por rama y pull request. La API solo expone comprobaciones de salud (`/api/health` y `/api/health/db`); la funcionalidad (autenticación, recetas, preferencias, motor de reglas) se implementa en la fase de prototipo. El prototipo visual del frontend (componentes con prefijo `tp-`, vistas con datos de ejemplo y Storybook) está incorporado al repositorio; las secciones de más abajo sobre estructura del frontend, diseño visual, rutas y funcionalidades describen ese prototipo.
 
 ## Stack tecnológico
 
@@ -15,6 +15,7 @@ Estado actual (8 nov 2026): esqueleto desplegado de extremo a extremo — fronte
 | Frontend | Vue 3 + TypeScript (`<script setup>`) | Vite como bundler/dev server |
 | Routing | Vue Router 4 | Rutas anidadas, props por parámetro dinámico |
 | Estado | Pinia | Store único `recetario` con datos de ejemplo |
+| Componentes | Storybook 10 (`@storybook/vue3-vite`) | Una story por componente `tp-`, con controles, código y documentación; página de colores e iconos. `make dev` lo levanta en el puerto 6007 |
 | Backend | Express + TypeScript | `tsx watch` en dev, compila con `tsc` |
 | ORM | Prisma | `schema.prisma` + migraciones versionadas |
 | Base de datos | PostgreSQL 16 (Docker) | Contenedor local `recetario-db` |
@@ -119,7 +120,6 @@ Todas menos `/login` cuelgan del layout `AppShell` (nav superior + badge de esta
 
 ## Pendiente (fase "Prototipo" del roadmap académico)
 
-- Al incorporar el prototipo del frontend, sustituir «Snack» por «Almuerzo» y «Merienda» (tipos de comida, filtros, calendario de 5 filas, datos de ejemplo y generación automática).
 - Autenticación real: endpoints de registro/login, JWT + bcrypt contra la tabla `Usuario`, con el rol de administrador.
 - Panel de administración (fase futura): validar ingredientes propuestos y borrar recetas.
 - CRUD real contra Postgres (recetas, calendario, preferencias, alérgenos) sustituyendo el store mock de Pinia.

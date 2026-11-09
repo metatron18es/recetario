@@ -25,8 +25,8 @@ Requisitos: Node 22, Docker y un `backend/.env` (copia de `backend/.env.example`
 
 ```bash
 make install   # instala dependencias de backend y frontend
-make dev       # base de datos (5434), API (3001) y app (5174)
-make stop      # para la API y la app
+make dev       # base de datos (5434), API (3001), app (5174) y Storybook (6007)
+make stop      # para la API, la app y Storybook
 make db-stop   # para la base de datos
 ```
 

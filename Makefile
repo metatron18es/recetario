@@ -1,11 +1,11 @@
 SHELL := /bin/bash
 .DEFAULT_GOAL := help
-.PHONY: help install db db-stop backend frontend dev stop
+.PHONY: help install db db-stop backend frontend storybook dev stop
 
 LOGS := .logs
 
 # Servicios: nombre|puerto|enlace
-SERVICIOS := "Base de datos|5434|postgresql://recetario@localhost:5434/recetario" "API|3001|http://localhost:3001" "App|5174|http://localhost:5174"
+SERVICIOS := "Base de datos|5434|postgresql://recetario@localhost:5434/recetario" "API|3001|http://localhost:3001" "App|5174|http://localhost:5174" "Storybook|6007|http://localhost:6007"
 
 # Lanza un servicio en segundo plano salvo que su puerto ya esté ocupado. Uso: $(call lanzar,nombre,puerto,carpeta,comando)
 define lanzar
@@ -41,9 +41,12 @@ backend:
 frontend:
 	$(call lanzar,App,5174,frontend,npm run dev)
 
-dev: ## Lanza base de datos, API y app (lo que ya esté en marcha se salta)
+storybook:
+	$(call lanzar,Storybook,6007,frontend,npm run storybook -- --ci)
+
+dev: ## Lanza base de datos, API, app y Storybook (lo que ya esté en marcha se salta)
 	@echo "Arrancando servicios…"
-	@$(MAKE) --no-print-directory db backend frontend
+	@$(MAKE) --no-print-directory db backend frontend storybook
 	@echo; echo "Esperando a que respondan…"
 	@for s in $(SERVICIOS); do \
 		IFS='|' read -r nombre puerto enlace <<< "$$(echo $$s | tr -d '"')"; \
@@ -51,9 +54,9 @@ dev: ## Lanza base de datos, API y app (lo que ya esté en marcha se salta)
 		if (echo > /dev/tcp/127.0.0.1/$$puerto) 2>/dev/null; then estado="listo"; else estado="sin respuesta (mira $(LOGS)/)"; fi; \
 		printf "  %-14s puerto %-5s %-44s %s\n" "$$nombre" "$$puerto" "$$enlace" "$$estado"; \
 	done
-	@echo; echo "Logs en $(LOGS)/. Para parar: make stop (API y app) y make db-stop (base de datos)."
+	@echo; echo "Logs en $(LOGS)/. Para parar: make stop (API, app y Storybook) y make db-stop (base de datos)."
 
-stop: ## Para API y app (no toca la base de datos)
-	@for p in 3001 5174; do \
+stop: ## Para API, app y Storybook (no toca la base de datos)
+	@for p in 3001 5174 6007; do \
 		if fuser -k $$p/tcp >/dev/null 2>&1; then echo "  ✓ parado el puerto $$p"; else echo "  · nada en el puerto $$p"; fi; \
 	done
