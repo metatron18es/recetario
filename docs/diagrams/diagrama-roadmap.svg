@@ -30,8 +30,8 @@
 <rect x='30' y='87' width='8' height='14' rx='2' fill='#3a5a40' stroke='#3a5a40' stroke-width='0'/>
 <text x='46' y='99' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>analisis-diseno</text>
 <rect x='203.58490566037736' y='85' width='414.33962264150944' height='18' rx='5' fill='#3a5a40' stroke='#3a5a40' stroke-width='0'/>
-<rect x='203.58490566037736' y='85' width='362.54716981132077' height='18' rx='5' fill='#00000033' stroke='none' stroke-width='0'/>
-<text x='211.58490566037736' y='98' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>7/8 hechas</text>
+<rect x='203.58490566037736' y='85' width='414.33962264150944' height='18' rx='5' fill='#00000033' stroke='none' stroke-width='0'/>
+<text x='211.58490566037736' y='98' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>9/9 hechas</text>
 <rect x='24' y='116' width='892' height='30' rx='4' fill='#faf6ef' stroke='none' stroke-width='0'/>
 <rect x='30' y='123' width='8' height='14' rx='2' fill='#8a9a86' stroke='#8a9a86' stroke-width='0'/>
 <text x='46' y='135' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>memoria</text>
@@ -47,33 +47,33 @@
 <rect x='24' y='188' width='892' height='30' rx='4' fill='#faf6ef' stroke='none' stroke-width='0'/>
 <rect x='30' y='195' width='8' height='14' rx='2' fill='#c1622d' stroke='#c1622d' stroke-width='0'/>
 <text x='46' y='207' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>auth</text>
-<rect x='427.7358490566038' y='193' width='427.92452830188677' height='18' rx='5' fill='#c1622d' stroke='#c1622d' stroke-width='0'/>
-<text x='435.7358490566038' y='206' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>0/7 hechas</text>
+<rect x='475.28301886792457' y='193' width='366.79245283018867' height='18' rx='5' fill='#c1622d' stroke='#c1622d' stroke-width='0'/>
+<text x='483.28301886792457' y='206' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>0/7 hechas</text>
 <rect x='24' y='224' width='892' height='30' rx='4' fill='#f3efe6' stroke='none' stroke-width='0'/>
 <rect x='30' y='231' width='8' height='14' rx='2' fill='#b8892b' stroke='#b8892b' stroke-width='0'/>
 <text x='46' y='243' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>recetas</text>
-<rect x='427.7358490566038' y='229' width='190.18867924528297' height='18' rx='5' fill='#b8892b' stroke='#b8892b' stroke-width='0'/>
-<text x='435.7358490566038' y='242' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>0/5 hechas</text>
+<rect x='522.8301886792453' y='229' width='47.547169811320714' height='18' rx='5' fill='#b8892b' stroke='#b8892b' stroke-width='0'/>
+<text x='576.377358490566' y='242' font-size='10.5' fill='#5b6358' text-anchor='start' font-weight='700'>0/5 hechas</text>
 <rect x='24' y='260' width='892' height='30' rx='4' fill='#faf6ef' stroke='none' stroke-width='0'/>
 <rect x='30' y='267' width='8' height='14' rx='2' fill='#6b8f71' stroke='#6b8f71' stroke-width='0'/>
 <text x='46' y='279' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>preferencias</text>
-<rect x='427.7358490566038' y='265' width='190.18867924528297' height='18' rx='5' fill='#6b8f71' stroke='#6b8f71' stroke-width='0'/>
-<text x='435.7358490566038' y='278' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>0/2 hechas</text>
+<rect x='570.377358490566' y='265' width='33.96226415094338' height='18' rx='5' fill='#6b8f71' stroke='#6b8f71' stroke-width='0'/>
+<text x='610.3396226415094' y='278' font-size='10.5' fill='#5b6358' text-anchor='start' font-weight='700'>0/2 hechas</text>
 <rect x='24' y='296' width='892' height='30' rx='4' fill='#f3efe6' stroke='none' stroke-width='0'/>
 <rect x='30' y='303' width='8' height='14' rx='2' fill='#8c4a2f' stroke='#8c4a2f' stroke-width='0'/>
 <text x='46' y='315' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>motor-reglas</text>
-<rect x='427.7358490566038' y='301' width='190.18867924528297' height='18' rx='5' fill='#8c4a2f' stroke='#8c4a2f' stroke-width='0'/>
-<text x='435.7358490566038' y='314' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>0/2 hechas</text>
+<rect x='577.1698113207547' y='301' width='40.754716981132106' height='18' rx='5' fill='#8c4a2f' stroke='#8c4a2f' stroke-width='0'/>
+<text x='623.9245283018868' y='314' font-size='10.5' fill='#5b6358' text-anchor='start' font-weight='700'>0/2 hechas</text>
 <rect x='24' y='332' width='892' height='30' rx='4' fill='#faf6ef' stroke='none' stroke-width='0'/>
 <rect x='30' y='339' width='8' height='14' rx='2' fill='#4f7a86' stroke='#4f7a86' stroke-width='0'/>
 <text x='46' y='351' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>calendario</text>
-<rect x='617.9245283018868' y='337' width='237.7358490566038' height='18' rx='5' fill='#4f7a86' stroke='#4f7a86' stroke-width='0'/>
+<rect x='617.9245283018868' y='337' width='95.09433962264154' height='18' rx='5' fill='#4f7a86' stroke='#4f7a86' stroke-width='0'/>
 <text x='625.9245283018868' y='350' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>0/3 hechas</text>
 <rect x='24' y='368' width='892' height='30' rx='4' fill='#f3efe6' stroke='none' stroke-width='0'/>
 <rect x='30' y='375' width='8' height='14' rx='2' fill='#7a6a9a' stroke='#7a6a9a' stroke-width='0'/>
 <text x='46' y='387' font-size='12' fill='#20261f' text-anchor='start' font-weight='700'>calidad</text>
-<rect x='427.7358490566038' y='373' width='427.92452830188677' height='18' rx='5' fill='#7a6a9a' stroke='#7a6a9a' stroke-width='0'/>
-<text x='435.7358490566038' y='386' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>0/3 hechas</text>
+<rect x='577.1698113207547' y='373' width='230.9433962264152' height='18' rx='5' fill='#7a6a9a' stroke='#7a6a9a' stroke-width='0'/>
+<text x='585.1698113207547' y='386' font-size='10.5' fill='#ffffff' text-anchor='start' font-weight='700'>0/3 hechas</text>
 <line x1='427.7358490566038' y1='70' x2='427.7358490566038' y2='424' stroke='#c1622d' stroke-width='2'/>
 <rect x='407.7358490566038' y='424' width='40' height='17' rx='3' fill='#c1622d' stroke='#c1622d' stroke-width='0'/>
 <text x='427.7358490566038' y='436.5' font-size='10' fill='#ffffff' text-anchor='middle' font-weight='700'>HOY</text>

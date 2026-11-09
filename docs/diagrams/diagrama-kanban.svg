@@ -132,14 +132,11 @@
 <text x='536' y='62' font-size='10.5' fill='#1f3821' text-anchor='start' font-weight='700'>En revisión</text>
 <text x='536' y='75' font-size='10.5' fill='#1f3821' text-anchor='start' font-weight='700'>/ test</text>
 <rect x='590' y='80' width='26' height='17' rx='8' fill='#ffffff' stroke='#e4e1d8' stroke-width='1'/>
-<text x='603' y='92.5' font-size='10.5' fill='#5b6358' text-anchor='middle' font-weight='700'>1</text>
-<rect x='536' y='106' width='80' height='24' rx='4' fill='#ffffff' stroke='#e4e1d8' stroke-width='1'/>
-<rect x='536' y='106' width='4' height='24' rx='2' fill='#3a5a40' stroke='#3a5a40' stroke-width='0'/>
-<text x='546' y='122' font-size='10' fill='#5b6358' text-anchor='start' font-weight='700'>#64</text>
+<text x='603' y='92.5' font-size='10.5' fill='#5b6358' text-anchor='middle' font-weight='700'>0</text>
 <rect x='636' y='44' width='270' height='892' rx='8' fill='#efeadf' stroke='#e4e1d8' stroke-width='1.2'/>
 <text x='646' y='66' font-size='12.5' fill='#1f3821' text-anchor='start' font-weight='700'>Hecho</text>
 <rect x='872' y='54' width='26' height='17' rx='8' fill='#ffffff' stroke='#e4e1d8' stroke-width='1'/>
-<text x='885' y='66.5' font-size='10.5' fill='#5b6358' text-anchor='middle' font-weight='700'>14</text>
+<text x='885' y='66.5' font-size='10.5' fill='#5b6358' text-anchor='middle' font-weight='700'>16</text>
 <rect x='644' y='80' width='254' height='24' rx='4' fill='#ffffff' stroke='#e4e1d8' stroke-width='1'/>
 <rect x='644' y='80' width='4' height='24' rx='2' fill='#2f6f6a' stroke='#2f6f6a' stroke-width='0'/>
 <text x='654' y='96' font-size='10' fill='#5b6358' text-anchor='start' font-weight='700'>#19</text>
@@ -196,6 +193,14 @@
 <rect x='644' y='457' width='4' height='24' rx='2' fill='#2f6f6a' stroke='#2f6f6a' stroke-width='0'/>
 <text x='654' y='473' font-size='10' fill='#5b6358' text-anchor='start' font-weight='700'>#39</text>
 <text x='684' y='473' font-size='10.5' fill='#20261f' text-anchor='start'>Desplegar esqueleto mínimo en Verce…</text>
+<rect x='644' y='486' width='254' height='24' rx='4' fill='#ffffff' stroke='#e4e1d8' stroke-width='1'/>
+<rect x='644' y='486' width='4' height='24' rx='2' fill='#3a5a40' stroke='#3a5a40' stroke-width='0'/>
+<text x='654' y='502' font-size='10' fill='#5b6358' text-anchor='start' font-weight='700'>#64</text>
+<text x='684' y='502' font-size='10.5' fill='#20261f' text-anchor='start'>Diagramas de la fase 3: casos de us…</text>
+<rect x='644' y='515' width='254' height='24' rx='4' fill='#ffffff' stroke='#e4e1d8' stroke-width='1'/>
+<rect x='644' y='515' width='4' height='24' rx='2' fill='#3a5a40' stroke='#3a5a40' stroke-width='0'/>
+<text x='654' y='531' font-size='10' fill='#5b6358' text-anchor='start' font-weight='700'>#66</text>
+<text x='684' y='531' font-size='10.5' fill='#20261f' text-anchor='start'>Kanban y roadmap del proyecto en la…</text>
 <rect x='30' y='946' width='880' height='54' rx='8' fill='#ffffff' stroke='#e4e1d8' stroke-width='1.2'/>
 <rect x='46' y='956' width='12' height='12' rx='2' fill='#3a5a40' stroke='#3a5a40' stroke-width='0'/>
 <text x='64' y='966' font-size='11' fill='#20261f' text-anchor='start'>epic:analisis-diseno</text>
