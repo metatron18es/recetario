@@ -24,7 +24,7 @@ h1::after { content: ''; flex: 1; height: 1px; background: #e4e1d8; margin-top: 
 <div class="wrap fig" style="top:196px"><img style="width:91%;margin:0 auto" src="../diagrams/diagrama-casos-de-uso.svg" alt="Diagrama de casos de uso"></div>
 <div class="wrap cap" style="top:933px">Diagrama de casos de uso · 3 actores</div>
 <div class="wrap leg" style="top:959px"><div><b>Visitante</b> — sin sesión: solo puede registrarse o iniciar sesión.</div><div><b>Usuario</b> — gestiona recetas, preferencias y su calendario semanal.</div><div><b>Administrador</b> — hereda todo lo del usuario y además elimina recetas y valida ingredientes propuestos.</div></div>
-<div class="wrap foot"><span>Proyecto Intermodular</span><span>6</span></div>
+<div class="wrap foot"><span>Proyecto Intermodular</span><span>7</span></div>
 </section>
 <section class="page">
 <div class="wrap head"><span><b>RECETARIO</b> — MEMORIA TÉCNICA</span><span>Esquema relacional</span></div>
@@ -33,7 +33,7 @@ h1::after { content: ''; flex: 1; height: 1px; background: #e4e1d8; margin-top: 
 <div class="wrap fig" style="top:196px"><img src="../diagrams/diagrama-esquema-relacional.svg" alt="Esquema relacional"></div>
 <div class="wrap cap" style="top:775px">Esquema relacional · 11 tablas</div>
 <div class="wrap leg" style="top:801px"><div><b>Lista de la compra</b> — no es una tabla: se calcula sumando los ingredientes de las recetas del calendario.</div><div><b>Recetas públicas</b> — el autor es opcional (SET NULL) para conservar la receta si el usuario se da de baja.</div><div><b>Ingredientes</b> — los propone un usuario y los valida el administrador (validado, propuesto_por_id).</div></div>
-<div class="wrap foot"><span>Proyecto Intermodular</span><span>10</span></div>
+<div class="wrap foot"><span>Proyecto Intermodular</span><span>11</span></div>
 </section>
 <section class="page">
 <div class="wrap head"><span><b>RECETARIO</b> — MEMORIA TÉCNICA</span><span>Secuencia: autenticación</span></div>
@@ -42,7 +42,7 @@ h1::after { content: ''; flex: 1; height: 1px; background: #e4e1d8; margin-top: 
 <div class="wrap fig" style="top:196px"><img src="../diagrams/diagrama-secuencia-autenticacion.svg" alt="Secuencia: autenticación"></div>
 <div class="wrap cap" style="top:989px">Secuencia · registro, login y sesión con JWT</div>
 
-<div class="wrap foot"><span>Proyecto Intermodular</span><span>11</span></div>
+<div class="wrap foot"><span>Proyecto Intermodular</span><span>12</span></div>
 </section>
 <section class="page">
 <div class="wrap head"><span><b>RECETARIO</b> — MEMORIA TÉCNICA</span><span>Secuencia: generación del calendario</span></div>
@@ -51,7 +51,7 @@ h1::after { content: ''; flex: 1; height: 1px; background: #e4e1d8; margin-top: 
 <div class="wrap fig" style="top:196px"><img src="../diagrams/diagrama-secuencia-calendario.svg" alt="Secuencia: generación del calendario"></div>
 <div class="wrap cap" style="top:801px">Secuencia · generación automática del calendario</div>
 <div class="wrap leg" style="top:827px"><div><b>Entrada</b> — preferencias, alergias y recetas con ingredientes validados.</div><div><b>Salida</b> — 7 días × 5 comidas guardadas en entrada_calendario.</div><div><b>Fallo</b> — si no hay recetas suficientes, se informa con un mensaje claro.</div></div>
-<div class="wrap foot"><span>Proyecto Intermodular</span><span>12</span></div>
+<div class="wrap foot"><span>Proyecto Intermodular</span><span>13</span></div>
 </section>
 <section class="page">
 <div class="wrap head"><span><b>RECETARIO</b> — MEMORIA TÉCNICA</span><span>Diagrama de despliegue</span></div>
@@ -60,15 +60,16 @@ h1::after { content: ''; flex: 1; height: 1px; background: #e4e1d8; margin-top: 
 <div class="wrap fig" style="top:196px"><img src="../diagrams/diagrama-despliegue.svg" alt="Diagrama de despliegue"></div>
 <div class="wrap cap" style="top:755px">Despliegue · entornos y pipeline</div>
 
-<div class="wrap foot"><span>Proyecto Intermodular</span><span>16</span></div>
+<div class="wrap foot"><span>Proyecto Intermodular</span><span>17</span></div>
 </section>
-<section class="page">
-<div class="wrap head"><span><b>RECETARIO</b> — MEMORIA TÉCNICA</span><span>Diagrama de Gantt</span></div>
-<h1 class="wrap"><span class="n">05</span>Diagrama de Gantt</h1>
-<p class="wrap intro">Cronograma de las cinco fases del proyecto con el desglose del prototipo y del cierre. Las fechas de las fases vienen de la planificación; el reparto semanal de las tareas es una previsión que se ajustará.</p>
-<div class="wrap fig" style="top:196px"><img src="../diagrams/diagrama-gantt.svg" alt="Diagrama de Gantt"></div>
-<div class="wrap cap" style="top:729px">Gantt · octubre de 2026 – enero de 2027</div>
-
+<section class="page"><div class="wrap head"><span><b>RECETARIO</b> — MEMORIA TÉCNICA</span><span>PLANIFICACIÓN</span></div>
+<h1 class="wrap"><span class="n">04</span>Planificación (continuación)</h1>
+<p class="wrap intro">El seguimiento del trabajo se lleva en un proyecto de GitHub Projects, con un tablero Kanban de cinco columnas. Cada historia de usuario y cada tarea es una issue etiquetada con su épica y su prioridad (MoSCoW) y asignada al hito de su entrega.</p>
+<div class="wrap fig" style="top:208px"><img style="" src="../diagrams/diagrama-kanban.svg" alt=""></div><div class="wrap cap" style="top:898px">Tablero Kanban del proyecto en GitHub Projects · estado a 9 de noviembre de 2026</div><div class="wrap leg" style="top:928px"><div><b>Columnas</b> — Backlog, Lista para hacer, En progreso, En revisión/test y Hecho.</div><div><b>Épicas</b> — nueve: auth, recetas, preferencias, motor de reglas, calendario, calidad, despliegue, análisis y diseño, y memoria.</div><div><b>Hitos</b> — uno por entrega (1, 2, 3 y final) más la defensa ante tribunal; 43 issues en total.</div></div>
 <div class="wrap foot"><span>Proyecto Intermodular</span><span>4</span></div>
+</section><section class="page"><div class="wrap head"><span><b>RECETARIO</b> — MEMORIA TÉCNICA</span><span>ROADMAP Y GANTT</span></div>
+<h1 class="wrap"><span class="n">05</span>Roadmap y diagrama de Gantt</h1>
+<p class="wrap intro">El roadmap muestra el periodo de cada épica según las fechas del proyecto de GitHub; el Gantt detalla las cinco fases con el desglose del prototipo y del cierre (reparto semanal previsto).</p>
+<div class="wrap fig" style="top:190px"><img style="width:86%;margin:0 auto" src="../diagrams/diagrama-roadmap.svg" alt=""></div><div class="wrap cap" style="top:502px">Roadmap · épicas del proyecto</div><div class="wrap fig" style="top:530px"><img style="width:86%;margin:0 auto" src="../diagrams/diagrama-gantt.svg" alt=""></div><div class="wrap cap" style="top:990px">Gantt · octubre de 2026 – enero de 2027</div>
+<div class="wrap foot"><span>Proyecto Intermodular</span><span>5</span></div>
 </section>
-</body></html>
