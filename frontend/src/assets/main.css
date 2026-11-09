@@ -10,6 +10,36 @@
   --terracotta-soft: #e8a97e;
   --line: #e4e1d8;
   --chip-bg: #f3efe6;
+
+  /* Terracota: variantes para alertas y énfasis */
+  --terracotta-dark: #8a4420;
+  --terracotta-tint: #fbe9de;
+  --terracotta-border: #efc3a2;
+
+  /* Neutros */
+  --ink-muted: #9aa39a;
+  --mist: #eef0ea;
+  --sand: #eee9dd;
+  --sand-dark: #b8ab8f;
+
+  /* Notificaciones: éxito y error (aviso reutiliza terracotta-*) */
+  --green-tint: #e8f0e5;
+  --green-border: #c3d6bf;
+  --danger: #b3392b;
+  --danger-dark: #8c2a1f;
+  --danger-tint: #fbe4e1;
+  --danger-border: #eab3ac;
+
+  /* Degradados de recetas */
+  --leaf: #9ab08a;
+  --leaf-soft: #8fae8a;
+  --wheat: #d9c38a;
+
+  /* Sombras y capas */
+  --shadow-soft: rgba(32, 38, 31, 0.04);
+  --shadow-medium: rgba(32, 38, 31, 0.06);
+  --shadow-strong: rgba(32, 38, 31, 0.14);
+  --scrim: rgba(31, 56, 33, 0.75);
 }
 
 * {
