@@ -1,0 +1,122 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 940 1180' width='100%' font-family="'Liberation Sans','Arial',sans-serif">
+<rect x='0' y='0' width='940' height='1180' fill='#faf6ef'/>
+<defs><marker id='arrow' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#5b6358'/></marker><marker id='arrowT' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#c1622d'/></marker><marker id='tri' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='9' markerHeight='9' orient='auto'><path d='M0,0 L10,5 L0,10 z' fill='#ffffff' stroke='#5b6358' stroke-width='1.3'/></marker></defs>
+<text x='30' y='28' font-size='11' fill='#5b6358' text-anchor='start' letter-spacing='1.5' font-weight='700'>DIAGRAMA DE CASOS DE USO · RECETARIO</text>
+<rect x='190' y='44' width='725' height='1048' rx='10' fill='none' stroke='#1f3821' stroke-width='2'/>
+<text x='206' y='66' font-size='11' fill='#1f3821' text-anchor='start' letter-spacing='1.5' font-weight='700'>SISTEMA · RECETARIO</text>
+<rect x='208' y='84' width='689' height='98' rx='8' fill='#eef1e8' stroke='#e4e1d8' stroke-width='1.2'/>
+<text x='220' y='104' font-size='11' fill='#5b6358' text-anchor='start' letter-spacing='1.2' font-weight='700'>ACCESO</text>
+<ellipse cx='383' cy='144' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<text x='383' y='143.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Registrarse</text>
+<text x='383' y='159' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-01</text>
+<ellipse cx='722' cy='144' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<text x='722' y='143.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Iniciar sesión</text>
+<text x='722' y='159' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-02</text>
+<rect x='208' y='196' width='689' height='154' rx='8' fill='#eef1e8' stroke='#e4e1d8' stroke-width='1.2'/>
+<text x='220' y='216' font-size='11' fill='#5b6358' text-anchor='start' letter-spacing='1.2' font-weight='700'>SESIÓN Y CUENTA</text>
+<ellipse cx='383' cy='256' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<text x='383' y='255.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Cerrar sesión</text>
+<text x='383' y='271' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-03</text>
+<ellipse cx='722' cy='256' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<text x='722' y='255.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Mantener la sesión</text>
+<text x='722' y='271' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-04</text>
+<ellipse cx='383' cy='312' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6' stroke-dasharray='5 4'/>
+<text x='383' y='311.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Darse de baja</text>
+<text x='383' y='327' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-24</text>
+<rect x='208' y='364' width='689' height='210' rx='8' fill='#eef1e8' stroke='#e4e1d8' stroke-width='1.2'/>
+<text x='220' y='384' font-size='11' fill='#5b6358' text-anchor='start' letter-spacing='1.2' font-weight='700'>RECETAS</text>
+<ellipse cx='383' cy='424' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<text x='383' y='423.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Listar y ver detalle</text>
+<text x='383' y='439' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-08</text>
+<ellipse cx='722' cy='424' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<text x='722' y='423.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Buscar y filtrar</text>
+<text x='722' y='439' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-09</text>
+<ellipse cx='383' cy='480' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<text x='383' y='479.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Crear receta</text>
+<text x='383' y='495' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-05</text>
+<ellipse cx='722' cy='480' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<text x='722' y='484.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Proponer ingrediente nuevo</text>
+<ellipse cx='383' cy='536' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<text x='383' y='535.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Editar receta</text>
+<text x='383' y='551' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-06</text>
+<rect x='208' y='588' width='689' height='98' rx='8' fill='#eef1e8' stroke='#e4e1d8' stroke-width='1.2'/>
+<text x='220' y='608' font-size='11' fill='#5b6358' text-anchor='start' letter-spacing='1.2' font-weight='700'>PREFERENCIAS</text>
+<ellipse cx='383' cy='648' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<text x='383' y='647.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Alergias e intolerancias</text>
+<text x='383' y='663' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-10</text>
+<ellipse cx='722' cy='648' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<text x='722' y='647.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Dieta y objetivo calórico</text>
+<text x='722' y='663' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-11</text>
+<rect x='208' y='700' width='689' height='266' rx='8' fill='#eef1e8' stroke='#e4e1d8' stroke-width='1.2'/>
+<text x='220' y='720' font-size='11' fill='#5b6358' text-anchor='start' letter-spacing='1.2' font-weight='700'>CALENDARIO</text>
+<ellipse cx='383' cy='760' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<text x='383' y='759.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Generar calendario semanal</text>
+<text x='383' y='775' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-12</text>
+<ellipse cx='722' cy='760' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<text x='722' y='764.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Aplicar reglas nutricionales</text>
+<ellipse cx='383' cy='816' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6' stroke-dasharray='5 4'/>
+<text x='383' y='815.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Ver calendario semanal</text>
+<text x='383' y='831' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-14</text>
+<ellipse cx='722' cy='816' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<text x='722' y='815.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Garantizar variedad</text>
+<text x='722' y='831' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-13</text>
+<ellipse cx='383' cy='872' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6' stroke-dasharray='5 4'/>
+<text x='383' y='871.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Sustituir una comida</text>
+<text x='383' y='887' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-15</text>
+<ellipse cx='722' cy='872' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6' stroke-dasharray='5 4'/>
+<text x='722' y='871.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Regenerar calendario</text>
+<text x='722' y='887' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-16</text>
+<ellipse cx='383' cy='928' rx='142' ry='23' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6' stroke-dasharray='5 4'/>
+<text x='383' y='932.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Ver lista de la compra</text>
+<rect x='208' y='980' width='689' height='98' rx='8' fill='#f7e7dc' stroke='#e4e1d8' stroke-width='1.2'/>
+<text x='220' y='1000' font-size='11' fill='#5b6358' text-anchor='start' letter-spacing='1.2' font-weight='700'>ADMINISTRACIÓN</text>
+<ellipse cx='383' cy='1040' rx='142' ry='23' fill='#ffffff' stroke='#c1622d' stroke-width='1.6'/>
+<text x='383' y='1039.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Eliminar receta</text>
+<text x='383' y='1055' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-07</text>
+<ellipse cx='722' cy='1040' rx='142' ry='23' fill='#ffffff' stroke='#c1622d' stroke-width='1.6' stroke-dasharray='5 4'/>
+<text x='722' y='1039.0' font-size='13' fill='#20261f' text-anchor='middle' font-weight='700'>Validar ingredientes</text>
+<text x='722' y='1055' font-size='10.5' fill='#5b6358' text-anchor='middle'>US-23</text>
+<line x1='525.0' y1='760.0' x2='580.0' y2='760.0' stroke='#5b6358' stroke-width='1.3' stroke-dasharray='6 4' marker-end='url(#arrow)'/>
+<text x='552.5' y='753.0' font-size='10.5' fill='#c1622d' text-anchor='middle' font-style='italic'>«include»</text>
+<line x1='482.4161317672605' y1='776.4227238317599' x2='622.5838682327395' y2='799.5772761682401' stroke='#5b6358' stroke-width='1.3' stroke-dasharray='6 4' marker-end='url(#arrow)'/>
+<text x='586.5' y='786.0' font-size='10.5' fill='#c1622d' text-anchor='middle' font-style='italic'>«include»</text>
+<line x1='580.0' y1='480.0' x2='525.0' y2='480.0' stroke='#5b6358' stroke-width='1.3' stroke-dasharray='6 4' marker-end='url(#arrow)'/>
+<text x='552.5' y='473.0' font-size='10.5' fill='#c1622d' text-anchor='middle' font-style='italic'>«extend»</text>
+<circle cx='80' cy='93.0' r='11' fill='#ffffff' stroke='#3a5a40' stroke-width='2'/>
+<line x1='80' y1='104.0' x2='80' y2='135.0' stroke='#3a5a40' stroke-width='2'/>
+<line x1='62' y1='115.0' x2='98' y2='115.0' stroke='#3a5a40' stroke-width='2'/>
+<line x1='80' y1='135.0' x2='65' y2='159.0' stroke='#3a5a40' stroke-width='2'/>
+<line x1='80' y1='135.0' x2='95' y2='159.0' stroke='#3a5a40' stroke-width='2'/>
+<text x='80' y='179.0' font-size='14' fill='#1f3821' text-anchor='middle' font-weight='700'>Visitante</text>
+<line x1='100' y1='113.0' x2='208' y2='133.0' stroke='#3a5a40' stroke-width='1.6'/>
+<circle cx='80' cy='541.0' r='11' fill='#ffffff' stroke='#3a5a40' stroke-width='2'/>
+<line x1='80' y1='552.0' x2='80' y2='583.0' stroke='#3a5a40' stroke-width='2'/>
+<line x1='62' y1='563.0' x2='98' y2='563.0' stroke='#3a5a40' stroke-width='2'/>
+<line x1='80' y1='583.0' x2='65' y2='607.0' stroke='#3a5a40' stroke-width='2'/>
+<line x1='80' y1='583.0' x2='95' y2='607.0' stroke='#3a5a40' stroke-width='2'/>
+<text x='80' y='627.0' font-size='14' fill='#1f3821' text-anchor='middle' font-weight='700'>Usuario</text>
+<line x1='100' y1='561.0' x2='165' y2='561.0' stroke='#3a5a40' stroke-width='1.6'/>
+<line x1='165' y1='216' x2='165' y2='946' stroke='#3a5a40' stroke-width='1.6'/>
+<line x1='165' y1='273.0' x2='208' y2='273.0' stroke='#3a5a40' stroke-width='1.6'/>
+<line x1='165' y1='469.0' x2='208' y2='469.0' stroke='#3a5a40' stroke-width='1.6'/>
+<line x1='165' y1='637.0' x2='208' y2='637.0' stroke='#3a5a40' stroke-width='1.6'/>
+<line x1='165' y1='833.0' x2='208' y2='833.0' stroke='#3a5a40' stroke-width='1.6'/>
+<circle cx='80' cy='989.0' r='11' fill='#ffffff' stroke='#c1622d' stroke-width='2'/>
+<line x1='80' y1='1000.0' x2='80' y2='1031.0' stroke='#c1622d' stroke-width='2'/>
+<line x1='62' y1='1011.0' x2='98' y2='1011.0' stroke='#c1622d' stroke-width='2'/>
+<line x1='80' y1='1031.0' x2='65' y2='1055.0' stroke='#c1622d' stroke-width='2'/>
+<line x1='80' y1='1031.0' x2='95' y2='1055.0' stroke='#c1622d' stroke-width='2'/>
+<text x='80' y='1075.0' font-size='14' fill='#1f3821' text-anchor='middle' font-weight='700'>Administrador</text>
+<line x1='100' y1='1009.0' x2='208' y2='1029.0' stroke='#c1622d' stroke-width='1.6'/>
+<line x1='80' y1='952' x2='80' y2='633.0' stroke='#5b6358' stroke-width='1.4' marker-end='url(#tri)'/>
+<text x='88' y='922' font-size='10.5' fill='#5b6358' text-anchor='start' font-style='italic'>hereda</text>
+<text x='88' y='935' font-size='10.5' fill='#5b6358' text-anchor='start' font-style='italic'>de Usuario</text>
+<rect x='30' y='1108' width='880' height='56' rx='8' fill='#ffffff' stroke='#e4e1d8' stroke-width='1.2'/>
+<ellipse cx='70' cy='1128' rx='26' ry='11' fill='#ffffff' stroke='#3a5a40' stroke-width='1.5'/>
+<text x='106' y='1132' font-size='12' fill='#20261f' text-anchor='start'>En la entrega 3 (prototipo)</text>
+<ellipse cx='330' cy='1128' rx='26' ry='11' fill='#ffffff' stroke='#3a5a40' stroke-width='1.5' stroke-dasharray='5 4'/>
+<text x='366' y='1132' font-size='12' fill='#20261f' text-anchor='start'>Posterior (cierre) o sin historia asignada</text>
+<line x1='640' y1='1128' x2='676' y2='1128' stroke='#5b6358' stroke-width='1.3' stroke-dasharray='6 4' marker-end='url(#arrow)'/>
+<text x='686' y='1132' font-size='12' fill='#20261f' text-anchor='start'>«include» / «extend»</text>
+<text x='50' y='1154' font-size='11' fill='#5b6358' text-anchor='start'>US-xx = historia de usuario del backlog (issues del repositorio). Actores: Visitante (sin sesión), Usuario y Administrador.</text>
+</svg>

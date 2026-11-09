@@ -1,0 +1,98 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 940 760' width='100%' font-family="'Liberation Sans','Arial',sans-serif">
+<rect x='0' y='0' width='940' height='760' fill='#faf6ef'/>
+<defs><marker id='arrow' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#5b6358'/></marker><marker id='arrowT' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#c1622d'/></marker><marker id='tri' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='9' markerHeight='9' orient='auto'><path d='M0,0 L10,5 L0,10 z' fill='#ffffff' stroke='#5b6358' stroke-width='1.3'/></marker></defs>
+<text x='30' y='28' font-size='11' fill='#5b6358' text-anchor='start' letter-spacing='1.5' font-weight='700'>DIAGRAMA DE GANTT · CRONOGRAMA DEL PROYECTO</text>
+<rect x='300.0' y='46' width='123.23232323232321' height='22' rx='0' fill='#3a5a40' stroke='#ffffff' stroke-width='1'/>
+<text x='361.6161616161616' y='62' font-size='10.5' fill='#ffffff' text-anchor='middle' letter-spacing='1' font-weight='700'>OCTUBRE</text>
+<rect x='423.2323232323232' y='46' width='184.84848484848487' height='22' rx='0' fill='#3a5a40' stroke='#ffffff' stroke-width='1'/>
+<text x='515.6565656565656' y='62' font-size='10.5' fill='#ffffff' text-anchor='middle' letter-spacing='1' font-weight='700'>NOVIEMBRE</text>
+<rect x='608.0808080808081' y='46' width='191.01010101010104' height='22' rx='0' fill='#3a5a40' stroke='#ffffff' stroke-width='1'/>
+<text x='703.5858585858587' y='62' font-size='10.5' fill='#ffffff' text-anchor='middle' letter-spacing='1' font-weight='700'>DICIEMBRE</text>
+<rect x='799.0909090909091' y='46' width='110.90909090909088' height='22' rx='0' fill='#3a5a40' stroke='#ffffff' stroke-width='1'/>
+<text x='854.5454545454545' y='62' font-size='10.5' fill='#ffffff' text-anchor='middle' letter-spacing='1' font-weight='700'>ENERO</text>
+<line x1='300.0' y1='70' x2='300.0' y2='650' stroke='#e4e1d8' stroke-width='1'/>
+<text x='302.0' y='82' font-size='9.5' fill='#5b6358' text-anchor='start'>12</text>
+<line x1='343.1313131313131' y1='70' x2='343.1313131313131' y2='650' stroke='#e4e1d8' stroke-width='1'/>
+<text x='345.1313131313131' y='82' font-size='9.5' fill='#5b6358' text-anchor='start'>19</text>
+<line x1='386.26262626262627' y1='70' x2='386.26262626262627' y2='650' stroke='#e4e1d8' stroke-width='1'/>
+<text x='388.26262626262627' y='82' font-size='9.5' fill='#5b6358' text-anchor='start'>26</text>
+<line x1='429.3939393939394' y1='70' x2='429.3939393939394' y2='650' stroke='#e4e1d8' stroke-width='1'/>
+<text x='431.3939393939394' y='82' font-size='9.5' fill='#5b6358' text-anchor='start'>2</text>
+<line x1='472.52525252525254' y1='70' x2='472.52525252525254' y2='650' stroke='#e4e1d8' stroke-width='1'/>
+<text x='474.52525252525254' y='82' font-size='9.5' fill='#5b6358' text-anchor='start'>9</text>
+<line x1='515.6565656565656' y1='70' x2='515.6565656565656' y2='650' stroke='#e4e1d8' stroke-width='1'/>
+<text x='517.6565656565656' y='82' font-size='9.5' fill='#5b6358' text-anchor='start'>16</text>
+<line x1='558.7878787878788' y1='70' x2='558.7878787878788' y2='650' stroke='#e4e1d8' stroke-width='1'/>
+<text x='560.7878787878788' y='82' font-size='9.5' fill='#5b6358' text-anchor='start'>23</text>
+<line x1='601.9191919191919' y1='70' x2='601.9191919191919' y2='650' stroke='#e4e1d8' stroke-width='1'/>
+<text x='603.9191919191919' y='82' font-size='9.5' fill='#5b6358' text-anchor='start'>30</text>
+<line x1='645.0505050505051' y1='70' x2='645.0505050505051' y2='650' stroke='#e4e1d8' stroke-width='1'/>
+<text x='647.0505050505051' y='82' font-size='9.5' fill='#5b6358' text-anchor='start'>7</text>
+<line x1='688.1818181818182' y1='70' x2='688.1818181818182' y2='650' stroke='#e4e1d8' stroke-width='1'/>
+<text x='690.1818181818182' y='82' font-size='9.5' fill='#5b6358' text-anchor='start'>14</text>
+<line x1='731.3131313131313' y1='70' x2='731.3131313131313' y2='650' stroke='#e4e1d8' stroke-width='1'/>
+<text x='733.3131313131313' y='82' font-size='9.5' fill='#5b6358' text-anchor='start'>21</text>
+<line x1='774.4444444444445' y1='70' x2='774.4444444444445' y2='650' stroke='#e4e1d8' stroke-width='1'/>
+<text x='776.4444444444445' y='82' font-size='9.5' fill='#5b6358' text-anchor='start'>28</text>
+<line x1='817.5757575757576' y1='70' x2='817.5757575757576' y2='650' stroke='#e4e1d8' stroke-width='1'/>
+<text x='819.5757575757576' y='82' font-size='9.5' fill='#5b6358' text-anchor='start'>4</text>
+<line x1='860.7070707070708' y1='70' x2='860.7070707070708' y2='650' stroke='#e4e1d8' stroke-width='1'/>
+<text x='862.7070707070708' y='82' font-size='9.5' fill='#5b6358' text-anchor='start'>11</text>
+<line x1='903.8383838383838' y1='70' x2='903.8383838383838' y2='650' stroke='#e4e1d8' stroke-width='1'/>
+<text x='905.8383838383838' y='82' font-size='9.5' fill='#5b6358' text-anchor='start'>18</text>
+<rect x='24' y='92' width='892' height='32' rx='4' fill='#eef1e8' stroke='#eef1e8' stroke-width='0'/>
+<text x='30' y='113' font-size='12.5' fill='#1f3821' text-anchor='start' font-weight='700'>FASE 1 · Introducción y objetivos</text>
+<rect x='306.16161616161617' y='99' width='80.1010101010101' height='16' rx='4' fill='#3a5a40' stroke='#3a5a40' stroke-width='0'/>
+<text x='392.26262626262627' y='112' font-size='10' fill='#5b6358' text-anchor='start'>13/10 – 25/10</text>
+<rect x='24' y='128' width='892' height='32' rx='4' fill='#eef1e8' stroke='#eef1e8' stroke-width='0'/>
+<text x='30' y='149' font-size='12.5' fill='#1f3821' text-anchor='start' font-weight='700'>FASE 2 · Planificación y tecnologías</text>
+<rect x='386.26262626262627' y='135' width='86.26262626262627' height='16' rx='4' fill='#3a5a40' stroke='#3a5a40' stroke-width='0'/>
+<text x='478.52525252525254' y='148' font-size='10' fill='#5b6358' text-anchor='start'>26/10 – 8/11</text>
+<rect x='24' y='164' width='892' height='32' rx='4' fill='#eef1e8' stroke='#eef1e8' stroke-width='0'/>
+<text x='30' y='185' font-size='12.5' fill='#1f3821' text-anchor='start' font-weight='700'>FASE 3 · Prototipo (~50 %)</text>
+<rect x='472.52525252525254' y='171' width='172.52525252525254' height='16' rx='4' fill='#c1622d' stroke='#c1622d' stroke-width='0'/>
+<text x='651.0505050505051' y='184' font-size='10' fill='#5b6358' text-anchor='start'>9/11 – 6/12</text>
+<text x='46' y='221' font-size='11.5' fill='#20261f' text-anchor='start'>Bloque 0 · Importar prototipo (4 PR)</text>
+<rect x='472.52525252525254' y='209' width='43.13131313131305' height='12' rx='3' fill='#ffffff' stroke='#c1622d' stroke-width='1.5' stroke-dasharray='4 3'/>
+<text x='46' y='257' font-size='11.5' fill='#20261f' text-anchor='start'>Autenticación y rol admin · #1–#4, #58</text>
+<rect x='515.6565656565656' y='245' width='43.13131313131316' height='12' rx='3' fill='#ffffff' stroke='#c1622d' stroke-width='1.5' stroke-dasharray='4 3'/>
+<text x='46' y='293' font-size='11.5' fill='#20261f' text-anchor='start'>Recetas · #5–#9</text>
+<rect x='558.7878787878788' y='281' width='43.13131313131316' height='12' rx='3' fill='#ffffff' stroke='#c1622d' stroke-width='1.5' stroke-dasharray='4 3'/>
+<text x='46' y='329' font-size='11.5' fill='#20261f' text-anchor='start'>Preferencias · #10, #11</text>
+<rect x='601.9191919191919' y='317' width='24.646464646464665' height='12' rx='3' fill='#ffffff' stroke='#c1622d' stroke-width='1.5' stroke-dasharray='4 3'/>
+<text x='46' y='365' font-size='11.5' fill='#20261f' text-anchor='start'>Calendario automático · #12, #13</text>
+<rect x='601.9191919191919' y='353' width='43.13131313131316' height='12' rx='3' fill='#ffffff' stroke='#c1622d' stroke-width='1.5' stroke-dasharray='4 3'/>
+<text x='46' y='401' font-size='11.5' fill='#20261f' text-anchor='start'>Protocolo de pruebas · #38</text>
+<rect x='608.0808080808081' y='389' width='36.969696969697' height='12' rx='3' fill='#ffffff' stroke='#c1622d' stroke-width='1.5' stroke-dasharray='4 3'/>
+<rect x='24' y='416' width='892' height='32' rx='4' fill='#eef1e8' stroke='#eef1e8' stroke-width='0'/>
+<text x='30' y='437' font-size='12.5' fill='#1f3821' text-anchor='start' font-weight='700'>FASE 4 · Cierre, calidad y despliegue</text>
+<rect x='645.0505050505051' y='423' width='215.6565656565657' height='16' rx='4' fill='#8a9a86' stroke='#8a9a86' stroke-width='0'/>
+<text x='639.0505050505051' y='436' font-size='10' fill='#5b6358' text-anchor='end'>7/12 – 10/1</text>
+<text x='46' y='473' font-size='11.5' fill='#20261f' text-anchor='start'>Calendario editable · #14–#16</text>
+<rect x='645.0505050505051' y='461' width='86.26262626262621' height='12' rx='3' fill='#ffffff' stroke='#c1622d' stroke-width='1.5' stroke-dasharray='4 3'/>
+<text x='46' y='509' font-size='11.5' fill='#20261f' text-anchor='start'>Tests y validación OWASP · #17, #18</text>
+<rect x='688.1818181818182' y='497' width='129.39393939393938' height='12' rx='3' fill='#ffffff' stroke='#c1622d' stroke-width='1.5' stroke-dasharray='4 3'/>
+<text x='46' y='545' font-size='11.5' fill='#20261f' text-anchor='start'>Panel admin y baja de usuario · #59, #60</text>
+<rect x='731.3131313131313' y='533' width='86.26262626262633' height='12' rx='3' fill='#ffffff' stroke='#c1622d' stroke-width='1.5' stroke-dasharray='4 3'/>
+<text x='46' y='581' font-size='11.5' fill='#20261f' text-anchor='start'>Despliegue final y memoria</text>
+<rect x='817.5757575757576' y='569' width='43.13131313131316' height='12' rx='3' fill='#ffffff' stroke='#c1622d' stroke-width='1.5' stroke-dasharray='4 3'/>
+<rect x='24' y='596' width='892' height='32' rx='4' fill='#eef1e8' stroke='#eef1e8' stroke-width='0'/>
+<text x='30' y='617' font-size='12.5' fill='#1f3821' text-anchor='start' font-weight='700'>FASE 5 · Defensa ante tribunal</text>
+<rect x='860.7070707070708' y='603' width='49.292929292929216' height='16' rx='4' fill='#8a9a86' stroke='#8a9a86' stroke-width='0'/>
+<text x='854.7070707070708' y='616' font-size='10' fill='#5b6358' text-anchor='end'>11/1 – 18/1</text>
+<line x1='472.52525252525254' y1='68' x2='472.52525252525254' y2='650' stroke='#c1622d' stroke-width='2'/>
+<rect x='450.52525252525254' y='650' width='44' height='18' rx='3' fill='#c1622d' stroke='#c1622d' stroke-width='0'/>
+<text x='472.52525252525254' y='663' font-size='10' fill='#ffffff' text-anchor='middle' font-weight='700'>HOY</text>
+<path d='M645.0505050505051,640 l7,7 l-7,7 l-7,-7 z' fill='#c1622d'/>
+<text x='657.0505050505051' y='653' font-size='10' fill='#c1622d' text-anchor='start' font-weight='700'>Fin del prototipo · 6/12</text>
+<rect x='30' y='690' width='880' height='56' rx='8' fill='#ffffff' stroke='#e4e1d8' stroke-width='1.2'/>
+<rect x='46' y='702' width='26' height='12' rx='3' fill='#3a5a40' stroke='#3a5a40' stroke-width='0'/>
+<text x='80' y='713' font-size='11.5' fill='#20261f' text-anchor='start'>Fase hecha</text>
+<rect x='196' y='702' width='26' height='12' rx='3' fill='#c1622d' stroke='#c1622d' stroke-width='0'/>
+<text x='230' y='713' font-size='11.5' fill='#20261f' text-anchor='start'>Fase en curso</text>
+<rect x='346' y='702' width='26' height='12' rx='3' fill='#8a9a86' stroke='#8a9a86' stroke-width='0'/>
+<text x='380' y='713' font-size='11.5' fill='#20261f' text-anchor='start'>Fase pendiente</text>
+<rect x='510' y='702' width='26' height='12' rx='3' fill='#ffffff' stroke='#c1622d' stroke-width='1.5' stroke-dasharray='4 3'/>
+<text x='544' y='713' font-size='11.5' fill='#20261f' text-anchor='start'>Tarea con fecha prevista (por ajustar)</text>
+<text x='46' y='736' font-size='10.5' fill='#5b6358' text-anchor='start'>Fechas de las fases según el cronograma de la memoria; el reparto por semanas del prototipo y del cierre es una previsión. #n = issue.</text>
+</svg>
