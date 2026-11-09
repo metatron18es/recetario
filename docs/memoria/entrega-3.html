@@ -1,0 +1,74 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Recetario — Tercera entrega: diagramas</title><style>@page { size: A4; margin: 0 }
+* { box-sizing: border-box }
+body { margin: 0; font-family: 'Liberation Sans', Arial, sans-serif; color: #20261f; font-size: 13px; line-height: 1.5 }
+.page { width: 794px; height: 1122px; position: relative; page-break-after: always; overflow: hidden }
+.page:last-child { page-break-after: auto }
+.wrap { position: absolute; left: 76px; right: 76px }
+.head { top: 36px; display: flex; justify-content: space-between; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: #5b6358; padding-bottom: 8px; border-bottom: 1px solid #e4e1d8 }
+.head b { color: #1f3821 }
+h1 { top: 74px; margin: 0; display: flex; align-items: center; gap: 14px; font-size: 24px; color: #1f3821; font-weight: 700 }
+h1 .n { font-size: 40px; color: transparent; -webkit-text-stroke: 1.6px #c1622d; line-height: 1 }
+h1::after { content: ''; flex: 1; height: 1px; background: #e4e1d8; margin-top: 8px }
+.intro { top: 134px; border-left: 3px solid #c1622d; padding: 0 0 0 14px; margin: 0; text-align: justify; font-size: 13.5px }
+.fig { top: 196px; background: #faf6ef; border: 1px solid #e4e1d8; border-radius: 10px; padding: 14px 16px }
+.fig img { display: block; width: 100% }
+.cap { text-align: center; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: #5b6358 }
+.leg { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 20px; font-size: 11.5px; line-height: 1.45 }
+.leg b { color: #1f3821 }
+.foot { bottom: 36px; display: flex; justify-content: space-between; font-size: 10.5px; color: #5b6358; border-top: 1px solid #e4e1d8; padding-top: 8px }
+</style></head><body>
+<section class="page">
+<div class="wrap head"><span><b>RECETARIO</b> — MEMORIA TÉCNICA</span><span>Diagrama de casos de uso</span></div>
+<h1 class="wrap"><span class="n">07</span>Diagrama de casos de uso</h1>
+<p class="wrap intro">Recoge qué puede hacer cada actor con Recetario. Los casos de uso se agrupan por bloque funcional y cada uno enlaza con una historia de usuario del backlog (US-xx).</p>
+<div class="wrap fig" style="top:196px"><img style="width:91%;margin:0 auto" src="../diagrams/diagrama-casos-de-uso.svg" alt="Diagrama de casos de uso"></div>
+<div class="wrap cap" style="top:933px">Diagrama de casos de uso · 3 actores</div>
+<div class="wrap leg" style="top:959px"><div><b>Visitante</b> — sin sesión: solo puede registrarse o iniciar sesión.</div><div><b>Usuario</b> — gestiona recetas, preferencias y su calendario semanal.</div><div><b>Administrador</b> — hereda todo lo del usuario y además elimina recetas y valida ingredientes propuestos.</div></div>
+<div class="wrap foot"><span>Proyecto Intermodular</span><span>6</span></div>
+</section>
+<section class="page">
+<div class="wrap head"><span><b>RECETARIO</b> — MEMORIA TÉCNICA</span><span>Esquema relacional</span></div>
+<h1 class="wrap"><span class="n">11</span>Esquema relacional</h1>
+<p class="wrap intro">Traducción del modelo entidad-relación a las 11 tablas de PostgreSQL que gestiona Prisma. Las tablas puente resuelven las relaciones N:M y las claves foráneas indican a qué tabla apuntan.</p>
+<div class="wrap fig" style="top:196px"><img src="../diagrams/diagrama-esquema-relacional.svg" alt="Esquema relacional"></div>
+<div class="wrap cap" style="top:775px">Esquema relacional · 11 tablas</div>
+<div class="wrap leg" style="top:801px"><div><b>Lista de la compra</b> — no es una tabla: se calcula sumando los ingredientes de las recetas del calendario.</div><div><b>Recetas públicas</b> — el autor es opcional (SET NULL) para conservar la receta si el usuario se da de baja.</div><div><b>Ingredientes</b> — los propone un usuario y los valida el administrador (validado, propuesto_por_id).</div></div>
+<div class="wrap foot"><span>Proyecto Intermodular</span><span>10</span></div>
+</section>
+<section class="page">
+<div class="wrap head"><span><b>RECETARIO</b> — MEMORIA TÉCNICA</span><span>Secuencia: autenticación</span></div>
+<h1 class="wrap"><span class="n">12</span>Secuencia: autenticación</h1>
+<p class="wrap intro">Registro, inicio de sesión, sesión persistente y cierre de sesión (US-01 a US-04). Es el diseño previsto: los nombres exactos de los endpoints se fijarán al implementar cada historia.</p>
+<div class="wrap fig" style="top:196px"><img src="../diagrams/diagrama-secuencia-autenticacion.svg" alt="Secuencia: autenticación"></div>
+<div class="wrap cap" style="top:989px">Secuencia · registro, login y sesión con JWT</div>
+
+<div class="wrap foot"><span>Proyecto Intermodular</span><span>11</span></div>
+</section>
+<section class="page">
+<div class="wrap head"><span><b>RECETARIO</b> — MEMORIA TÉCNICA</span><span>Secuencia: generación del calendario</span></div>
+<h1 class="wrap"><span class="n">13</span>Secuencia: generación del calendario</h1>
+<p class="wrap intro">Cómo genera el motor de reglas el calendario semanal (US-12 y US-13): filtra por dieta y alergias, asigna una receta a cada celda evitando repeticiones y comprueba el objetivo calórico.</p>
+<div class="wrap fig" style="top:196px"><img src="../diagrams/diagrama-secuencia-calendario.svg" alt="Secuencia: generación del calendario"></div>
+<div class="wrap cap" style="top:801px">Secuencia · generación automática del calendario</div>
+<div class="wrap leg" style="top:827px"><div><b>Entrada</b> — preferencias, alergias y recetas con ingredientes validados.</div><div><b>Salida</b> — 7 días × 5 comidas guardadas en entrada_calendario.</div><div><b>Fallo</b> — si no hay recetas suficientes, se informa con un mensaje claro.</div></div>
+<div class="wrap foot"><span>Proyecto Intermodular</span><span>12</span></div>
+</section>
+<section class="page">
+<div class="wrap head"><span><b>RECETARIO</b> — MEMORIA TÉCNICA</span><span>Diagrama de despliegue</span></div>
+<h1 class="wrap"><span class="n">16</span>Diagrama de despliegue</h1>
+<p class="wrap intro">Entornos del proyecto: desarrollo local con make dev, integración con GitHub y Actions, y producción en Vercel y Neon. Complementa el diagrama de arquitectura.</p>
+<div class="wrap fig" style="top:196px"><img src="../diagrams/diagrama-despliegue.svg" alt="Diagrama de despliegue"></div>
+<div class="wrap cap" style="top:755px">Despliegue · entornos y pipeline</div>
+
+<div class="wrap foot"><span>Proyecto Intermodular</span><span>16</span></div>
+</section>
+<section class="page">
+<div class="wrap head"><span><b>RECETARIO</b> — MEMORIA TÉCNICA</span><span>Diagrama de Gantt</span></div>
+<h1 class="wrap"><span class="n">05</span>Diagrama de Gantt</h1>
+<p class="wrap intro">Cronograma de las cinco fases del proyecto con el desglose del prototipo y del cierre. Las fechas de las fases vienen de la planificación; el reparto semanal de las tareas es una previsión que se ajustará.</p>
+<div class="wrap fig" style="top:196px"><img src="../diagrams/diagrama-gantt.svg" alt="Diagrama de Gantt"></div>
+<div class="wrap cap" style="top:729px">Gantt · octubre de 2026 – enero de 2027</div>
+
+<div class="wrap foot"><span>Proyecto Intermodular</span><span>4</span></div>
+</section>
+</body></html>

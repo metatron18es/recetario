@@ -1,0 +1,88 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 940 800' width='100%' font-family="'Liberation Sans','Arial',sans-serif">
+<rect x='0' y='0' width='940' height='800' fill='#faf6ef'/>
+<defs><marker id='arrow' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#5b6358'/></marker><marker id='arrowT' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#c1622d'/></marker><marker id='tri' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='9' markerHeight='9' orient='auto'><path d='M0,0 L10,5 L0,10 z' fill='#ffffff' stroke='#5b6358' stroke-width='1.3'/></marker></defs>
+<text x='30' y='28' font-size='11' fill='#5b6358' text-anchor='start' letter-spacing='1.5' font-weight='700'>DIAGRAMA DE DESPLIEGUE · ENTORNOS Y PIPELINE</text>
+<rect x='25' y='60' width='890' height='200' rx='12' fill='none' stroke='#5b6358' stroke-width='1.3' stroke-dasharray='7 5'/>
+<rect x='41' y='49' width='257.79999999999995' height='22' rx='6' fill='#faf6ef' stroke='#faf6ef' stroke-width='0'/>
+<text x='51' y='65' font-size='11' fill='#5b6358' text-anchor='start' letter-spacing='1.3' font-weight='700'>DESARROLLO LOCAL  ·  make dev</text>
+<rect x='45' y='90' width='255' height='150' rx='8' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<path d='M45,120 L45,98 Q45,90 53,90 L292,90 Q300,90 300,98 L300,120 Z' fill='#3a5a40'/>
+<text x='57' y='110' font-size='13' fill='#ffffff' text-anchor='start' font-weight='700'>Frontend · Vite</text>
+<text x='57' y='142' font-size='12' fill='#20261f' text-anchor='start'>Vue 3 + TypeScript</text>
+<text x='57' y='161' font-size='12' fill='#20261f' text-anchor='start'>http://localhost:5174</text>
+<text x='57' y='180' font-size='12' fill='#5b6358' text-anchor='start'>· Storybook en :6007</text>
+<rect x='340' y='90' width='255' height='150' rx='8' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<path d='M340,120 L340,98 Q340,90 348,90 L587,90 Q595,90 595,98 L595,120 Z' fill='#3a5a40'/>
+<text x='352' y='110' font-size='13' fill='#ffffff' text-anchor='start' font-weight='700'>Backend · Express</text>
+<text x='352' y='142' font-size='12' fill='#20261f' text-anchor='start'>API REST + Prisma</text>
+<text x='352' y='161' font-size='12' fill='#20261f' text-anchor='start'>http://localhost:3001</text>
+<text x='352' y='180' font-size='12' fill='#5b6358' text-anchor='start'>· VITE_API_URL apunta aquí</text>
+<rect x='635' y='90' width='255' height='150' rx='8' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<path d='M635,120 L635,98 Q635,90 643,90 L882,90 Q890,90 890,98 L890,120 Z' fill='#3a5a40'/>
+<text x='647' y='110' font-size='13' fill='#ffffff' text-anchor='start' font-weight='700'>PostgreSQL · Docker</text>
+<text x='647' y='142' font-size='12' fill='#20261f' text-anchor='start'>Contenedor local</text>
+<text x='647' y='161' font-size='12' fill='#20261f' text-anchor='start'>localhost:5434</text>
+<text x='647' y='180' font-size='12' fill='#5b6358' text-anchor='start'>· DATABASE_URL local</text>
+<line x1='300' y1='165' x2='340' y2='165' stroke='#5b6358' stroke-width='1.5' marker-end='url(#arrow)'/>
+<line x1='595' y1='165' x2='635' y2='165' stroke='#5b6358' stroke-width='1.5' marker-end='url(#arrow)'/>
+<text x='320' y='156' font-size='10' fill='#5b6358' text-anchor='middle'>HTTP</text>
+<text x='615' y='156' font-size='10' fill='#5b6358' text-anchor='middle'>SQL</text>
+<rect x='25' y='320' width='890' height='190' rx='12' fill='none' stroke='#5b6358' stroke-width='1.3' stroke-dasharray='7 5'/>
+<rect x='41' y='309' width='200.39999999999998' height='22' rx='6' fill='#faf6ef' stroke='#faf6ef' stroke-width='0'/>
+<text x='51' y='325' font-size='11' fill='#5b6358' text-anchor='start' letter-spacing='1.3' font-weight='700'>INTEGRACIÓN  ·  GitHub</text>
+<rect x='45' y='350' width='255' height='140' rx='8' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<path d='M45,380 L45,358 Q45,350 53,350 L292,350 Q300,350 300,358 L300,380 Z' fill='#3a5a40'/>
+<text x='57' y='370' font-size='13' fill='#ffffff' text-anchor='start' font-weight='700'>Repositorio</text>
+<text x='57' y='402' font-size='12' fill='#20261f' text-anchor='start'>Rama feature/… docs/… chore/…</text>
+<text x='57' y='421' font-size='12' fill='#20261f' text-anchor='start'>Pull Request hacia main</text>
+<text x='57' y='440' font-size='12' fill='#5b6358' text-anchor='start'>· Issues, hitos y tablero</text>
+<rect x='340' y='350' width='255' height='140' rx='8' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<path d='M340,380 L340,358 Q340,350 348,350 L587,350 Q595,350 595,358 L595,380 Z' fill='#3a5a40'/>
+<text x='352' y='370' font-size='13' fill='#ffffff' text-anchor='start' font-weight='700'>GitHub Actions · CI</text>
+<text x='352' y='402' font-size='12' fill='#20261f' text-anchor='start'>En cada PR y push a main</text>
+<text x='352' y='421' font-size='12' fill='#5b6358' text-anchor='start'>· Backend: prisma generate,</text>
+<text x='352' y='440' font-size='12' fill='#5b6358' text-anchor='start'>  build y tests (Node 22)</text>
+<text x='352' y='459' font-size='12' fill='#5b6358' text-anchor='start'>· Frontend: build</text>
+<rect x='635' y='350' width='255' height='140' rx='8' fill='#ffffff' stroke='#c1622d' stroke-width='1.6'/>
+<path d='M635,380 L635,358 Q635,350 643,350 L882,350 Q890,350 890,358 L890,380 Z' fill='#c1622d'/>
+<text x='647' y='370' font-size='13' fill='#ffffff' text-anchor='start' font-weight='700'>Revisión y merge</text>
+<text x='647' y='402' font-size='12' fill='#20261f' text-anchor='start'>El CI debe pasar en verde</text>
+<text x='647' y='421' font-size='12' fill='#20261f' text-anchor='start'>Squash merge a main</text>
+<text x='647' y='440' font-size='12' fill='#5b6358' text-anchor='start'>· Un PR por historia o bloque</text>
+<line x1='300' y1='420' x2='340' y2='420' stroke='#5b6358' stroke-width='1.5' marker-end='url(#arrow)'/>
+<line x1='595' y1='420' x2='635' y2='420' stroke='#5b6358' stroke-width='1.5' marker-end='url(#arrow)'/>
+<rect x='25' y='570' width='890' height='190' rx='12' fill='none' stroke='#5b6358' stroke-width='1.3' stroke-dasharray='7 5'/>
+<rect x='41' y='559' width='102.0' height='22' rx='6' fill='#faf6ef' stroke='#faf6ef' stroke-width='0'/>
+<text x='51' y='575' font-size='11' fill='#5b6358' text-anchor='start' letter-spacing='1.3' font-weight='700'>PRODUCCIÓN</text>
+<rect x='45' y='600' width='255' height='140' rx='8' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<path d='M45,630 L45,608 Q45,600 53,600 L292,600 Q300,600 300,608 L300,630 Z' fill='#3a5a40'/>
+<text x='57' y='620' font-size='13' fill='#ffffff' text-anchor='start' font-weight='700'>Vercel · Frontend</text>
+<text x='57' y='652' font-size='12' fill='#20261f' text-anchor='start'>SPA estática en CDN</text>
+<text x='57' y='671' font-size='12' fill='#20261f' text-anchor='start'>vercel.json: reescribe todas</text>
+<text x='57' y='690' font-size='12' fill='#20261f' text-anchor='start'>las rutas a /index.html</text>
+<text x='57' y='709' font-size='12' fill='#5b6358' text-anchor='start'>· Vue Router en modo history</text>
+<rect x='340' y='600' width='255' height='140' rx='8' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<path d='M340,630 L340,608 Q340,600 348,600 L587,600 Q595,600 595,608 L595,630 Z' fill='#3a5a40'/>
+<text x='352' y='620' font-size='13' fill='#ffffff' text-anchor='start' font-weight='700'>Vercel · Backend</text>
+<text x='352' y='652' font-size='12' fill='#20261f' text-anchor='start'>Express como funciones</text>
+<text x='352' y='671' font-size='12' fill='#20261f' text-anchor='start'>serverless</text>
+<text x='352' y='690' font-size='12' fill='#5b6358' text-anchor='start'>· Auth JWT + bcrypt, Zod</text>
+<text x='352' y='709' font-size='12' fill='#5b6358' text-anchor='start'>· Motor de reglas</text>
+<rect x='635' y='600' width='255' height='140' rx='8' fill='#ffffff' stroke='#3a5a40' stroke-width='1.6'/>
+<path d='M635,630 L635,608 Q635,600 643,600 L882,600 Q890,600 890,608 L890,630 Z' fill='#3a5a40'/>
+<text x='647' y='620' font-size='13' fill='#ffffff' text-anchor='start' font-weight='700'>Neon · PostgreSQL</text>
+<text x='647' y='652' font-size='12' fill='#20261f' text-anchor='start'>Base de datos serverless</text>
+<text x='647' y='671' font-size='12' fill='#5b6358' text-anchor='start'>· DATABASE_URL (pooler)</text>
+<text x='647' y='690' font-size='12' fill='#5b6358' text-anchor='start'>· DATABASE_URL_UNPOOLED</text>
+<text x='647' y='709' font-size='12' fill='#5b6358' text-anchor='start'>  para migraciones Prisma</text>
+<line x1='300' y1='670' x2='340' y2='670' stroke='#5b6358' stroke-width='1.5' marker-end='url(#arrow)'/>
+<line x1='595' y1='670' x2='635' y2='670' stroke='#5b6358' stroke-width='1.5' marker-end='url(#arrow)'/>
+<text x='320' y='661' font-size='10' fill='#5b6358' text-anchor='middle'>HTTPS</text>
+<text x='615' y='661' font-size='10' fill='#5b6358' text-anchor='middle'>Prisma</text>
+<line x1='170' y1='240' x2='170' y2='350' stroke='#c1622d' stroke-width='1.8' marker-end='url(#arrowT)'/>
+<text x='180' y='292' font-size='11' fill='#c1622d' text-anchor='start' font-style='italic'>git push · PR</text>
+<line x1='762' y1='490' x2='762' y2='569' stroke='#c1622d' stroke-width='1.8' stroke-dasharray='6 4' marker-end='url(#arrowT)'/>
+<text x='772' y='534' font-size='11' fill='#c1622d' text-anchor='start' font-style='italic'>despliegue automático</text>
+<text x='772' y='550' font-size='11' fill='#c1622d' text-anchor='start' font-style='italic'>tras cada push a main</text>
+<text x='30' y='788' font-size='11' fill='#5b6358' text-anchor='start'>El frontend en producción llama a la API por HTTPS con el JWT en la cabecera Authorization.</text>
+</svg>
