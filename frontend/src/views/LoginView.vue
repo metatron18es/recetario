@@ -1,0 +1,117 @@
+<script setup lang="ts">
+import TpButton from '../components/atoms/tp-button.vue'
+import TpInput from '../components/atoms/tp-input.vue'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import TpBrand from '../components/molecules/tp-brand.vue'
+import TpCard from '../components/atoms/tp-card.vue'
+
+const isRegister = ref(false)
+const router = useRouter()
+
+function submit() {
+  // Fase de esqueleto: sin backend todavía, navega directamente.
+  router.push('/recetas')
+}
+</script>
+
+<template>
+  <div class="login-page">
+    <tp-card size="lg" class="login-card">
+      <tp-brand size="lg" />
+
+      <form v-if="isRegister" class="form" @submit.prevent="submit">
+        <h1>Crea tu cuenta</h1>
+        <p class="lead">Guarda tus recetas, planifica tu semana y controla alergias e ingredientes.</p>
+        <tp-input id="r-name" label="Nombre" type="text" placeholder="Tu nombre" autocomplete="name" required/>
+        <tp-input id="r-email" label="Email" type="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required/>
+        <tp-input id="r-pass" label="Contraseña" type="password" placeholder="Mínimo 8 caracteres" autocomplete="new-password" required minlength="8"/>
+        <tp-button class="submit-btn" type="submit">Crear cuenta</tp-button>
+        <p class="switch">
+          ¿Ya tienes cuenta? <tp-button variant="link" @click="isRegister = false">Inicia sesión</tp-button>
+        </p>
+      </form>
+
+      <form v-else class="form" @submit.prevent="submit">
+        <h1>Bienvenido de nuevo</h1>
+        <p class="lead">Accede para gestionar tus recetas y tu calendario semanal.</p>
+        <tp-input id="l-email" label="Email" type="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required/>
+        <tp-input id="l-pass" label="Contraseña" type="password" placeholder="Tu contraseña" autocomplete="current-password" required>
+          <template #aside><tp-button variant="link">¿Olvidaste tu contraseña?</tp-button></template>
+        </tp-input>
+        <tp-button class="submit-btn" type="submit">Iniciar sesión</tp-button>
+        <div class="divider"><span>o</span></div>
+        <tp-button variant="secondary" @click="isRegister = true">Crear cuenta nueva</tp-button>
+      </form>
+    </tp-card>
+  </div>
+</template>
+
+<style scoped>
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+h1 {
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.lead {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+.submit-btn {
+  margin-top: 6px;
+  width: 100%;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.switch {
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0;
+}
+</style>
