@@ -5,9 +5,32 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import TpBrand from '../components/molecules/tp-brand.vue'
 import TpCard from '../components/atoms/tp-card.vue'
+import { registrarUsuario } from '../lib/api'
 
 const isRegister = ref(false)
 const router = useRouter()
+const nombre = ref('')
+const email = ref('')
+const password = ref('')
+const error = ref('')
+const aviso = ref('')
+const enviando = ref(false)
+
+async function registrar() {
+  error.value = ''
+  enviando.value = true
+  try {
+    await registrarUsuario({ nombre: nombre.value, email: email.value, password: password.value })
+    // El inicio de sesión llega con US-02: de momento se vuelve al formulario de acceso.
+    aviso.value = 'Cuenta creada. Ya puedes iniciar sesión.'
+    password.value = ''
+    isRegister.value = false
+  } catch (e) {
+    error.value = e instanceof Error ? e.message : 'No se pudo crear la cuenta'
+  } finally {
+    enviando.value = false
+  }
+}
 
 function submit() {
   // Fase de esqueleto: sin backend todavía, navega directamente.
@@ -20,13 +43,14 @@ function submit() {
     <tp-card size="lg" class="login-card">
       <tp-brand size="lg" />
 
-      <form v-if="isRegister" class="form" @submit.prevent="submit">
+      <form v-if="isRegister" class="form" @submit.prevent="registrar">
         <h1>Crea tu cuenta</h1>
         <p class="lead">Guarda tus recetas, planifica tu semana y controla alergias e ingredientes.</p>
-        <tp-input id="r-name" label="Nombre" type="text" placeholder="Tu nombre" autocomplete="name" required/>
-        <tp-input id="r-email" label="Email" type="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required/>
-        <tp-input id="r-pass" label="Contraseña" type="password" placeholder="Mínimo 8 caracteres" autocomplete="new-password" required minlength="8"/>
-        <tp-button class="submit-btn" type="submit">Crear cuenta</tp-button>
+        <tp-input id="r-name" v-model="nombre" label="Nombre" type="text" placeholder="Tu nombre" autocomplete="name" required/>
+        <tp-input id="r-email" v-model="email" label="Email" type="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required/>
+        <tp-input id="r-pass" v-model="password" label="Contraseña" type="password" placeholder="Mínimo 8 caracteres" autocomplete="new-password" required minlength="8"/>
+        <p v-if="error" class="msg msg--error" role="alert">{{ error }}</p>
+        <tp-button class="submit-btn" type="submit" :disabled="enviando">Crear cuenta</tp-button>
         <p class="switch">
           ¿Ya tienes cuenta? <tp-button variant="link" @click="isRegister = false">Inicia sesión</tp-button>
         </p>
@@ -35,6 +59,7 @@ function submit() {
       <form v-else class="form" @submit.prevent="submit">
         <h1>Bienvenido de nuevo</h1>
         <p class="lead">Accede para gestionar tus recetas y tu calendario semanal.</p>
+        <p v-if="aviso" class="msg" role="status">{{ aviso }}</p>
         <tp-input id="l-email" label="Email" type="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required/>
         <tp-input id="l-pass" label="Contraseña" type="password" placeholder="Tu contraseña" autocomplete="current-password" required>
           <template #aside><tp-button variant="link">¿Olvidaste tu contraseña?</tp-button></template>
@@ -106,6 +131,16 @@ h1 {
   flex: 1;
   height: 1px;
   background: var(--line);
+}
+
+.msg {
+  font-size: 13px;
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.msg--error {
+  color: #b3261e;
 }
 
 .switch {

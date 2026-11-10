@@ -5,3 +5,26 @@ export async function getApiHealth(): Promise<{ status: string; service: string 
   if (!res.ok) throw new Error(`API respondió ${res.status}`)
   return res.json()
 }
+
+export interface UsuarioApi {
+  id: number
+  nombre: string
+  email: string
+  rol: string
+}
+
+// US-01: crea la cuenta. Lanza Error con el mensaje de la API (p. ej. email duplicado).
+export async function registrarUsuario(datos: {
+  nombre: string
+  email: string
+  password: string
+}): Promise<UsuarioApi> {
+  const res = await fetch(`${API_URL}/api/auth/registro`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(datos),
+  })
+  const body = await res.json().catch(() => ({}))
+  if (!res.ok) throw new Error(body.error ?? `API respondió ${res.status}`)
+  return body
+}
