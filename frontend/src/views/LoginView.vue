@@ -5,7 +5,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import TpBrand from '../components/molecules/tp-brand.vue'
 import TpCard from '../components/atoms/tp-card.vue'
-import { registrarUsuario } from '../lib/api'
+import { iniciarSesion, registrarUsuario } from '../lib/api'
 
 const isRegister = ref(false)
 const router = useRouter()
@@ -21,7 +21,6 @@ async function registrar() {
   enviando.value = true
   try {
     await registrarUsuario({ nombre: nombre.value, email: email.value, password: password.value })
-    // El inicio de sesión llega con US-02: de momento se vuelve al formulario de acceso.
     aviso.value = 'Cuenta creada. Ya puedes iniciar sesión.'
     password.value = ''
     isRegister.value = false
@@ -32,9 +31,18 @@ async function registrar() {
   }
 }
 
-function submit() {
-  // Fase de esqueleto: sin backend todavía, navega directamente.
-  router.push('/recetas')
+async function submit() {
+  error.value = ''
+  aviso.value = ''
+  enviando.value = true
+  try {
+    await iniciarSesion({ email: email.value, password: password.value })
+    router.push('/recetas')
+  } catch (e) {
+    error.value = e instanceof Error ? e.message : 'No se pudo iniciar sesión'
+  } finally {
+    enviando.value = false
+  }
 }
 </script>
 
@@ -60,13 +68,14 @@ function submit() {
         <h1>Bienvenido de nuevo</h1>
         <p class="lead">Accede para gestionar tus recetas y tu calendario semanal.</p>
         <p v-if="aviso" class="msg" role="status">{{ aviso }}</p>
-        <tp-input id="l-email" label="Email" type="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required/>
-        <tp-input id="l-pass" label="Contraseña" type="password" placeholder="Tu contraseña" autocomplete="current-password" required>
+        <tp-input id="l-email" v-model="email" label="Email" type="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required/>
+        <tp-input id="l-pass" v-model="password" label="Contraseña" type="password" placeholder="Tu contraseña" autocomplete="current-password" required>
           <template #aside><tp-button variant="link">¿Olvidaste tu contraseña?</tp-button></template>
         </tp-input>
-        <tp-button class="submit-btn" type="submit">Iniciar sesión</tp-button>
+        <p v-if="error" class="msg msg--error" role="alert">{{ error }}</p>
+        <tp-button class="submit-btn" type="submit" :disabled="enviando">Iniciar sesión</tp-button>
         <div class="divider"><span>o</span></div>
-        <tp-button variant="secondary" @click="isRegister = true">Crear cuenta nueva</tp-button>
+        <tp-button variant="secondary" @click="isRegister = true; error = ''">Crear cuenta nueva</tp-button>
       </form>
     </tp-card>
   </div>

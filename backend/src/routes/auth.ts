@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 import { Router } from 'express'
 import { Prisma } from '@prisma/client'
 import { z } from 'zod'
@@ -34,5 +35,45 @@ authRouter.post('/auth/registro', async (req, res) => {
       return
     }
     res.status(500).json({ error: 'No se pudo crear la cuenta' })
+  }
+})
+
+const loginSchema = z.object({
+  email: z.string().trim().toLowerCase().email(),
+  password: z.string().min(1),
+})
+
+const CREDENCIALES_INVALIDAS = 'Email o contraseña incorrectos'
+const SESION_MS = 7 * 24 * 60 * 60 * 1000
+
+// US-02: inicio de sesión. Emite un JWT en cookie httpOnly. El mensaje de error es el mismo
+// para email inexistente y contraseña errónea, para no revelar qué cuentas existen.
+authRouter.post('/auth/login', async (req, res) => {
+  const parsed = loginSchema.safeParse(req.body)
+  if (!parsed.success) {
+    res.status(401).json({ error: CREDENCIALES_INVALIDAS })
+    return
+  }
+  const { email, password } = parsed.data
+
+  try {
+    const usuario = await prisma.usuario.findUnique({ where: { email } })
+    const ok = usuario ? await bcrypt.compare(password, usuario.passwordHash) : false
+    if (!usuario || !ok) {
+      res.status(401).json({ error: CREDENCIALES_INVALIDAS })
+      return
+    }
+    const token = jwt.sign({ sub: String(usuario.id), rol: usuario.rol }, process.env.JWT_SECRET!, {
+      expiresIn: SESION_MS / 1000,
+    })
+    res.cookie('token', token, {
+      httpOnly: true,
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: SESION_MS,
+    })
+    res.json({ id: usuario.id, nombre: usuario.nombre, email: usuario.email, rol: usuario.rol })
+  } catch {
+    res.status(500).json({ error: 'No se pudo iniciar sesión' })
   }
 })
