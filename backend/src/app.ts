@@ -9,6 +9,7 @@ export function createApp() {
   app.use(
     cors({
       origin: process.env.FRONTEND_ORIGIN ?? 'http://localhost:5174',
+      credentials: true,
     }),
   )
   app.use(express.json())

@@ -28,3 +28,16 @@ export async function registrarUsuario(datos: {
   if (!res.ok) throw new Error(body.error ?? `API respondió ${res.status}`)
   return body
 }
+
+// US-02: inicia sesión; la API deja el JWT en una cookie httpOnly.
+export async function iniciarSesion(datos: { email: string; password: string }): Promise<UsuarioApi> {
+  const res = await fetch(`${API_URL}/api/auth/login`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(datos),
+  })
+  const body = await res.json().catch(() => ({}))
+  if (!res.ok) throw new Error(body.error ?? `API respondió ${res.status}`)
+  return body
+}
