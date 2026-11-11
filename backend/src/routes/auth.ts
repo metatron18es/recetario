@@ -4,6 +4,7 @@ import { Router } from 'express'
 import { Prisma } from '@prisma/client'
 import { z } from 'zod'
 import { prisma } from '../lib/prisma.js'
+import { rolParaEmail } from '../lib/auth.js'
 
 export const authRouter = Router()
 
@@ -25,7 +26,7 @@ authRouter.post('/auth/registro', async (req, res) => {
   try {
     const passwordHash = await bcrypt.hash(password, 10)
     const usuario = await prisma.usuario.create({
-      data: { nombre, email, passwordHash },
+      data: { nombre, email, passwordHash, rol: rolParaEmail(email) },
       select: { id: true, nombre: true, email: true, rol: true },
     })
     res.status(201).json(usuario)
