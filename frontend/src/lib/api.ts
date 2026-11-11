@@ -41,3 +41,9 @@ export async function iniciarSesion(datos: { email: string; password: string }):
   if (!res.ok) throw new Error(body.error ?? `API respondió ${res.status}`)
   return body
 }
+
+// US-03: cierra sesión; la API borra la cookie del JWT.
+export async function cerrarSesion(): Promise<void> {
+  const res = await fetch(`${API_URL}/api/auth/logout`, { method: 'POST', credentials: 'include' })
+  if (!res.ok) throw new Error(`API respondió ${res.status}`)
+}

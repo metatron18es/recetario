@@ -1,12 +1,22 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
-import { getApiHealth } from '../../lib/api'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
+import { cerrarSesion, getApiHealth } from '../../lib/api'
 import TpAvatar from '../atoms/tp-avatar.vue'
 import TpBrand from '../molecules/tp-brand.vue'
 
 // Esqueleto: comprobación simple de que el backend Express responde.
 const apiStatus = ref<'comprobando' | 'conectado' | 'sin conexión'>('comprobando')
+
+const router = useRouter()
+
+async function salir() {
+  try {
+    await cerrarSesion()
+  } finally {
+    router.push({ name: 'login' })
+  }
+}
 
 onMounted(async () => {
   try {
@@ -32,6 +42,7 @@ onMounted(async () => {
         API {{ apiStatus }}
       </span>
       <RouterLink to="/perfil" aria-label="Perfil"><tp-avatar :size="32" /></RouterLink>
+      <button type="button" class="nav-link salir" @click="salir">Cerrar sesión</button>
     </nav>
     <main class="content">
       <RouterView />
@@ -69,6 +80,14 @@ onMounted(async () => {
   color: var(--ink);
   font-weight: 600;
   border-bottom-color: var(--green-dark);
+}
+
+.salir {
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .spacer {
