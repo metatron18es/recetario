@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { obtenerSesion } from '../lib/api'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,6 +54,13 @@ const router = createRouter({
       ],
     },
   ],
+})
+
+// US-04: al recargar se consulta la cookie; sin sesión válida se redirige a login.
+router.beforeEach(async (to) => {
+  const sesion = await obtenerSesion().catch(() => null)
+  if (to.name === 'login') return sesion ? { path: '/recetas' } : true
+  return sesion ? true : { name: 'login' }
 })
 
 export default router
