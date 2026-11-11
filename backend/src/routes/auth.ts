@@ -46,6 +46,13 @@ const loginSchema = z.object({
 const CREDENCIALES_INVALIDAS = 'Email o contraseña incorrectos'
 const SESION_MS = 7 * 24 * 60 * 60 * 1000
 
+// Mismas opciones al emitir y al borrar la cookie, o el navegador no la elimina.
+const cookieOpciones = () => ({
+  httpOnly: true,
+  sameSite: process.env.NODE_ENV === 'production' ? ('none' as const) : ('lax' as const),
+  secure: process.env.NODE_ENV === 'production',
+})
+
 // US-02: inicio de sesión. Emite un JWT en cookie httpOnly. El mensaje de error es el mismo
 // para email inexistente y contraseña errónea, para no revelar qué cuentas existen.
 authRouter.post('/auth/login', async (req, res) => {
@@ -66,14 +73,15 @@ authRouter.post('/auth/login', async (req, res) => {
     const token = jwt.sign({ sub: String(usuario.id), rol: usuario.rol }, process.env.JWT_SECRET!, {
       expiresIn: SESION_MS / 1000,
     })
-    res.cookie('token', token, {
-      httpOnly: true,
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: SESION_MS,
-    })
+    res.cookie('token', token, { ...cookieOpciones(), maxAge: SESION_MS })
     res.json({ id: usuario.id, nombre: usuario.nombre, email: usuario.email, rol: usuario.rol })
   } catch {
     res.status(500).json({ error: 'No se pudo iniciar sesión' })
   }
+})
+
+// US-03: cierre de sesión. Borra la cookie del JWT; es idempotente.
+authRouter.post('/auth/logout', (_req, res) => {
+  res.clearCookie('token', cookieOpciones())
+  res.status(204).end()
 })
