@@ -19,3 +19,4 @@ dist/
 
 !docs/entregas/*.pdf
 skills-lock.json
+.vercel
