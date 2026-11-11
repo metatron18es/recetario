@@ -85,3 +85,26 @@ authRouter.post('/auth/logout', (_req, res) => {
   res.clearCookie('token', cookieOpciones())
   res.status(204).end()
 })
+
+// US-04: persistencia de sesión. Devuelve el usuario de la cookie JWT; 401 si falta, es inválida o expiró.
+authRouter.get('/auth/me', async (req, res) => {
+  const token = /(?:^|;\s*)token=([^;]+)/.exec(req.headers.cookie ?? '')?.[1]
+  if (!token) {
+    res.status(401).json({ error: 'No autenticado' })
+    return
+  }
+  try {
+    const { sub } = jwt.verify(decodeURIComponent(token), process.env.JWT_SECRET!) as { sub: string }
+    const usuario = await prisma.usuario.findUnique({
+      where: { id: Number(sub) },
+      select: { id: true, nombre: true, email: true, rol: true },
+    })
+    if (!usuario) {
+      res.status(401).json({ error: 'No autenticado' })
+      return
+    }
+    res.json(usuario)
+  } catch {
+    res.status(401).json({ error: 'Sesión no válida o expirada' })
+  }
+})

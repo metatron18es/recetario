@@ -47,3 +47,11 @@ export async function cerrarSesion(): Promise<void> {
   const res = await fetch(`${API_URL}/api/auth/logout`, { method: 'POST', credentials: 'include' })
   if (!res.ok) throw new Error(`API respondió ${res.status}`)
 }
+
+// US-04: usuario de la sesión actual (cookie); null si no hay sesión o expiró.
+export async function obtenerSesion(): Promise<UsuarioApi | null> {
+  const res = await fetch(`${API_URL}/api/auth/me`, { credentials: 'include' })
+  if (res.status === 401) return null
+  if (!res.ok) throw new Error(`API respondió ${res.status}`)
+  return res.json()
+}
