@@ -88,10 +88,11 @@ function eliminarFila(index: number) {
   display: flex;
   gap: 10px;
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .campo-ingrediente {
-  flex: 2;
+  flex: 1 1 100%;
   position: relative;
 }
 
@@ -122,12 +123,19 @@ function eliminarFila(index: number) {
 }
 
 .cantidad {
-  flex: 1;
-  min-width: 90px;
+  flex: 1 1 90px;
+  min-width: 0;
 }
 
 .unidad {
-  flex: 1;
-  min-width: 110px;
+  flex: 1 1 110px;
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .campo-ingrediente {
+    flex: 2 1 0;
+    min-width: 0;
+  }
 }
 </style>

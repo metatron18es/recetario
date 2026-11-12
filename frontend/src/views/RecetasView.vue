@@ -53,13 +53,19 @@ const recetasFiltradas = computed(() => {
 }
 
 .search {
-  flex: 1 1 260px;
-  min-width: 220px;
+  flex: 1 1 100%;
+  min-width: 0;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
   gap: 22px;
+}
+
+@media (min-width: 640px) {
+  .search {
+    flex-basis: 260px;
+  }
 }
 </style>
