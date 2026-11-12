@@ -1,24 +1,24 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { RouterLink, RouterView, useRouter } from 'vue-router'
-import { cerrarSesion, getApiHealth } from '../../lib/api'
+import { RouterLink, RouterView } from 'vue-router'
+import { getApiHealth } from '../../lib/api'
 import TpAvatar from '../atoms/tp-avatar.vue'
+import TpIcon from '../atoms/tp-icon.vue'
 import TpBrand from '../molecules/tp-brand.vue'
 
-// Esqueleto: comprobación simple de que el backend Express responde.
+const secciones = [
+  { to: '/recetas', texto: 'Mis recetas', corto: 'Recetas', icono: 'recetas' },
+  { to: '/calendario', texto: 'Calendario', corto: 'Calendario', icono: 'calendario' },
+  { to: '/lista-compra', texto: 'Lista de la compra', corto: 'Compra', icono: 'compra' },
+  { to: '/perfil', texto: 'Perfil', corto: 'Perfil', icono: 'perfil' },
+]
+
+// Solo en desarrollo: comprobación simple de que el backend Express responde.
+const esDev = import.meta.env.DEV
 const apiStatus = ref<'comprobando' | 'conectado' | 'sin conexión'>('comprobando')
 
-const router = useRouter()
-
-async function salir() {
-  try {
-    await cerrarSesion()
-  } finally {
-    router.push({ name: 'login' })
-  }
-}
-
 onMounted(async () => {
+  if (!esDev) return
   try {
     await getApiHealth()
     apiStatus.value = 'conectado'
@@ -30,42 +30,61 @@ onMounted(async () => {
 
 <template>
   <div class="shell">
-    <nav class="nav">
+    <header class="topbar">
       <tp-brand />
-      <RouterLink to="/recetas" class="nav-link">Mis recetas</RouterLink>
-      <RouterLink to="/calendario" class="nav-link">Calendario</RouterLink>
-      <RouterLink to="/lista-compra" class="nav-link">Lista de la compra</RouterLink>
-      <RouterLink to="/perfil" class="nav-link">Perfil</RouterLink>
+      <nav class="links" aria-label="Principal">
+        <RouterLink v-for="s in secciones.slice(0, 3)" :key="s.to" :to="s.to" class="nav-link">{{ s.texto }}</RouterLink>
+      </nav>
       <div class="spacer"></div>
-      <span class="api-status" :class="apiStatus.replace(' ', '-')">
+      <span v-if="esDev" class="api-status" :class="apiStatus.replace(' ', '-')">
         <span class="dot"></span>
         API {{ apiStatus }}
       </span>
-      <RouterLink to="/perfil" aria-label="Perfil"><tp-avatar :size="32" /></RouterLink>
-      <button type="button" class="nav-link salir" @click="salir">Cerrar sesión</button>
-    </nav>
+      <RouterLink to="/perfil" class="avatar-link" aria-label="Perfil"><tp-avatar :size="32" /></RouterLink>
+    </header>
+
     <main class="content">
       <RouterView />
     </main>
+
+    <nav class="tabbar" aria-label="Principal">
+      <RouterLink v-for="s in secciones" :key="s.to" :to="s.to" class="tab">
+        <tp-icon :name="s.icono" :size="22" />
+        <span>{{ s.corto }}</span>
+      </RouterLink>
+    </nav>
   </div>
 </template>
 
 <style scoped>
+/* Mobile-first: barra superior mínima (marca y avatar) + tab bar inferior. */
 .shell {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-.nav {
+.topbar {
   display: flex;
   align-items: center;
-  gap: 28px;
-  padding: 0 40px;
-  height: 68px;
+  gap: 16px;
+  min-height: 56px;
+  padding: 8px var(--gutter);
   background: var(--paper);
   border-bottom: 1px solid var(--line);
-  flex-wrap: wrap;
+}
+
+.links {
+  display: none;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.avatar-link {
+  display: inline-flex;
+  border-radius: 50%;
 }
 
 .nav-link {
@@ -74,6 +93,7 @@ onMounted(async () => {
   text-decoration: none;
   padding: 8px 4px;
   border-bottom: 2px solid transparent;
+  white-space: nowrap;
 }
 
 .nav-link.router-link-active {
@@ -82,20 +102,8 @@ onMounted(async () => {
   border-bottom-color: var(--green-dark);
 }
 
-.salir {
-  background: none;
-  border: 0;
-  border-bottom: 2px solid transparent;
-  cursor: pointer;
-  font-family: inherit;
-}
-
-.spacer {
-  flex: 1;
-}
-
 .api-status {
-  display: inline-flex;
+  display: none;
   align-items: center;
   gap: 6px;
   font-size: 11.5px;
@@ -126,7 +134,72 @@ onMounted(async () => {
   max-width: 1240px;
   margin: 0 auto;
   width: 100%;
-  box-sizing: border-box;
-  padding: 36px 40px 60px;
+  padding: 24px var(--gutter) calc(var(--tabbar-h) + 32px + env(safe-area-inset-bottom));
+}
+
+.tabbar {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 44px;
+  font-size: 11px;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.tab.router-link-active {
+  color: var(--green-dark);
+  font-weight: 600;
+}
+
+/* Tablet (≥640): barra superior horizontal con texto, sin tab bar. */
+@media (min-width: 640px) {
+  .tabbar {
+    display: none;
+  }
+
+  .links {
+    display: flex;
+    gap: 20px;
+    margin-left: 12px;
+  }
+
+  .content {
+    padding-top: 32px;
+    padding-bottom: 60px;
+  }
+}
+
+/* Escritorio (≥1024): barra con más aire y estado de la API (solo dev). */
+@media (min-width: 1024px) {
+  .topbar {
+    gap: 28px;
+  }
+
+  .links {
+    gap: 28px;
+  }
+
+  .api-status {
+    display: inline-flex;
+  }
+
+  .content {
+    padding-top: 36px;
+  }
 }
 </style>

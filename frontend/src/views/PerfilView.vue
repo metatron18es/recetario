@@ -9,7 +9,19 @@ import TpSelect from '../components/atoms/tp-select.vue'
 import TpChipGroup from '../components/molecules/tp-chip-group.vue'
 import TpNotification from '../components/molecules/tp-notification.vue'
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { cerrarSesion } from '../lib/api'
 import { useRecetarioStore } from '../stores/recetario'
+
+const router = useRouter()
+
+async function salir() {
+  try {
+    await cerrarSesion()
+  } finally {
+    router.push({ name: 'login' })
+  }
+}
 
 const store = useRecetarioStore()
 const opcionesAlergia = computed(() => store.alergiasDisponibles.map((a) => ({ id: a.id, label: a.nombre })))
@@ -62,6 +74,10 @@ const seleccionadas = computed(() => store.alergiasUsuario.length)
       <tp-button variant="secondary">Cancelar</tp-button>
       <tp-button>Guardar cambios</tp-button>
     </div>
+
+    <div class="cerrar-sesion">
+      <tp-button variant="secondary" @click="salir">Cerrar sesión</tp-button>
+    </div>
   </div>
 </template>
 
@@ -106,5 +122,9 @@ const seleccionadas = computed(() => store.alergiasUsuario.length)
   display: flex;
   gap: 12px;
   justify-content: flex-end;
+}
+.cerrar-sesion {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
 }
 </style>
