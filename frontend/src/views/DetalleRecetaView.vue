@@ -87,22 +87,14 @@ function editarReceta() {
 
 <style scoped>
 .layout {
-  display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
 }
 
-.main-col {
-  flex: 1 1 440px;
-  min-width: 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
+.main-col,
 .side-col {
-  flex: 1 1 300px;
-  min-width: 260px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -112,5 +104,12 @@ function editarReceta() {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
+    gap: 40px;
+  }
 }
 </style>
