@@ -40,6 +40,11 @@
   --shadow-medium: rgba(32, 38, 31, 0.06);
   --shadow-strong: rgba(32, 38, 31, 0.14);
   --scrim: rgba(31, 56, 33, 0.75);
+
+  /* Responsive (mobile-first). Los breakpoints no admiten var() en @media: 640px (tablet) y 1024px (escritorio). */
+  --gutter: clamp(16px, 4vw, 40px);
+  --tabbar-h: 60px;
+  --fs-body: clamp(14px, 0.9vw + 11px, 15px);
 }
 
 * {
@@ -51,6 +56,7 @@ body {
   font-family: 'Inter', system-ui, sans-serif;
   color: var(--ink);
   background: var(--cream);
+  font-size: var(--fs-body);
 }
 
 h1,
