@@ -1,5 +1,6 @@
 import { Router, type Response } from 'express'
 import { z } from 'zod'
+import type { Prisma } from '@prisma/client'
 import { prisma } from '../lib/prisma.js'
 import { optionalUserId, requireAdmin, requireUserId, ROL_ADMIN } from '../lib/auth.js'
 import { recipeKcal, UNITS } from '../lib/nutrition.js'
@@ -40,18 +41,22 @@ const listSchema = z.object({
   page: z.coerce.number().int().min(1).default(1),
   limit: z.coerce.number().int().min(1).max(50).default(12),
   mine: z.enum(['true', 'false']).default('false'),
+  // US-09: free text (recipe name or ingredient) + meal type, combinable.
+  q: z.string().trim().max(100).optional(),
+  mealType: z.enum(['Desayuno', 'Almuerzo', 'Comida', 'Merienda', 'Cena']).optional(),
 })
 
 // US-08: public paginated list. `mine=true` returns only the session user's recipes.
 recipesRouter.get('/recipes', async (req, res) => {
   const parsed = listSchema.safeParse(req.query)
   if (!parsed.success) {
-    sendError(res, 400, 'INVALID_PAGINATION')
+    const badMeal = parsed.error.issues.some((i) => i.path[0] === 'mealType')
+    sendError(res, 400, badMeal ? 'INVALID_MEAL_TYPE' : 'INVALID_PAGINATION')
     return
   }
-  const { page, limit, mine } = parsed.data
+  const { page, limit, mine, q, mealType } = parsed.data
 
-  let where = {}
+  let where: Prisma.RecetaWhereInput = {}
   if (mine === 'true') {
     const usuarioId = optionalUserId(req)
     if (usuarioId === null) {
@@ -59,6 +64,14 @@ recipesRouter.get('/recipes', async (req, res) => {
       return
     }
     where = { usuarioId }
+  }
+  if (mealType) where = { ...where, tipoComida: mealType }
+  if (q) {
+    const contains = { contains: q, mode: 'insensitive' as const }
+    where = {
+      ...where,
+      OR: [{ nombre: contains }, { ingredientes: { some: { ingrediente: { nombre: contains } } } }],
+    }
   }
 
   try {

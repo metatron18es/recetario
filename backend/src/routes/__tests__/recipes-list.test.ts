@@ -32,6 +32,26 @@ describe('GET /api/recipes', () => {
     findUnique.mockReset()
   })
 
+  it('combines text (name or ingredient) and meal type filters', async () => {
+    const res = await request(createApp()).get('/api/recipes?q=quinoa&mealType=Comida')
+    expect(res.status).toBe(200)
+    const contains = { contains: 'quinoa', mode: 'insensitive' }
+    expect(findMany).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: {
+          tipoComida: 'Comida',
+          OR: [{ nombre: contains }, { ingredientes: { some: { ingrediente: { nombre: contains } } } }],
+        },
+      }),
+    )
+  })
+
+  it('rejects an unknown meal type', async () => {
+    const res = await request(createApp()).get('/api/recipes?mealType=Brunch')
+    expect(res.status).toBe(400)
+    expect(res.body.error.code).toBe('INVALID_MEAL_TYPE')
+  })
+
   it('public paginated list with computed kcal and author', async () => {
     const res = await request(createApp()).get('/api/recipes?page=2&limit=5')
     expect(res.status).toBe(200)
