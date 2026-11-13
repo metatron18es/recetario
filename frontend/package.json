@@ -11,6 +11,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@recetario/shared": "*",
     "pinia": "^4.1.0",
     "vue": "^3.5.44",
     "vue-router": "^4.6.4"
