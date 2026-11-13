@@ -31,6 +31,8 @@ const MESSAGES = {
   RECIPE_CREATE_FAILED: 'Could not create the recipe',
   NOT_RECIPE_OWNER: 'Only the author or the admin can edit this recipe',
   RECIPE_UPDATE_FAILED: 'Could not update the recipe',
+  RECIPE_IN_USE: 'The recipe is used in calendars; confirm with force=true to delete it',
+  RECIPE_DELETE_FAILED: 'Could not delete the recipe',
   INGREDIENTS_LOAD_FAILED: 'Could not load ingredients',
 } as const
 
@@ -40,6 +42,6 @@ export function isErrorCode(value: string): value is ErrorCode {
   return value in MESSAGES
 }
 
-export function sendError(res: Response, status: number, code: ErrorCode) {
-  res.status(status).json({ error: { code, message: MESSAGES[code] } })
+export function sendError(res: Response, status: number, code: ErrorCode, extra: Record<string, unknown> = {}) {
+  res.status(status).json({ error: { code, message: MESSAGES[code], ...extra } })
 }
