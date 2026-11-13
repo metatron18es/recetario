@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 import type { NextFunction, Request, Response } from 'express'
 import { prisma } from './prisma.js'
+import { sendError } from './errors.js'
 
 export const ROL_ADMIN = 'admin'
 
@@ -15,22 +16,34 @@ export function rolParaEmail(email: string): 'admin' | 'usuario' {
 export async function requireAdmin(req: Request, res: Response, next: NextFunction) {
   const token = /(?:^|;\s*)token=([^;]+)/.exec(req.headers.cookie ?? '')?.[1]
   if (!token) {
-    res.status(401).json({ error: 'No autenticado' })
+    sendError(res, 401, 'NOT_AUTHENTICATED')
     return
   }
   try {
     const { sub } = jwt.verify(decodeURIComponent(token), process.env.JWT_SECRET!) as { sub: string }
     const usuario = await prisma.usuario.findUnique({ where: { id: Number(sub) }, select: { rol: true } })
     if (!usuario) {
-      res.status(401).json({ error: 'No autenticado' })
+      sendError(res, 401, 'NOT_AUTHENTICATED')
       return
     }
     if (usuario.rol !== ROL_ADMIN) {
-      res.status(403).json({ error: 'Se requiere rol de administrador' })
+      sendError(res, 403, 'ADMIN_REQUIRED')
       return
     }
     next()
   } catch {
-    res.status(401).json({ error: 'Sesión no válida o expirada' })
+    sendError(res, 401, 'INVALID_SESSION')
+  }
+}
+
+// Id of the user in the JWT cookie, or null if there is no valid session. For public routes that vary by user.
+export function optionalUserId(req: Request): number | null {
+  const token = /(?:^|;\s*)token=([^;]+)/.exec(req.headers.cookie ?? '')?.[1]
+  if (!token) return null
+  try {
+    const { sub } = jwt.verify(decodeURIComponent(token), process.env.JWT_SECRET!) as { sub: string }
+    return Number(sub)
+  } catch {
+    return null
   }
 }

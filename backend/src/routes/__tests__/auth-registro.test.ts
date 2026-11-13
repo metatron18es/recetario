@@ -29,7 +29,7 @@ describe('POST /api/auth/registro', () => {
   it('rechaza contraseñas de menos de 8 caracteres', async () => {
     const res = await request(createApp()).post('/api/auth/registro').send({ ...valido, password: '1234567' })
     expect(res.status).toBe(400)
-    expect(res.body.error).toMatch(/8 caracteres/)
+    expect(res.body.error.code).toBe('PASSWORD_TOO_SHORT')
     expect(create).not.toHaveBeenCalled()
   })
 
@@ -45,6 +45,6 @@ describe('POST /api/auth/registro', () => {
     )
     const res = await request(createApp()).post('/api/auth/registro').send(valido)
     expect(res.status).toBe(409)
-    expect(res.body.error).toMatch(/email/)
+    expect(res.body.error.code).toBe('EMAIL_TAKEN')
   })
 })
