@@ -43,6 +43,8 @@ export interface Ingrediente {
   caloriasPor100g: number
   // Dieta más restrictiva que admite: la dieta de una receta es la más restrictiva de sus ingredientes.
   dietaMinima: TipoDieta
+  // Ids de Alergia que provoca este ingrediente.
+  alergenos?: number[]
 }
 
 export interface RecetaIngrediente {
@@ -88,6 +90,7 @@ const ALERGIAS: Alergia[] = [
   { id: 4, nombre: 'Huevo' },
   { id: 5, nombre: 'Marisco' },
   { id: 6, nombre: 'Soja' },
+  { id: 7, nombre: 'Pescado' },
 ]
 
 const INGREDIENTES: Ingrediente[] = [
@@ -97,10 +100,10 @@ const INGREDIENTES: Ingrediente[] = [
   { id: 4, nombre: 'Tomate cherry', caloriasPor100g: 18, dietaMinima: 'Vegana' },
   { id: 5, nombre: 'Lima', caloriasPor100g: 30, dietaMinima: 'Vegana' },
   { id: 6, nombre: 'Aceite de oliva virgen extra', caloriasPor100g: 884, dietaMinima: 'Vegana' },
-  { id: 7, nombre: 'Huevo', caloriasPor100g: 155, dietaMinima: 'Vegetariana' },
-  { id: 8, nombre: 'Avena', caloriasPor100g: 389, dietaMinima: 'Vegana' },
+  { id: 7, nombre: 'Huevo', caloriasPor100g: 155, dietaMinima: 'Vegetariana', alergenos: [4] },
+  { id: 8, nombre: 'Avena', caloriasPor100g: 389, dietaMinima: 'Vegana', alergenos: [1] },
   { id: 9, nombre: 'Lentejas', caloriasPor100g: 116, dietaMinima: 'Vegana' },
-  { id: 10, nombre: 'Salmón', caloriasPor100g: 208, dietaMinima: 'Pescetariana' },
+  { id: 10, nombre: 'Salmón', caloriasPor100g: 208, dietaMinima: 'Pescetariana', alergenos: [7] },
   { id: 11, nombre: 'Pollo', caloriasPor100g: 165, dietaMinima: 'Omnívora' },
   { id: 12, nombre: 'Hummus', caloriasPor100g: 166, dietaMinima: 'Vegana' },
 ]
@@ -295,6 +298,14 @@ export const useRecetarioStore = defineStore('recetario', {
         if (ing) max = Math.max(max, DIETAS.indexOf(ing.dietaMinima))
       }
       return DIETAS[max]
+    },
+    // Ids de alergia presentes en los ingredientes de una receta.
+    alergenosDeReceta: (state) => (receta: Receta): number[] => {
+      const ids = new Set<number>()
+      for (const ri of receta.ingredientes) {
+        state.ingredientes.find((i) => i.id === ri.ingredienteId)?.alergenos?.forEach((a) => ids.add(a))
+      }
+      return [...ids]
     },
     tieneAlergia: (state) => (alergiaId: number) => state.alergiasUsuario.includes(alergiaId),
     // La lista de la compra no es una entidad persistida: se deriva del calendario + RecetaIngrediente.
