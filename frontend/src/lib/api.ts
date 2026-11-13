@@ -57,3 +57,59 @@ export async function obtenerSesion(): Promise<UsuarioApi | null> {
   if (!res.ok) throw new Error(`API respondió ${res.status}`)
   return res.json()
 }
+
+export interface IngredienteApi {
+  id: number
+  name: string
+  kcalPer100g: number
+  minDiet: string
+  validated: boolean
+}
+
+export interface RecetaApi {
+  id: number
+  name: string
+  mealType: string
+  prepTimeMin: number
+  description: string
+  kcal: number
+  author: { id: number; name: string } | null
+  ingredients: { ingredientId: number; name: string; quantity: number; unit: string }[]
+  steps: { text: string }[]
+}
+
+// US-05: catálogo de ingredientes (validados + los propuestos por el usuario de la sesión).
+export async function listarIngredientes(): Promise<IngredienteApi[]> {
+  const res = await fetch(`${API_URL}/api/ingredients`, { credentials: 'include' })
+  const body = await res.json().catch(() => ({}))
+  if (!res.ok) throw new Error(textoDeError(body.error?.code))
+  return body
+}
+
+export interface NuevaRecetaApi {
+  name: string
+  mealType: string
+  prepTimeMin: number
+  description: string
+  // Un ingrediente del catálogo (`ingredientId`) o uno propuesto (`proposed`), que queda pendiente de validar.
+  ingredients: {
+    ingredientId?: number
+    proposed?: { name: string; kcalPer100g: number }
+    quantity: number
+    unit: string
+  }[]
+  steps: string[]
+}
+
+// US-05: crea la receta; queda asociada al autor de la sesión y es pública.
+export async function crearReceta(datos: NuevaRecetaApi): Promise<RecetaApi> {
+  const res = await fetch(`${API_URL}/api/recipes`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(datos),
+  })
+  const body = await res.json().catch(() => ({}))
+  if (!res.ok) throw new Error(textoDeError(body.error?.code))
+  return body
+}

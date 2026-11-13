@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import type { RecetaApi } from '../lib/api'
 import imgBowlQuinoa from '../assets/recipes/bowl-quinoa.svg'
 import imgTostadaAguacate from '../assets/recipes/tostada-aguacate.svg'
 import imgCurryGarbanzos from '../assets/recipes/curry-garbanzos.svg'
@@ -346,6 +347,30 @@ export const useRecetarioStore = defineStore('recetario', {
     asignarReceta(dia: DiaSemana, tipoComida: TipoComida, recetaId: number | null) {
       const entrada = this.calendario.find((e) => e.diaSemana === dia && e.tipoComida === tipoComida)
       if (entrada) entrada.recetaId = recetaId
+    },
+    // US-05: mezcla el catálogo de la API con el del prototipo (mismos ids en una base con el seed).
+    cargarCatalogo(lista: { id: number; name: string; kcalPer100g: number; minDiet: string }[]) {
+      for (const i of lista) {
+        const nuevo = { nombre: i.name, caloriasPor100g: i.kcalPer100g, dietaMinima: i.minDiet as TipoDieta }
+        const actual = this.ingredientes.find((x) => x.id === i.id)
+        if (actual) Object.assign(actual, nuevo)
+        else this.ingredientes.push({ id: i.id, ...nuevo })
+      }
+    },
+    // US-05: guarda en el store la receta que ha creado la API (para verla en lista y detalle).
+    anadirRecetaApi(r: RecetaApi, datos: { imagenes: string[]; pasos: PasoPreparacion[] }) {
+      this.recetas.push({
+        id: r.id,
+        nombre: r.name,
+        tipoComida: r.mealType as TipoComida,
+        tiempoPreparacionMin: r.prepTimeMin,
+        descripcion: r.description,
+        kcal: r.kcal,
+        ingredientes: r.ingredients.map((i) => ({ ingredienteId: i.ingredientId, cantidad: i.quantity, unidad: i.unit })),
+        pasos: r.steps.map((p, i) => ({ texto: p.text, ...(datos.pasos[i]?.imagenes?.length ? { imagenes: datos.pasos[i].imagenes } : {}) })),
+        gradiente: 'linear-gradient(135deg,var(--leaf),var(--green))',
+        imagenes: datos.imagenes,
+      })
     },
     anadirReceta(receta: Omit<Receta, 'id'>) {
       const id = Math.max(...this.recetas.map((r) => r.id)) + 1
