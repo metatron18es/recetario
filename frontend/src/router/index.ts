@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { obtenerSesion } from '../lib/api'
+import { sesion as sesionActual } from '../lib/sesion'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +23,7 @@ const router = createRouter({
         {
           path: 'recetas/nueva',
           name: 'crear-receta',
+          meta: { requiereSesion: true },
           component: () => import('../views/CrearRecetaView.vue'),
         },
         {
@@ -33,6 +35,7 @@ const router = createRouter({
         {
           path: 'recetas/:id/editar',
           name: 'editar-receta',
+          meta: { requiereSesion: true },
           component: () => import('../views/CrearRecetaView.vue'),
           props: (route) => ({ editId: Number(route.params.id) }),
         },
@@ -49,6 +52,7 @@ const router = createRouter({
         {
           path: 'perfil',
           name: 'perfil',
+          meta: { requiereSesion: true },
           component: () => import('../views/PerfilView.vue'),
         },
       ],
@@ -56,11 +60,14 @@ const router = createRouter({
   ],
 })
 
-// US-04: al recargar se consulta la cookie; sin sesión válida se redirige a login.
+// US-04: al recargar se consulta la cookie. Recetas, calendario y lista de la compra son públicos;
+// solo las rutas con meta.requiereSesion (crear/editar recetas y perfil) exigen sesión.
 router.beforeEach(async (to) => {
   const sesion = await obtenerSesion().catch(() => null)
+  sesionActual.value = sesion
   if (to.name === 'login') return sesion ? { path: '/recetas' } : true
-  return sesion ? true : { name: 'login' }
+  if (to.meta.requiereSesion && !sesion) return { name: 'login', query: { redirect: to.fullPath } }
+  return true
 })
 
 export default router

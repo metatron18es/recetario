@@ -2,13 +2,14 @@
 import TpButton from '../components/atoms/tp-button.vue'
 import TpInput from '../components/atoms/tp-input.vue'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import TpBrand from '../components/molecules/tp-brand.vue'
 import TpCard from '../components/atoms/tp-card.vue'
 import { iniciarSesion, registrarUsuario } from '../lib/api'
 
 const isRegister = ref(false)
 const router = useRouter()
+const route = useRoute()
 const nombre = ref('')
 const email = ref('')
 const password = ref('')
@@ -37,7 +38,9 @@ async function submit() {
   enviando.value = true
   try {
     await iniciarSesion({ email: email.value, password: password.value })
-    router.push('/recetas')
+    // Vuelve a la ruta que pedía el visitante (solo rutas internas).
+    const destino = typeof route.query.redirect === 'string' ? route.query.redirect : ''
+    router.push(destino.startsWith('/') && !destino.startsWith('//') ? destino : '/recetas')
   } catch (e) {
     error.value = e instanceof Error ? e.message : 'No se pudo iniciar sesión'
   } finally {
