@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import TpPageHeader from '../components/molecules/tp-page-header.vue'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { IMAGEN_PLACEHOLDER, useRecetarioStore, type PasoPreparacion, type TipoComida } from '../stores/recetario'
+import { crearReceta, listarIngredientes } from '../lib/api'
 import TpButton from '../components/atoms/tp-button.vue'
 import TpInput from '../components/atoms/tp-input.vue'
 import TpSelect from '../components/atoms/tp-select.vue'
@@ -33,6 +34,7 @@ const filas = ref<IngredientRow[]>(
     ? recetaEnEdicion.value.ingredientes.map((ri) => ({
         ingredienteId: ri.ingredienteId,
         nombrePendiente: null,
+        kcalPendiente: '',
         cantidad: String(ri.cantidad),
         unidad: ri.unidad,
         query: '',
@@ -49,7 +51,58 @@ function toggleAlergeno(id: number) {
   else alergenosSeleccionados.value.add(id)
 }
 
-const puedeGuardar = computed(() => nombre.value.trim().length > 0 && filas.value.some((f) => f.ingredienteId))
+const puedeGuardar = computed(
+  () =>
+    !guardando.value &&
+    nombre.value.trim().length > 0 &&
+    filas.value.some((f) => f.ingredienteId || f.nombrePendiente) &&
+    filas.value.every((f) => !f.nombrePendiente || (f.kcalPendiente !== '' && Number(f.kcalPendiente) >= 0)) &&
+    pasos.value.some((p) => p.texto.trim().length > 0),
+)
+const guardando = ref(false)
+const error = ref('')
+
+// US-05: el catálogo viene de la API (validados + propuestos por el usuario).
+onMounted(async () => {
+  try {
+    store.cargarCatalogo(await listarIngredientes())
+  } catch (e) {
+    error.value = e instanceof Error ? e.message : ''
+  }
+})
+
+async function crear() {
+  const pasosLimpios = pasos.value.filter((p) => p.texto.trim().length > 0)
+  guardando.value = true
+  error.value = ''
+  try {
+    const receta = await crearReceta({
+      name: nombre.value.trim(),
+      mealType: tipoComida.value,
+      prepTimeMin: Number(tiempoPreparacionMin.value),
+      description: descripcion.value,
+      ingredients: filas.value
+        .filter((f) => f.ingredienteId || f.nombrePendiente)
+        .map((f) => ({
+          ...(f.ingredienteId ? { ingredientId: f.ingredienteId } : { proposed: { name: f.nombrePendiente!, kcalPer100g: Number(f.kcalPendiente) } }),
+          quantity: Number(f.cantidad),
+          unit: f.unidad,
+        })),
+      steps: pasosLimpios.map((p) => p.texto.trim()),
+    })
+    // Un ingrediente propuesto acaba de crearse en la API: se recarga el catálogo para conocer su id.
+    store.cargarCatalogo(await listarIngredientes())
+    store.anadirRecetaApi(receta, {
+      imagenes: fotosReceta.value.length ? [...fotosReceta.value] : [IMAGEN_PLACEHOLDER],
+      pasos: pasosLimpios,
+    })
+    router.push(`/recetas/${receta.id}`)
+  } catch (e) {
+    error.value = e instanceof Error ? e.message : ''
+  } finally {
+    guardando.value = false
+  }
+}
 
 function guardar() {
   const datos = {
@@ -72,8 +125,7 @@ function guardar() {
     store.actualizarReceta(props.editId, datos)
     router.push(`/recetas/${props.editId}`)
   } else {
-    const id = store.anadirReceta(datos)
-    router.push(`/recetas/${id}`)
+    crear()
   }
 }
 </script>
@@ -113,6 +165,8 @@ function guardar() {
         <tp-section-header title="Alérgenos que contiene" />
         <tp-chip-group :options="opcionesAlergia" :selected="alergenosSeleccionados" @toggle="toggleAlergeno" />
       </div>
+
+      <p v-if="error" class="error" role="alert">{{ error }}</p>
 
       <div class="form-actions">
         <tp-button :to="modoEdicion && editId ? `/recetas/${editId}` : '/recetas'" variant="secondary">Cancelar</tp-button>
@@ -159,6 +213,12 @@ function guardar() {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.error {
+  font-size: 13px;
+  color: #b3261e;
+  margin: 0;
 }
 
 .form-actions {

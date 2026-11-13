@@ -11,6 +11,8 @@ const GRAMS_PER_UNIT: Record<string, number> = {
   pizca: 0.5,
 }
 
+export const UNITS = Object.keys(GRAMS_PER_UNIT)
+
 // Recipe kcal = sum of calorias100g × grams / 100 for each ingredient (unknown unit counts as 0).
 export function recipeKcal(
   items: { cantidad: number; unidad: string; ingrediente: { calorias100g: number } }[],

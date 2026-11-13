@@ -47,3 +47,10 @@ export function optionalUserId(req: Request): number | null {
     return null
   }
 }
+
+// Id of the session user; sends 401 and returns null when there is no valid session.
+export function requireUserId(req: Request, res: Response): number | null {
+  const id = optionalUserId(req)
+  if (id === null) sendError(res, 401, 'NOT_AUTHENTICATED')
+  return id
+}

@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import { z } from 'zod'
 import { prisma } from '../lib/prisma.js'
-import { optionalUserId } from '../lib/auth.js'
-import { recipeKcal } from '../lib/nutrition.js'
+import { optionalUserId, requireUserId } from '../lib/auth.js'
+import { recipeKcal, UNITS } from '../lib/nutrition.js'
 import { sendError } from '../lib/errors.js'
 
 export const recipesRouter = Router()
@@ -88,5 +88,113 @@ recipesRouter.get('/recipes/:id', async (req, res) => {
     res.json(toApi(recipe))
   } catch {
     sendError(res, 500, 'RECIPE_LOAD_FAILED')
+  }
+})
+
+const MEAL_TYPES = ['Desayuno', 'Almuerzo', 'Comida', 'Merienda', 'Cena']
+
+const ingredientSchema = z.object({
+  ingredientId: z.number().int().positive().optional(),
+  // A user can propose a new ingredient: it stays pending until the admin validates it.
+  proposed: z.object({ name: z.string().trim().min(1).max(80), kcalPer100g: z.number().int().min(0).max(1000) }).optional(),
+  quantity: z.number().positive(),
+  unit: z.string().refine((u) => UNITS.includes(u)),
+})
+
+const createSchema = z.object({
+  name: z.string().trim().min(1),
+  mealType: z.string(),
+  prepTimeMin: z.number().int().positive(),
+  description: z.string().default(''),
+  ingredients: z.array(z.any()),
+  steps: z.array(z.string()),
+})
+
+// US-05: any signed-in user creates a recipe; it is public and linked to its author.
+recipesRouter.post('/recipes', async (req, res) => {
+  const usuarioId = requireUserId(req, res)
+  if (usuarioId === null) return
+
+  const body = createSchema.safeParse(req.body)
+  if (!body.success) {
+    const field = body.error.issues[0]?.path[0]
+    sendError(res, 400, field === 'name' ? 'RECIPE_NAME_REQUIRED' : field === 'prepTimeMin' ? 'INVALID_PREP_TIME' : 'INVALID_RECIPE_BODY')
+    return
+  }
+  const { name, mealType, prepTimeMin, description } = body.data
+  if (!MEAL_TYPES.includes(mealType)) return sendError(res, 400, 'INVALID_MEAL_TYPE')
+  const steps = body.data.steps.map((s) => s.trim()).filter(Boolean)
+  if (body.data.ingredients.length === 0) return sendError(res, 400, 'INGREDIENTS_REQUIRED')
+  if (steps.length === 0) return sendError(res, 400, 'STEPS_REQUIRED')
+
+  const items = z.array(ingredientSchema).safeParse(body.data.ingredients)
+  if (!items.success || items.data.some((i) => (i.ingredientId === undefined) === (i.proposed === undefined))) {
+    return sendError(res, 400, 'INVALID_INGREDIENT')
+  }
+
+  try {
+    const created = await prisma.$transaction(async (tx) => {
+      const rows: { ingredienteId: number; cantidad: number; unidad: string }[] = []
+      for (const item of items.data) {
+        let ingredienteId = item.ingredientId
+        if (ingredienteId !== undefined) {
+          if (!(await tx.ingrediente.findUnique({ where: { id: ingredienteId }, select: { id: true } }))) {
+            throw new Error('INGREDIENT_NOT_FOUND')
+          }
+        } else {
+          const { name: nombre, kcalPer100g } = item.proposed!
+          const existing = await tx.ingrediente.findFirst({ where: { nombre: { equals: nombre, mode: 'insensitive' } } })
+          ingredienteId = (
+            existing ??
+            (await tx.ingrediente.create({
+              data: { nombre, calorias100g: kcalPer100g, validado: false, propuestoPorId: usuarioId },
+            }))
+          ).id
+        }
+        rows.push({ ingredienteId, cantidad: item.quantity, unidad: item.unit })
+      }
+      if (new Set(rows.map((r) => r.ingredienteId)).size !== rows.length) throw new Error('DUPLICATE_INGREDIENT')
+
+      return tx.receta.create({
+        data: {
+          usuarioId,
+          nombre: name,
+          tipoComida: mealType,
+          tiempoPreparacionMin: prepTimeMin,
+          descripcion: description,
+          ingredientes: { create: rows },
+          pasos: { create: steps.map((texto, i) => ({ orden: i + 1, texto })) },
+        },
+        include,
+      })
+    })
+    res.status(201).json(toApi(created))
+  } catch (e) {
+    const code = e instanceof Error ? e.message : ''
+    if (code === 'INGREDIENT_NOT_FOUND') sendError(res, 400, 'INGREDIENT_NOT_FOUND')
+    else if (code === 'DUPLICATE_INGREDIENT') sendError(res, 400, 'DUPLICATE_INGREDIENT')
+    else sendError(res, 500, 'RECIPE_CREATE_FAILED')
+  }
+})
+
+// US-05: catalog for the recipe form: validated ingredients plus the ones the user proposed.
+recipesRouter.get('/ingredients', async (req, res) => {
+  const usuarioId = optionalUserId(req)
+  try {
+    const rows = await prisma.ingrediente.findMany({
+      where: { OR: [{ validado: true }, ...(usuarioId === null ? [] : [{ propuestoPorId: usuarioId }])] },
+      orderBy: { nombre: 'asc' },
+    })
+    res.json(
+      rows.map((i) => ({
+        id: i.id,
+        name: i.nombre,
+        kcalPer100g: i.calorias100g,
+        minDiet: i.dietaMinima,
+        validated: i.validado,
+      })),
+    )
+  } catch {
+    sendError(res, 500, 'INGREDIENTS_LOAD_FAILED')
   }
 })

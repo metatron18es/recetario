@@ -17,6 +17,17 @@ const TEXTOS: Record<string, string> = {
   RECIPE_NOT_FOUND: 'Receta no encontrada',
   RECIPES_LOAD_FAILED: 'No se pudieron cargar las recetas',
   RECIPE_LOAD_FAILED: 'No se pudo cargar la receta',
+  RECIPE_NAME_REQUIRED: 'El nombre de la receta es obligatorio',
+  INVALID_MEAL_TYPE: 'Tipo de comida no válido',
+  INVALID_PREP_TIME: 'El tiempo debe ser un número entero de minutos mayor que 0',
+  INVALID_RECIPE_BODY: 'Los datos de la receta no son válidos',
+  INGREDIENTS_REQUIRED: 'Añade al menos un ingrediente',
+  INVALID_INGREDIENT: 'Cada ingrediente necesita una cantidad mayor que 0 y una unidad válida',
+  DUPLICATE_INGREDIENT: 'Hay un ingrediente repetido',
+  STEPS_REQUIRED: 'Añade al menos un paso',
+  INGREDIENT_NOT_FOUND: 'Algún ingrediente ya no existe en el catálogo',
+  RECIPE_CREATE_FAILED: 'No se pudo guardar la receta',
+  INGREDIENTS_LOAD_FAILED: 'No se pudo cargar el catálogo de ingredientes',
 }
 
 export const ERROR_GENERICO = 'Algo ha ido mal. Inténtalo de nuevo'

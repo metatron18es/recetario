@@ -19,6 +19,17 @@ const MESSAGES = {
   RECIPE_NOT_FOUND: 'Recipe not found',
   RECIPES_LOAD_FAILED: 'Could not load recipes',
   RECIPE_LOAD_FAILED: 'Could not load the recipe',
+  RECIPE_NAME_REQUIRED: 'Recipe name is required',
+  INVALID_MEAL_TYPE: 'Invalid meal type',
+  INVALID_PREP_TIME: 'Preparation time must be a positive whole number of minutes',
+  INVALID_RECIPE_BODY: 'Invalid recipe body',
+  INGREDIENTS_REQUIRED: 'At least one ingredient is required',
+  INVALID_INGREDIENT: 'Each ingredient needs a positive quantity, a valid unit and an existing or proposed ingredient',
+  DUPLICATE_INGREDIENT: 'An ingredient appears more than once',
+  STEPS_REQUIRED: 'At least one step is required',
+  INGREDIENT_NOT_FOUND: 'Ingredient not found',
+  RECIPE_CREATE_FAILED: 'Could not create the recipe',
+  INGREDIENTS_LOAD_FAILED: 'Could not load ingredients',
 } as const
 
 export type ErrorCode = keyof typeof MESSAGES

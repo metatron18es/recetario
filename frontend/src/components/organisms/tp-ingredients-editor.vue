@@ -17,6 +17,7 @@ const opcionesIngrediente = computed(() => store.ingredientes.map((i) => ({ id: 
 function elegirIngrediente(fila: IngredientRow, id: number) {
   fila.ingredienteId = id
   fila.nombrePendiente = null
+  fila.kcalPendiente = ''
   fila.query = ''
 }
 
@@ -29,6 +30,7 @@ function proponerNuevo(fila: IngredientRow, texto: string) {
 function limpiarFila(fila: IngredientRow) {
   fila.ingredienteId = null
   fila.nombrePendiente = null
+  fila.kcalPendiente = ''
   fila.query = ''
 }
 
@@ -68,6 +70,17 @@ function eliminarFila(index: number) {
           @create="proponerNuevo(fila, $event)"
         />
       </div>
+      <tp-input
+        v-if="fila.nombrePendiente"
+        v-model="fila.kcalPendiente"
+        type="number"
+        min="0"
+        max="1000"
+        step="1"
+        placeholder="kcal por 100 g"
+        aria-label="Calorías por 100 g del ingrediente propuesto"
+        class="cantidad"
+      />
       <tp-input v-model="fila.cantidad" type="number" min="0" step="any" placeholder="Cantidad" aria-label="Cantidad" class="cantidad" />
       <tp-select v-model="fila.unidad" aria-label="Unidad" class="unidad">
         <option v-for="u in UNIDADES" :key="u.valor" :value="u.valor">{{ u.etiqueta }}</option>
