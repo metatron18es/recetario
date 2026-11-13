@@ -3,7 +3,7 @@ import TpPageHeader from '../components/molecules/tp-page-header.vue'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { IMAGEN_PLACEHOLDER, useRecetarioStore, type PasoPreparacion, type TipoComida } from '../stores/recetario'
-import { crearReceta, listarIngredientes } from '../lib/api'
+import { actualizarReceta, crearReceta, listarIngredientes } from '../lib/api'
 import TpButton from '../components/atoms/tp-button.vue'
 import TpInput from '../components/atoms/tp-input.vue'
 import TpSelect from '../components/atoms/tp-select.vue'
@@ -71,12 +71,12 @@ onMounted(async () => {
   }
 })
 
-async function crear() {
+async function guardar() {
   const pasosLimpios = pasos.value.filter((p) => p.texto.trim().length > 0)
   guardando.value = true
   error.value = ''
   try {
-    const receta = await crearReceta({
+    const datos = {
       name: nombre.value.trim(),
       mealType: tipoComida.value,
       prepTimeMin: Number(tiempoPreparacionMin.value),
@@ -89,13 +89,16 @@ async function crear() {
           unit: f.unidad,
         })),
       steps: pasosLimpios.map((p) => p.texto.trim()),
-    })
-    // Un ingrediente propuesto acaba de crearse en la API: se recarga el catálogo para conocer su id.
-    store.cargarCatalogo(await listarIngredientes())
-    store.anadirRecetaApi(receta, {
+    }
+    const extra = {
       imagenes: fotosReceta.value.length ? [...fotosReceta.value] : [IMAGEN_PLACEHOLDER],
       pasos: pasosLimpios,
-    })
+    }
+    const receta = modoEdicion.value && props.editId ? await actualizarReceta(props.editId, datos) : await crearReceta(datos)
+    // Un ingrediente propuesto acaba de crearse en la API: se recarga el catálogo para conocer su id.
+    store.cargarCatalogo(await listarIngredientes())
+    if (modoEdicion.value) store.actualizarRecetaApi(receta, extra)
+    else store.anadirRecetaApi(receta, extra)
     router.push(`/recetas/${receta.id}`)
   } catch (e) {
     error.value = e instanceof Error ? e.message : ''
@@ -104,30 +107,6 @@ async function crear() {
   }
 }
 
-function guardar() {
-  const datos = {
-    nombre: nombre.value.trim(),
-    tipoComida: tipoComida.value,
-    tiempoPreparacionMin: tiempoPreparacionMin.value,
-    descripcion: descripcion.value,
-    kcal: recetaEnEdicion.value?.kcal ?? 0,
-    ingredientes: filas.value
-      .filter((f) => f.ingredienteId)
-      .map((f) => ({ ingredienteId: f.ingredienteId!, cantidad: Number(f.cantidad) || 0, unidad: f.unidad })),
-    pasos: pasos.value
-      .filter((p) => p.texto.trim().length > 0)
-      .map((p) => (p.imagenes?.length ? { texto: p.texto.trim(), imagenes: [...p.imagenes] } : { texto: p.texto.trim() })),
-    gradiente: recetaEnEdicion.value?.gradiente ?? 'linear-gradient(135deg,var(--leaf),var(--green))',
-    imagenes: fotosReceta.value.length ? [...fotosReceta.value] : [IMAGEN_PLACEHOLDER],
-  }
-
-  if (modoEdicion.value && props.editId) {
-    store.actualizarReceta(props.editId, datos)
-    router.push(`/recetas/${props.editId}`)
-  } else {
-    crear()
-  }
-}
 </script>
 
 <template>

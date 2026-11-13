@@ -71,6 +71,8 @@ export interface Receta {
   pasos: PasoPreparacion[]
   gradiente: string
   imagenes: string[]
+  // Autor según la API; las recetas de ejemplo no lo tienen.
+  autorId?: number | null
 }
 
 export interface EntradaCalendario {
@@ -369,6 +371,22 @@ export const useRecetarioStore = defineStore('recetario', {
         ingredientes: r.ingredients.map((i) => ({ ingredienteId: i.ingredientId, cantidad: i.quantity, unidad: i.unit })),
         pasos: r.steps.map((p, i) => ({ texto: p.text, ...(datos.pasos[i]?.imagenes?.length ? { imagenes: datos.pasos[i].imagenes } : {}) })),
         gradiente: 'linear-gradient(135deg,var(--leaf),var(--green))',
+        imagenes: datos.imagenes,
+        autorId: r.author?.id ?? null,
+      })
+    },
+    // US-06: refleja en el store la receta que ha devuelto la API tras editarla.
+    actualizarRecetaApi(r: RecetaApi, datos: { imagenes: string[]; pasos: PasoPreparacion[] }) {
+      const actual = this.recetas.find((x) => x.id === r.id)
+      if (!actual) return
+      Object.assign(actual, {
+        nombre: r.name,
+        tipoComida: r.mealType as TipoComida,
+        tiempoPreparacionMin: r.prepTimeMin,
+        descripcion: r.description,
+        kcal: r.kcal,
+        ingredientes: r.ingredients.map((i) => ({ ingredienteId: i.ingredientId, cantidad: i.quantity, unidad: i.unit })),
+        pasos: r.steps.map((p, i) => ({ texto: p.text, ...(datos.pasos[i]?.imagenes?.length ? { imagenes: datos.pasos[i].imagenes } : {}) })),
         imagenes: datos.imagenes,
       })
     },
