@@ -15,3 +15,4 @@ const meta = {
 export default meta
 export const Default: StoryObj<typeof meta> = {}
 export const ConFoto: StoryObj<typeof meta> = { args: { src: FOTO, alt: 'María López' } }
+export const ConIniciales: StoryObj<typeof meta> = { args: { name: 'María López' } }
