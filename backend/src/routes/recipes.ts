@@ -1,7 +1,7 @@
 import { Router, type Response } from 'express'
 import { z } from 'zod'
 import { prisma } from '../lib/prisma.js'
-import { optionalUserId, requireUserId, ROL_ADMIN } from '../lib/auth.js'
+import { optionalUserId, requireAdmin, requireUserId, ROL_ADMIN } from '../lib/auth.js'
 import { recipeKcal, UNITS } from '../lib/nutrition.js'
 import { sendError, type ErrorCode } from '../lib/errors.js'
 
@@ -227,6 +227,24 @@ recipesRouter.put('/recipes/:id', async (req, res) => {
     res.json(toApi(updated))
   } catch (e) {
     sendWriteError(res, e, 'RECIPE_UPDATE_FAILED')
+  }
+})
+
+// US-07: only the admin deletes. If calendars use the recipe, answer 409 with the usage count
+// until the client repeats the call with ?force=true; the calendar cells are emptied (SetNull).
+recipesRouter.delete('/recipes/:id', requireAdmin, async (req, res) => {
+  const id = Number(req.params.id)
+  if (!Number.isInteger(id) || id < 1) return sendError(res, 400, 'INVALID_ID')
+  try {
+    if (!(await prisma.receta.findUnique({ where: { id }, select: { id: true } }))) {
+      return sendError(res, 404, 'RECIPE_NOT_FOUND')
+    }
+    const usages = await prisma.entradaCalendario.count({ where: { recetaId: id } })
+    if (usages > 0 && req.query.force !== 'true') return sendError(res, 409, 'RECIPE_IN_USE', { usages })
+    await prisma.receta.delete({ where: { id } })
+    res.status(204).end()
+  } catch {
+    sendError(res, 500, 'RECIPE_DELETE_FAILED')
   }
 })
 
