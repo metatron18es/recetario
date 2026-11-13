@@ -1,3 +1,4 @@
+import type { MealType } from '@recetario/shared'
 import { textoDeError } from './errores'
 
 const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3001'
@@ -69,7 +70,7 @@ export interface IngredienteApi {
 export interface RecetaApi {
   id: number
   name: string
-  mealType: string
+  mealType: MealType
   prepTimeMin: number
   description: string
   kcal: number
@@ -88,7 +89,7 @@ export async function listarIngredientes(): Promise<IngredienteApi[]> {
 
 export interface NuevaRecetaApi {
   name: string
-  mealType: string
+  mealType: MealType
   prepTimeMin: number
   description: string
   // Un ingrediente del catálogo (`ingredientId`) o uno propuesto (`proposed`), que queda pendiente de validar.

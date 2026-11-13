@@ -24,11 +24,13 @@ Más detalle en [`docs/DECISIONES_PROYECTO.md`](docs/DECISIONES_PROYECTO.md).
 Requisitos: Node 22, Docker y un `backend/.env` (copia de `backend/.env.example`).
 
 ```bash
-make install   # instala dependencias de backend y frontend
+make install   # npm install en la raíz (workspaces) y compila shared
 make dev       # base de datos (5434), API (3001), app (5174) y Storybook (6007)
 make stop      # para la API, la app y Storybook
 make db-stop   # para la base de datos
 ```
+
+Estructura: workspace de npm con `shared/` (contrato front/back con zod, `@recetario/shared`), `backend/` y `frontend/`. Un único `package-lock.json` en la raíz; `shared` se compila a `shared/dist` en el `postinstall` (`npm run build:shared` tras cambiarlo).
 
 Aplicación desplegada: https://recetario-ncgi.vercel.app (API: https://recetario-nine-sage.vercel.app/api/health).
 

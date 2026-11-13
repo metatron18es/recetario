@@ -7,31 +7,26 @@ on:
 jobs:
   backend:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: backend/package-lock.json
       - run: npm ci
+      - run: npm run build -w shared
       - run: npx prisma generate
-      - run: npm run build
-      - run: npm test
+        working-directory: backend
+      - run: npm run build -w backend
+      - run: npm test -w backend
   frontend:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: frontend/package-lock.json
       - run: npm ci
-      - run: npm run build
+      - run: npm run build -w shared
+      - run: npm run build -w frontend
