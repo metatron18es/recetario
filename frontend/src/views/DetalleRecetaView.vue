@@ -10,6 +10,7 @@ import TpChip from '../components/atoms/tp-chip.vue'
 import TpNotification from '../components/molecules/tp-notification.vue'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { sesion } from '../lib/sesion'
 import { useRecetarioStore } from '../stores/recetario'
 
 const props = defineProps<{ id: number }>()
@@ -73,7 +74,7 @@ function editarReceta() {
         </div>
 
         <tp-button @click="anadirAlCalendario">+ Añadir al calendario</tp-button>
-        <tp-button variant="secondary" @click="editarReceta">Editar receta</tp-button>
+        <tp-button v-if="sesion" variant="secondary" @click="editarReceta">Editar receta</tp-button>
       </div>
     </div>
   </div>

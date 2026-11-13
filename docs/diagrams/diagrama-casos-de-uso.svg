@@ -89,6 +89,14 @@
 <line x1='80' y1='135.0' x2='95' y2='159.0' stroke='#3a5a40' stroke-width='2'/>
 <text x='80' y='179.0' font-size='14' fill='#1f3821' text-anchor='middle' font-weight='700'>Visitante</text>
 <line x1='100' y1='113.0' x2='208' y2='133.0' stroke='#3a5a40' stroke-width='1.6'/>
+<line x1='100' y1='128' x2='150' y2='128' stroke='#3a5a40' stroke-width='1.6'/>
+<line x1='150' y1='128' x2='150' y2='928' stroke='#3a5a40' stroke-width='1.6'/>
+<line x1='150' y1='424' x2='241' y2='424' stroke='#3a5a40' stroke-width='1.6'/>
+<line x1='150' y1='760' x2='241' y2='760' stroke='#3a5a40' stroke-width='1.6'/>
+<line x1='150' y1='816' x2='241' y2='816' stroke='#3a5a40' stroke-width='1.6'/>
+<line x1='150' y1='928' x2='241' y2='928' stroke='#3a5a40' stroke-width='1.6'/>
+<line x1='80' y1='520' x2='80' y2='187' stroke='#5b6358' stroke-width='1.4' marker-end='url(#tri)'/>
+<text x='88' y='360' font-size='10.5' fill='#5b6358' text-anchor='start' font-style='italic'>hereda</text>
 <circle cx='80' cy='541.0' r='11' fill='#ffffff' stroke='#3a5a40' stroke-width='2'/>
 <line x1='80' y1='552.0' x2='80' y2='583.0' stroke='#3a5a40' stroke-width='2'/>
 <line x1='62' y1='563.0' x2='98' y2='563.0' stroke='#3a5a40' stroke-width='2'/>

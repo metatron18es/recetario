@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
-import { getApiHealth } from '../../lib/api'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
+import { cerrarSesion, getApiHealth } from '../../lib/api'
+import { sesion } from '../../lib/sesion'
 import TpAvatar from '../atoms/tp-avatar.vue'
 import TpIcon from '../atoms/tp-icon.vue'
 import TpBrand from '../molecules/tp-brand.vue'
@@ -10,12 +11,44 @@ const secciones = [
   { to: '/recetas', texto: 'Mis recetas', corto: 'Recetas', icono: 'recetas' },
   { to: '/calendario', texto: 'Calendario', corto: 'Calendario', icono: 'calendario' },
   { to: '/lista-compra', texto: 'Lista de la compra', corto: 'Compra', icono: 'compra' },
-  { to: '/perfil', texto: 'Perfil', corto: 'Perfil', icono: 'perfil' },
 ]
 
 // Solo en desarrollo: comprobación simple de que el backend Express responde.
 const esDev = import.meta.env.DEV
 const apiStatus = ref<'comprobando' | 'conectado' | 'sin conexión'>('comprobando')
+
+// Menú del avatar: se cierra al pulsar fuera, con Escape o al navegar.
+const route = useRoute()
+const router = useRouter()
+const menuAbierto = ref(false)
+const menuRef = ref<HTMLElement | null>(null)
+
+function cerrarSiFuera(e: MouseEvent) {
+  if (menuRef.value && !menuRef.value.contains(e.target as Node)) menuAbierto.value = false
+}
+function cerrarConEscape(e: KeyboardEvent) {
+  if (e.key === 'Escape') menuAbierto.value = false
+}
+watch(() => route.fullPath, () => (menuAbierto.value = false))
+
+async function salir() {
+  menuAbierto.value = false
+  try {
+    await cerrarSesion()
+  } finally {
+    sesion.value = null
+    router.push({ name: 'login' })
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', cerrarSiFuera)
+  document.addEventListener('keydown', cerrarConEscape)
+})
+onBeforeUnmount(() => {
+  document.removeEventListener('click', cerrarSiFuera)
+  document.removeEventListener('keydown', cerrarConEscape)
+})
 
 onMounted(async () => {
   if (!esDev) return
@@ -40,7 +73,23 @@ onMounted(async () => {
         <span class="dot"></span>
         API {{ apiStatus }}
       </span>
-      <RouterLink to="/perfil" class="avatar-link" aria-label="Perfil"><tp-avatar :size="32" /></RouterLink>
+      <div v-if="sesion" ref="menuRef" class="user-menu">
+        <button
+          type="button"
+          class="avatar-link"
+          aria-label="Menú de usuario"
+          aria-haspopup="menu"
+          :aria-expanded="menuAbierto"
+          @click="menuAbierto = !menuAbierto"
+        >
+          <tp-avatar :size="32" :name="sesion.nombre" />
+        </button>
+        <div v-if="menuAbierto" class="menu" role="menu">
+          <RouterLink to="/perfil" class="menu-item" role="menuitem">Mi perfil</RouterLink>
+          <button type="button" class="menu-item" role="menuitem" @click="salir">Cerrar sesión</button>
+        </div>
+      </div>
+      <RouterLink v-else to="/login" class="nav-link">Iniciar sesión</RouterLink>
     </header>
 
     <main class="content">
@@ -51,6 +100,10 @@ onMounted(async () => {
       <RouterLink v-for="s in secciones" :key="s.to" :to="s.to" class="tab">
         <tp-icon :name="s.icono" :size="22" />
         <span>{{ s.corto }}</span>
+      </RouterLink>
+      <RouterLink :to="sesion ? '/perfil' : '/login'" class="tab">
+        <tp-icon name="perfil" :size="22" />
+        <span>{{ sesion ? 'Perfil' : 'Entrar' }}</span>
       </RouterLink>
     </nav>
   </div>
@@ -84,7 +137,50 @@ onMounted(async () => {
 
 .avatar-link {
   display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: none;
   border-radius: 50%;
+  cursor: pointer;
+}
+
+.user-menu {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 20;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
+}
+
+.menu-item {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menu-item:hover,
+.menu-item:focus-visible {
+  background: var(--chip-bg);
 }
 
 .nav-link {
