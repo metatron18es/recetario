@@ -1,9 +1,9 @@
-import { Router } from 'express'
+import { Router, type Response } from 'express'
 import { z } from 'zod'
 import { prisma } from '../lib/prisma.js'
-import { optionalUserId, requireUserId } from '../lib/auth.js'
+import { optionalUserId, requireUserId, ROL_ADMIN } from '../lib/auth.js'
 import { recipeKcal, UNITS } from '../lib/nutrition.js'
-import { sendError } from '../lib/errors.js'
+import { sendError, type ErrorCode } from '../lib/errors.js'
 
 export const recipesRouter = Router()
 
@@ -110,51 +110,68 @@ const createSchema = z.object({
   steps: z.array(z.string()),
 })
 
+type Tx = Parameters<Parameters<typeof prisma.$transaction>[0]>[0]
+
+// Validates the body shared by create and edit. Returns the error code, or the clean data.
+function parseRecipeBody(raw: unknown) {
+  const body = createSchema.safeParse(raw)
+  if (!body.success) {
+    const field = body.error.issues[0]?.path[0]
+    return { error: (field === 'name' ? 'RECIPE_NAME_REQUIRED' : field === 'prepTimeMin' ? 'INVALID_PREP_TIME' : 'INVALID_RECIPE_BODY') as ErrorCode }
+  }
+  const { name, mealType, prepTimeMin, description } = body.data
+  if (!MEAL_TYPES.includes(mealType)) return { error: 'INVALID_MEAL_TYPE' as ErrorCode }
+  const steps = body.data.steps.map((s) => s.trim()).filter(Boolean)
+  if (body.data.ingredients.length === 0) return { error: 'INGREDIENTS_REQUIRED' as ErrorCode }
+  if (steps.length === 0) return { error: 'STEPS_REQUIRED' as ErrorCode }
+  const items = z.array(ingredientSchema).safeParse(body.data.ingredients)
+  if (!items.success || items.data.some((i) => (i.ingredientId === undefined) === (i.proposed === undefined))) {
+    return { error: 'INVALID_INGREDIENT' as ErrorCode }
+  }
+  return { data: { name, mealType, prepTimeMin, description, steps, items: items.data } }
+}
+
+// Resolves existing ingredients and creates the proposed ones (pending admin validation).
+async function resolveIngredients(tx: Tx, items: z.infer<typeof ingredientSchema>[], usuarioId: number) {
+  const rows: { ingredienteId: number; cantidad: number; unidad: string }[] = []
+  for (const item of items) {
+    let ingredienteId = item.ingredientId
+    if (ingredienteId !== undefined) {
+      if (!(await tx.ingrediente.findUnique({ where: { id: ingredienteId }, select: { id: true } }))) {
+        throw new Error('INGREDIENT_NOT_FOUND')
+      }
+    } else {
+      const { name: nombre, kcalPer100g } = item.proposed!
+      const existing = await tx.ingrediente.findFirst({ where: { nombre: { equals: nombre, mode: 'insensitive' } } })
+      ingredienteId = (
+        existing ??
+        (await tx.ingrediente.create({ data: { nombre, calorias100g: kcalPer100g, validado: false, propuestoPorId: usuarioId } }))
+      ).id
+    }
+    rows.push({ ingredienteId, cantidad: item.quantity, unidad: item.unit })
+  }
+  if (new Set(rows.map((r) => r.ingredienteId)).size !== rows.length) throw new Error('DUPLICATE_INGREDIENT')
+  return rows
+}
+
+function sendWriteError(res: Response, e: unknown, fallback: ErrorCode) {
+  const code = e instanceof Error ? e.message : ''
+  if (code === 'INGREDIENT_NOT_FOUND' || code === 'DUPLICATE_INGREDIENT') sendError(res, 400, code)
+  else sendError(res, 500, fallback)
+}
+
 // US-05: any signed-in user creates a recipe; it is public and linked to its author.
 recipesRouter.post('/recipes', async (req, res) => {
   const usuarioId = requireUserId(req, res)
   if (usuarioId === null) return
 
-  const body = createSchema.safeParse(req.body)
-  if (!body.success) {
-    const field = body.error.issues[0]?.path[0]
-    sendError(res, 400, field === 'name' ? 'RECIPE_NAME_REQUIRED' : field === 'prepTimeMin' ? 'INVALID_PREP_TIME' : 'INVALID_RECIPE_BODY')
-    return
-  }
-  const { name, mealType, prepTimeMin, description } = body.data
-  if (!MEAL_TYPES.includes(mealType)) return sendError(res, 400, 'INVALID_MEAL_TYPE')
-  const steps = body.data.steps.map((s) => s.trim()).filter(Boolean)
-  if (body.data.ingredients.length === 0) return sendError(res, 400, 'INGREDIENTS_REQUIRED')
-  if (steps.length === 0) return sendError(res, 400, 'STEPS_REQUIRED')
-
-  const items = z.array(ingredientSchema).safeParse(body.data.ingredients)
-  if (!items.success || items.data.some((i) => (i.ingredientId === undefined) === (i.proposed === undefined))) {
-    return sendError(res, 400, 'INVALID_INGREDIENT')
-  }
+  const parsed = parseRecipeBody(req.body)
+  if (parsed.error) return sendError(res, 400, parsed.error)
+  const { name, mealType, prepTimeMin, description, steps, items } = parsed.data
 
   try {
     const created = await prisma.$transaction(async (tx) => {
-      const rows: { ingredienteId: number; cantidad: number; unidad: string }[] = []
-      for (const item of items.data) {
-        let ingredienteId = item.ingredientId
-        if (ingredienteId !== undefined) {
-          if (!(await tx.ingrediente.findUnique({ where: { id: ingredienteId }, select: { id: true } }))) {
-            throw new Error('INGREDIENT_NOT_FOUND')
-          }
-        } else {
-          const { name: nombre, kcalPer100g } = item.proposed!
-          const existing = await tx.ingrediente.findFirst({ where: { nombre: { equals: nombre, mode: 'insensitive' } } })
-          ingredienteId = (
-            existing ??
-            (await tx.ingrediente.create({
-              data: { nombre, calorias100g: kcalPer100g, validado: false, propuestoPorId: usuarioId },
-            }))
-          ).id
-        }
-        rows.push({ ingredienteId, cantidad: item.quantity, unidad: item.unit })
-      }
-      if (new Set(rows.map((r) => r.ingredienteId)).size !== rows.length) throw new Error('DUPLICATE_INGREDIENT')
-
+      const rows = await resolveIngredients(tx, items, usuarioId)
       return tx.receta.create({
         data: {
           usuarioId,
@@ -170,10 +187,46 @@ recipesRouter.post('/recipes', async (req, res) => {
     })
     res.status(201).json(toApi(created))
   } catch (e) {
-    const code = e instanceof Error ? e.message : ''
-    if (code === 'INGREDIENT_NOT_FOUND') sendError(res, 400, 'INGREDIENT_NOT_FOUND')
-    else if (code === 'DUPLICATE_INGREDIENT') sendError(res, 400, 'DUPLICATE_INGREDIENT')
-    else sendError(res, 500, 'RECIPE_CREATE_FAILED')
+    sendWriteError(res, e, 'RECIPE_CREATE_FAILED')
+  }
+})
+
+// US-06: only the author or the admin edits a recipe; the whole recipe is replaced.
+recipesRouter.put('/recipes/:id', async (req, res) => {
+  const usuarioId = requireUserId(req, res)
+  if (usuarioId === null) return
+  const id = Number(req.params.id)
+  if (!Number.isInteger(id) || id < 1) return sendError(res, 400, 'INVALID_ID')
+
+  const parsed = parseRecipeBody(req.body)
+  if (parsed.error) return sendError(res, 400, parsed.error)
+  const { name, mealType, prepTimeMin, description, steps, items } = parsed.data
+
+  try {
+    const current = await prisma.receta.findUnique({ where: { id }, select: { usuarioId: true } })
+    if (!current) return sendError(res, 404, 'RECIPE_NOT_FOUND')
+    if (current.usuarioId !== usuarioId) {
+      const user = await prisma.usuario.findUnique({ where: { id: usuarioId }, select: { rol: true } })
+      if (user?.rol !== ROL_ADMIN) return sendError(res, 403, 'NOT_RECIPE_OWNER')
+    }
+    const updated = await prisma.$transaction(async (tx) => {
+      const rows = await resolveIngredients(tx, items, usuarioId)
+      return tx.receta.update({
+        where: { id },
+        data: {
+          nombre: name,
+          tipoComida: mealType,
+          tiempoPreparacionMin: prepTimeMin,
+          descripcion: description,
+          ingredientes: { deleteMany: {}, create: rows },
+          pasos: { deleteMany: {}, create: steps.map((texto, i) => ({ orden: i + 1, texto })) },
+        },
+        include,
+      })
+    })
+    res.json(toApi(updated))
+  } catch (e) {
+    sendWriteError(res, e, 'RECIPE_UPDATE_FAILED')
   }
 })
 

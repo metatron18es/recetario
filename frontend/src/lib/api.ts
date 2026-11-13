@@ -101,6 +101,19 @@ export interface NuevaRecetaApi {
   steps: string[]
 }
 
+// US-06: reemplaza la receta; solo su autor o el administrador.
+export async function actualizarReceta(id: number, datos: NuevaRecetaApi): Promise<RecetaApi> {
+  const res = await fetch(`${API_URL}/api/recipes/${id}`, {
+    method: 'PUT',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(datos),
+  })
+  const body = await res.json().catch(() => ({}))
+  if (!res.ok) throw new Error(textoDeError(body.error?.code))
+  return body
+}
+
 // US-05: crea la receta; queda asociada al autor de la sesión y es pública.
 export async function crearReceta(datos: NuevaRecetaApi): Promise<RecetaApi> {
   const res = await fetch(`${API_URL}/api/recipes`, {

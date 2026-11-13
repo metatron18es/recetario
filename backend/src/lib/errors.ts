@@ -29,6 +29,8 @@ const MESSAGES = {
   STEPS_REQUIRED: 'At least one step is required',
   INGREDIENT_NOT_FOUND: 'Ingredient not found',
   RECIPE_CREATE_FAILED: 'Could not create the recipe',
+  NOT_RECIPE_OWNER: 'Only the author or the admin can edit this recipe',
+  RECIPE_UPDATE_FAILED: 'Could not update the recipe',
   INGREDIENTS_LOAD_FAILED: 'Could not load ingredients',
 } as const
 

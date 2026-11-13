@@ -27,6 +27,8 @@ const TEXTOS: Record<string, string> = {
   STEPS_REQUIRED: 'Añade al menos un paso',
   INGREDIENT_NOT_FOUND: 'Algún ingrediente ya no existe en el catálogo',
   RECIPE_CREATE_FAILED: 'No se pudo guardar la receta',
+  NOT_RECIPE_OWNER: 'Solo el autor o el administrador pueden editar esta receta',
+  RECIPE_UPDATE_FAILED: 'No se pudo guardar la receta',
   INGREDIENTS_LOAD_FAILED: 'No se pudo cargar el catálogo de ingredientes',
 }
 

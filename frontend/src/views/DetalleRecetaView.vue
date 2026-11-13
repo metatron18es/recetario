@@ -34,6 +34,11 @@ function anadirAlCalendario() {
   router.push('/calendario')
 }
 
+// US-06: solo el autor o el administrador editan (la API lo vuelve a comprobar).
+const puedeEditar = computed(
+  () => !!sesion.value && (sesion.value.rol === 'admin' || (receta.value?.autorId != null && receta.value.autorId === sesion.value.id)),
+)
+
 function editarReceta() {
   router.push(`/recetas/${props.id}/editar`)
 }
@@ -74,7 +79,7 @@ function editarReceta() {
         </div>
 
         <tp-button @click="anadirAlCalendario">+ Añadir al calendario</tp-button>
-        <tp-button v-if="sesion" variant="secondary" @click="editarReceta">Editar receta</tp-button>
+        <tp-button v-if="puedeEditar" variant="secondary" @click="editarReceta">Editar receta</tp-button>
       </div>
     </div>
   </div>
