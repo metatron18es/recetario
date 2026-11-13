@@ -1,3 +1,5 @@
+import { textoDeError } from './errores'
+
 const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3001'
 
 export async function getApiHealth(): Promise<{ status: string; service: string }> {
@@ -25,7 +27,7 @@ export async function registrarUsuario(datos: {
     body: JSON.stringify(datos),
   })
   const body = await res.json().catch(() => ({}))
-  if (!res.ok) throw new Error(body.error ?? `API respondió ${res.status}`)
+  if (!res.ok) throw new Error(textoDeError(body.error?.code))
   return body
 }
 
@@ -38,7 +40,7 @@ export async function iniciarSesion(datos: { email: string; password: string }):
     body: JSON.stringify(datos),
   })
   const body = await res.json().catch(() => ({}))
-  if (!res.ok) throw new Error(body.error ?? `API respondió ${res.status}`)
+  if (!res.ok) throw new Error(textoDeError(body.error?.code))
   return body
 }
 

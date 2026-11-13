@@ -40,7 +40,8 @@ describe('POST /api/auth/login', () => {
 
     expect(mala.status).toBe(401)
     expect(noExiste.status).toBe(401)
-    expect(mala.body.error).toBe(noExiste.body.error)
+    expect(mala.body.error).toEqual(noExiste.body.error)
+    expect(mala.body.error.code).toBe('CREDENTIALS_INVALID')
     expect(mala.headers['set-cookie']).toBeUndefined()
   })
 

@@ -5,20 +5,22 @@ import { Prisma } from '@prisma/client'
 import { z } from 'zod'
 import { prisma } from '../lib/prisma.js'
 import { rolParaEmail } from '../lib/auth.js'
+import { isErrorCode, sendError } from '../lib/errors.js'
 
 export const authRouter = Router()
 
 const registroSchema = z.object({
-  nombre: z.string().trim().min(1, 'El nombre es obligatorio'),
-  email: z.string().trim().toLowerCase().email('El email no es válido'),
-  password: z.string().min(8, 'La contraseña debe tener al menos 8 caracteres'),
+  nombre: z.string().trim().min(1, 'NAME_REQUIRED'),
+  email: z.string().trim().toLowerCase().email('INVALID_EMAIL'),
+  password: z.string().min(8, 'PASSWORD_TOO_SHORT'),
 })
 
 // US-01: registro de usuario. El email es único y la contraseña se guarda con hash bcrypt.
 authRouter.post('/auth/registro', async (req, res) => {
   const parsed = registroSchema.safeParse(req.body)
   if (!parsed.success) {
-    res.status(400).json({ error: parsed.error.issues[0].message })
+    const code = parsed.error.issues[0].message
+    sendError(res, 400, isErrorCode(code) ? code : 'INVALID_EMAIL')
     return
   }
   const { nombre, email, password } = parsed.data
@@ -32,10 +34,10 @@ authRouter.post('/auth/registro', async (req, res) => {
     res.status(201).json(usuario)
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
-      res.status(409).json({ error: 'Ya existe una cuenta con ese email' })
+      sendError(res, 409, 'EMAIL_TAKEN')
       return
     }
-    res.status(500).json({ error: 'No se pudo crear la cuenta' })
+    sendError(res, 500, 'SIGNUP_FAILED')
   }
 })
 
@@ -44,7 +46,6 @@ const loginSchema = z.object({
   password: z.string().min(1),
 })
 
-const CREDENCIALES_INVALIDAS = 'Email o contraseña incorrectos'
 const SESION_MS = 7 * 24 * 60 * 60 * 1000
 
 // Mismas opciones al emitir y al borrar la cookie, o el navegador no la elimina.
@@ -59,7 +60,7 @@ const cookieOpciones = () => ({
 authRouter.post('/auth/login', async (req, res) => {
   const parsed = loginSchema.safeParse(req.body)
   if (!parsed.success) {
-    res.status(401).json({ error: CREDENCIALES_INVALIDAS })
+    sendError(res, 401, 'CREDENTIALS_INVALID')
     return
   }
   const { email, password } = parsed.data
@@ -68,7 +69,7 @@ authRouter.post('/auth/login', async (req, res) => {
     const usuario = await prisma.usuario.findUnique({ where: { email } })
     const ok = usuario ? await bcrypt.compare(password, usuario.passwordHash) : false
     if (!usuario || !ok) {
-      res.status(401).json({ error: CREDENCIALES_INVALIDAS })
+      sendError(res, 401, 'CREDENTIALS_INVALID')
       return
     }
     const token = jwt.sign({ sub: String(usuario.id), rol: usuario.rol }, process.env.JWT_SECRET!, {
@@ -77,7 +78,7 @@ authRouter.post('/auth/login', async (req, res) => {
     res.cookie('token', token, { ...cookieOpciones(), maxAge: SESION_MS })
     res.json({ id: usuario.id, nombre: usuario.nombre, email: usuario.email, rol: usuario.rol })
   } catch {
-    res.status(500).json({ error: 'No se pudo iniciar sesión' })
+    sendError(res, 500, 'LOGIN_FAILED')
   }
 })
 
@@ -91,7 +92,7 @@ authRouter.post('/auth/logout', (_req, res) => {
 authRouter.get('/auth/me', async (req, res) => {
   const token = /(?:^|;\s*)token=([^;]+)/.exec(req.headers.cookie ?? '')?.[1]
   if (!token) {
-    res.status(401).json({ error: 'No autenticado' })
+    sendError(res, 401, 'NOT_AUTHENTICATED')
     return
   }
   try {
@@ -101,11 +102,11 @@ authRouter.get('/auth/me', async (req, res) => {
       select: { id: true, nombre: true, email: true, rol: true },
     })
     if (!usuario) {
-      res.status(401).json({ error: 'No autenticado' })
+      sendError(res, 401, 'NOT_AUTHENTICATED')
       return
     }
     res.json(usuario)
   } catch {
-    res.status(401).json({ error: 'Sesión no válida o expirada' })
+    sendError(res, 401, 'INVALID_SESSION')
   }
 })
