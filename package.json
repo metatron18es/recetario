@@ -1,6 +1,17 @@
 {
+  "name": "recetario",
+  "private": true,
+  "workspaces": [
+    "shared",
+    "backend",
+    "frontend"
+  ],
   "dependencies": {
     "@neon/config": "^1.11.3",
     "@neon/env": "^1.6.15"
+  },
+  "scripts": {
+    "build:shared": "npm run build -w shared",
+    "postinstall": "npm run build -w shared"
   }
 }

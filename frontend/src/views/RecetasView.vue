@@ -6,12 +6,13 @@ import TpButton from '../components/atoms/tp-button.vue'
 import TpRecipeCard from '../components/molecules/tp-recipe-card.vue'
 import TpPageHeader from '../components/molecules/tp-page-header.vue'
 import { computed, ref } from 'vue'
+import { MEAL_TYPES } from '@recetario/shared'
 import { useRecetarioStore, type TipoComida } from '../stores/recetario'
 import { sesion } from '../lib/sesion'
 
 const store = useRecetarioStore()
 const filtro = ref<'Todas' | TipoComida>('Todas')
-const filtros: ('Todas' | TipoComida)[] = ['Todas', 'Desayuno', 'Almuerzo', 'Comida', 'Merienda', 'Cena']
+const filtros: ('Todas' | TipoComida)[] = ['Todas', ...MEAL_TYPES]
 const busqueda = ref('')
 
 const recetasFiltradas = computed(() => {

@@ -209,6 +209,14 @@ src/lib/      api.ts, imagenes.ts (lectura de fotos como data URL)
 - La tarjeta de Login no usa `BaseCard`: es más grande y con sombra.
 - Cambios visuales menores: espacio entre bloques unificado en 26 px y etiquetas en negrita 700.
 
+## Contrato front/back compartido (#91)
+
+- Paquete `shared/` (`@recetario/shared`) como workspace de npm, con schemas de zod y tipos inferidos con `z.infer`. Prisma sigue siendo solo del backend.
+- Primer contenido: `MEAL_TYPES`, `mealTypeSchema`/`MealType` y `paginationSchema`. Backend (listado, POST, PUT) y frontend (`TipoComida`, filtros, `lib/api.ts`) lo usan; un valor nuevo se añade en un único sitio.
+- Se compila a `shared/dist` (ESM + `.d.ts`); la CI y el `postinstall` lo construyen antes que backend y frontend. Se descartan rutas relativas (rompen `rootDir` de `tsc`), OpenAPI/tRPC y mantenerlo duplicado.
+- Un solo `package-lock.json` en la raíz (se eliminan los de `backend/` y `frontend/`).
+- Pendiente: probar un despliegue en Vercel (root directory y comando de instalación) y migrar después los schemas de receta.
+
 ## Backlog pendiente
 
 **Calidad del código (en alcance):**

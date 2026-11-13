@@ -21,9 +21,8 @@ endef
 help: ## Muestra esta ayuda
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  make %-10s %s\n", $$1, $$2}'
 
-install: ## Instala las dependencias de backend y frontend
-	cd backend && npm install
-	cd frontend && npm install
+install: ## Instala las dependencias (workspaces: shared, backend, frontend)
+	npm install
 
 db: ## Levanta PostgreSQL (docker, puerto 5434)
 	@if (echo > /dev/tcp/127.0.0.1/5434) 2>/dev/null; then \

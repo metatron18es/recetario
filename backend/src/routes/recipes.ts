@@ -1,3 +1,4 @@
+import { mealTypeSchema, paginationSchema } from '@recetario/shared'
 import { Router, type Response } from 'express'
 import { z } from 'zod'
 import type { Prisma } from '@prisma/client'
@@ -38,12 +39,11 @@ function toApi(r: RecipeRow) {
 }
 
 const listSchema = z.object({
-  page: z.coerce.number().int().min(1).default(1),
-  limit: z.coerce.number().int().min(1).max(50).default(12),
+  ...paginationSchema.shape,
   mine: z.enum(['true', 'false']).default('false'),
   // US-09: free text (recipe name or ingredient) + meal type, combinable.
   q: z.string().trim().max(100).optional(),
-  mealType: z.enum(['Desayuno', 'Almuerzo', 'Comida', 'Merienda', 'Cena']).optional(),
+  mealType: mealTypeSchema.optional(),
 })
 
 // US-08: public paginated list. `mine=true` returns only the session user's recipes.
@@ -104,8 +104,6 @@ recipesRouter.get('/recipes/:id', async (req, res) => {
   }
 })
 
-const MEAL_TYPES = ['Desayuno', 'Almuerzo', 'Comida', 'Merienda', 'Cena']
-
 const ingredientSchema = z.object({
   ingredientId: z.number().int().positive().optional(),
   // A user can propose a new ingredient: it stays pending until the admin validates it.
@@ -133,7 +131,7 @@ function parseRecipeBody(raw: unknown) {
     return { error: (field === 'name' ? 'RECIPE_NAME_REQUIRED' : field === 'prepTimeMin' ? 'INVALID_PREP_TIME' : 'INVALID_RECIPE_BODY') as ErrorCode }
   }
   const { name, mealType, prepTimeMin, description } = body.data
-  if (!MEAL_TYPES.includes(mealType)) return { error: 'INVALID_MEAL_TYPE' as ErrorCode }
+  if (!mealTypeSchema.safeParse(mealType).success) return { error: 'INVALID_MEAL_TYPE' as ErrorCode }
   const steps = body.data.steps.map((s) => s.trim()).filter(Boolean)
   if (body.data.ingredients.length === 0) return { error: 'INGREDIENTS_REQUIRED' as ErrorCode }
   if (steps.length === 0) return { error: 'STEPS_REQUIRED' as ErrorCode }

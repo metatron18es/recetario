@@ -1,3 +1,4 @@
+import { MEAL_TYPES, type MealType } from '@recetario/shared'
 import { defineStore } from 'pinia'
 import type { RecetaApi } from '../lib/api'
 import imgBowlQuinoa from '../assets/recipes/bowl-quinoa.svg'
@@ -10,7 +11,7 @@ import imgHummusCrudites from '../assets/recipes/hummus-crudites.svg'
 import imgWrapPollo from '../assets/recipes/wrap-pollo.svg'
 import imgPlaceholder from '../assets/recipes/placeholder.svg'
 
-export type TipoComida = 'Desayuno' | 'Almuerzo' | 'Comida' | 'Merienda' | 'Cena'
+export type TipoComida = MealType
 export type TipoDieta = 'Vegana' | 'Vegetariana' | 'Pescetariana' | 'Omnívora'
 export type DiaSemana = 'Lun' | 'Mar' | 'Mié' | 'Jue' | 'Vie' | 'Sáb' | 'Dom'
 
@@ -255,7 +256,7 @@ const RECETAS: Receta[] = [
 ]
 
 const DIAS: DiaSemana[] = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom']
-const MOMENTOS: TipoComida[] = ['Desayuno', 'Almuerzo', 'Comida', 'Merienda', 'Cena']
+const MOMENTOS: readonly TipoComida[] = MEAL_TYPES
 
 function seedCalendario(): EntradaCalendario[] {
   const porMomento: Record<TipoComida, number[]> = {
