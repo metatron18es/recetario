@@ -5,7 +5,8 @@ import { Prisma } from '@prisma/client'
 import { z } from 'zod'
 import { prisma } from '../lib/prisma.js'
 import { rolParaEmail } from '../lib/auth.js'
-import { isErrorCode, sendError } from '../lib/errors.js'
+import { sendError } from '../lib/errors.js'
+import { validate } from '../lib/validate.js'
 
 export const authRouter = Router()
 
@@ -16,14 +17,8 @@ const registroSchema = z.object({
 })
 
 // US-01: registro de usuario. El email es único y la contraseña se guarda con hash bcrypt.
-authRouter.post('/auth/registro', async (req, res) => {
-  const parsed = registroSchema.safeParse(req.body)
-  if (!parsed.success) {
-    const code = parsed.error.issues[0].message
-    sendError(res, 400, isErrorCode(code) ? code : 'INVALID_EMAIL')
-    return
-  }
-  const { nombre, email, password } = parsed.data
+authRouter.post('/auth/registro', validate({ body: { schema: registroSchema, fallback: 'INVALID_EMAIL' } }), async (req, res) => {
+  const { nombre, email, password } = req.body
 
   try {
     const passwordHash = await bcrypt.hash(password, 10)
@@ -57,13 +52,8 @@ const cookieOpciones = () => ({
 
 // US-02: inicio de sesión. Emite un JWT en cookie httpOnly. El mensaje de error es el mismo
 // para email inexistente y contraseña errónea, para no revelar qué cuentas existen.
-authRouter.post('/auth/login', async (req, res) => {
-  const parsed = loginSchema.safeParse(req.body)
-  if (!parsed.success) {
-    sendError(res, 401, 'CREDENTIALS_INVALID')
-    return
-  }
-  const { email, password } = parsed.data
+authRouter.post('/auth/login', validate({ body: { schema: loginSchema, fallback: 'CREDENTIALS_INVALID', status: 401 } }), async (req, res) => {
+  const { email, password } = req.body
 
   try {
     const usuario = await prisma.usuario.findUnique({ where: { email } })
