@@ -29,6 +29,11 @@ const TEXTOS: Record<string, string> = {
   RECIPE_CREATE_FAILED: 'No se pudo guardar la receta',
   NOT_RECIPE_OWNER: 'Solo el autor o el administrador pueden editar esta receta',
   RECIPE_UPDATE_FAILED: 'No se pudo guardar la receta',
+  IMAGE_TYPE_NOT_ALLOWED: 'Solo se admiten fotos jpg, png o webp',
+  IMAGE_TOO_LARGE: 'Una de las fotos pesa más de 5 MB',
+  IMAGE_UPLOAD_FAILED: 'No se pudo subir una foto',
+  IMAGE_NOT_FOUND: 'Una foto no se ha subido bien. Vuelve a intentarlo',
+  INVALID_IMAGES: 'Demasiadas fotos: máximo 5 en la receta y 3 por paso',
   INGREDIENTS_LOAD_FAILED: 'No se pudo cargar el catálogo de ingredientes',
 }
 

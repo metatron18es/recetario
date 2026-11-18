@@ -1,6 +1,6 @@
 import { MEAL_TYPES, type MealType } from '@recetario/shared'
 import { defineStore } from 'pinia'
-import type { RecetaApi } from '../lib/api'
+import { urlImagen, type RecetaApi } from '../lib/api'
 import imgBowlQuinoa from '../assets/recipes/bowl-quinoa.svg'
 import imgTostadaAguacate from '../assets/recipes/tostada-aguacate.svg'
 import imgCurryGarbanzos from '../assets/recipes/curry-garbanzos.svg'
@@ -278,8 +278,8 @@ function seedCalendario(): EntradaCalendario[] {
   return entradas
 }
 
-// Receta de la API → receta del store. Las fotos aún no viajan por la API (#87): se conservan las locales de la misma receta.
-function recetaDesdeApi(r: RecetaApi, previa?: Receta): Receta {
+// Receta de la API → receta del store. Las fotos vienen de la API (#87); sin fotos se usa el placeholder.
+function recetaDesdeApi(r: RecetaApi): Receta {
   return {
     id: r.id,
     nombre: r.name,
@@ -288,9 +288,9 @@ function recetaDesdeApi(r: RecetaApi, previa?: Receta): Receta {
     descripcion: r.description,
     kcal: r.kcal,
     ingredientes: r.ingredients.map((i) => ({ ingredienteId: i.ingredientId, cantidad: i.quantity, unidad: i.unit })),
-    pasos: r.steps.map((p, i) => ({ texto: p.text, ...(previa?.pasos[i]?.imagenes?.length ? { imagenes: previa.pasos[i].imagenes } : {}) })),
-    gradiente: previa?.gradiente ?? 'linear-gradient(135deg,var(--leaf),var(--green))',
-    imagenes: previa?.imagenes ?? [IMAGEN_PLACEHOLDER],
+    pasos: r.steps.map((p) => ({ texto: p.text, ...(p.images.length ? { imagenes: p.images.map(urlImagen) } : {}) })),
+    gradiente: 'linear-gradient(135deg,var(--leaf),var(--green))',
+    imagenes: r.images.length ? r.images.map(urlImagen) : [IMAGEN_PLACEHOLDER],
     autorId: r.author?.id ?? null,
   }
 }
@@ -379,46 +379,23 @@ export const useRecetarioStore = defineStore('recetario', {
     },
     // US-08: las recetas del store pasan a ser las de la API (sustituye a las de ejemplo).
     reemplazarRecetasApi(lista: RecetaApi[]) {
-      const previas = new Map(this.recetas.map((r) => [r.id, r]))
-      this.recetas = lista.map((r) => recetaDesdeApi(r, previas.get(r.id)))
+      this.recetas = lista.map(recetaDesdeApi)
     },
     // US-08: inserta o actualiza una receta (detalle abierto por enlace directo).
     guardarRecetaApi(r: RecetaApi) {
       const index = this.recetas.findIndex((x) => x.id === r.id)
-      const nueva = recetaDesdeApi(r, this.recetas[index])
+      const nueva = recetaDesdeApi(r)
       if (index === -1) this.recetas.push(nueva)
       else this.recetas[index] = nueva
     },
     // US-05: guarda en el store la receta que ha creado la API (para verla en lista y detalle).
-    anadirRecetaApi(r: RecetaApi, datos: { imagenes: string[]; pasos: PasoPreparacion[] }) {
-      this.recetas.push({
-        id: r.id,
-        nombre: r.name,
-        tipoComida: r.mealType as TipoComida,
-        tiempoPreparacionMin: r.prepTimeMin,
-        descripcion: r.description,
-        kcal: r.kcal,
-        ingredientes: r.ingredients.map((i) => ({ ingredienteId: i.ingredientId, cantidad: i.quantity, unidad: i.unit })),
-        pasos: r.steps.map((p, i) => ({ texto: p.text, ...(datos.pasos[i]?.imagenes?.length ? { imagenes: datos.pasos[i].imagenes } : {}) })),
-        gradiente: 'linear-gradient(135deg,var(--leaf),var(--green))',
-        imagenes: datos.imagenes,
-        autorId: r.author?.id ?? null,
-      })
+    anadirRecetaApi(r: RecetaApi) {
+      this.recetas.push(recetaDesdeApi(r))
     },
     // US-06: refleja en el store la receta que ha devuelto la API tras editarla.
-    actualizarRecetaApi(r: RecetaApi, datos: { imagenes: string[]; pasos: PasoPreparacion[] }) {
-      const actual = this.recetas.find((x) => x.id === r.id)
-      if (!actual) return
-      Object.assign(actual, {
-        nombre: r.name,
-        tipoComida: r.mealType as TipoComida,
-        tiempoPreparacionMin: r.prepTimeMin,
-        descripcion: r.description,
-        kcal: r.kcal,
-        ingredientes: r.ingredients.map((i) => ({ ingredienteId: i.ingredientId, cantidad: i.quantity, unidad: i.unit })),
-        pasos: r.steps.map((p, i) => ({ texto: p.text, ...(datos.pasos[i]?.imagenes?.length ? { imagenes: datos.pasos[i].imagenes } : {}) })),
-        imagenes: datos.imagenes,
-      })
+    actualizarRecetaApi(r: RecetaApi) {
+      const index = this.recetas.findIndex((x) => x.id === r.id)
+      if (index !== -1) this.recetas[index] = recetaDesdeApi(r)
     },
     anadirReceta(receta: Omit<Receta, 'id'>) {
       const id = Math.max(...this.recetas.map((r) => r.id)) + 1

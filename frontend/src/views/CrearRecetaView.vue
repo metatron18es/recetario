@@ -2,8 +2,8 @@
 import TpPageHeader from '../components/molecules/tp-page-header.vue'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { IMAGEN_PLACEHOLDER, useRecetarioStore, type PasoPreparacion, type TipoComida } from '../stores/recetario'
-import { actualizarReceta, crearReceta, listarIngredientes } from '../lib/api'
+import { useRecetarioStore, type PasoPreparacion, type TipoComida } from '../stores/recetario'
+import { actualizarReceta, crearReceta, listarIngredientes, subirImagen } from '../lib/api'
 import TpButton from '../components/atoms/tp-button.vue'
 import TpInput from '../components/atoms/tp-input.vue'
 import TpSelect from '../components/atoms/tp-select.vue'
@@ -71,6 +71,9 @@ onMounted(async () => {
   }
 })
 
+// Las fotos nuevas son data URLs: se suben y se sustituyen por el nombre de fichero.
+const subirFotos = (fotos: string[]) => Promise.all(fotos.filter((f) => f.startsWith('data:')).map(subirImagen))
+
 async function guardar() {
   const pasosLimpios = pasos.value.filter((p) => p.texto.trim().length > 0)
   guardando.value = true
@@ -90,15 +93,19 @@ async function guardar() {
         })),
       steps: pasosLimpios.map((p) => p.texto.trim()),
     }
-    const extra = {
-      imagenes: fotosReceta.value.length ? [...fotosReceta.value] : [IMAGEN_PLACEHOLDER],
-      pasos: pasosLimpios,
-    }
-    const receta = modoEdicion.value && props.editId ? await actualizarReceta(props.editId, datos) : await crearReceta(datos)
+    // Al crear se suben primero las fotos; al editar la API las ignora todavía (#6).
+    const receta =
+      modoEdicion.value && props.editId
+        ? await actualizarReceta(props.editId, datos)
+        : await crearReceta({
+            ...datos,
+            images: await subirFotos(fotosReceta.value),
+            steps: await Promise.all(pasosLimpios.map(async (p) => ({ text: p.texto.trim(), images: await subirFotos(p.imagenes ?? []) }))),
+          })
     // Un ingrediente propuesto acaba de crearse en la API: se recarga el catálogo para conocer su id.
     store.cargarCatalogo(await listarIngredientes())
-    if (modoEdicion.value) store.actualizarRecetaApi(receta, extra)
-    else store.anadirRecetaApi(receta, extra)
+    if (modoEdicion.value) store.actualizarRecetaApi(receta)
+    else store.anadirRecetaApi(receta)
     router.push(`/recetas/${receta.id}`)
   } catch (e) {
     error.value = e instanceof Error ? e.message : ''
