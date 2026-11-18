@@ -76,7 +76,9 @@ export interface RecetaApi {
   kcal: number
   author: { id: number; name: string } | null
   ingredients: { ingredientId: number; name: string; quantity: number; unit: string }[]
-  steps: { text: string }[]
+  // URLs relativas a la API (`/uploads/...`); usar `urlImagen` para mostrarlas.
+  images: string[]
+  steps: { text: string; images: string[] }[]
 }
 
 // US-05: catálogo de ingredientes (validados + los propuestos por el usuario de la sesión).
@@ -99,7 +101,9 @@ export interface NuevaRecetaApi {
     quantity: number
     unit: string
   }[]
-  steps: string[]
+  // Nombres de fichero devueltos por `subirImagen`; solo se envían al crear (editar las ignora, #6).
+  images?: string[]
+  steps: (string | { text: string; images: string[] })[]
 }
 
 // US-06: reemplaza la receta; solo su autor o el administrador.
@@ -151,4 +155,21 @@ export async function obtenerReceta(id: number): Promise<RecetaApi> {
   const body = await res.json().catch(() => ({}))
   if (!res.ok) throw new Error(textoDeError(body.error?.code))
   return body
+}
+
+// US-87: las URLs de fotos que devuelve la API son relativas (`/uploads/x.png`) y las sirve el backend.
+export const urlImagen = (ruta: string) => `${API_URL}${ruta}`
+
+// Sube una foto (data URL del selector) y devuelve el nombre de fichero que luego se envía con la receta.
+export async function subirImagen(dataUrl: string): Promise<string> {
+  const blob = await (await fetch(dataUrl)).blob()
+  const res = await fetch(`${API_URL}/api/recipes/images`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': blob.type },
+    body: blob,
+  })
+  const body = await res.json().catch(() => ({}))
+  if (!res.ok) throw new Error(textoDeError(body.error?.code))
+  return body.file
 }
