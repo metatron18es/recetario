@@ -128,12 +128,16 @@ export async function crearReceta(datos: NuevaRecetaApi): Promise<RecetaApi> {
   return body
 }
 
-// US-08: lista pública; la API pagina (máx. 50), así que se piden todas las páginas.
-export async function listarRecetas(): Promise<RecetaApi[]> {
+// US-08/US-09: lista pública con filtros opcionales (`q` busca en nombre e ingredientes). La API
+// pagina (máx. 50), así que se piden todas las páginas.
+export async function listarRecetas(filtros: { q?: string; mealType?: MealType } = {}): Promise<RecetaApi[]> {
   const limit = 50
   const todas: RecetaApi[] = []
   for (let page = 1; ; page++) {
-    const res = await fetch(`${API_URL}/api/recipes?page=${page}&limit=${limit}`, { credentials: 'include' })
+    const params = new URLSearchParams({ page: String(page), limit: String(limit) })
+    if (filtros.q) params.set('q', filtros.q)
+    if (filtros.mealType) params.set('mealType', filtros.mealType)
+    const res = await fetch(`${API_URL}/api/recipes?${params}`, { credentials: 'include' })
     const body = await res.json().catch(() => ({}))
     if (!res.ok) throw new Error(textoDeError(body.error?.code))
     todas.push(...body.recipes)
