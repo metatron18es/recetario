@@ -99,13 +99,22 @@ model IngredienteAlergia {
   @@map("ingrediente_alergia")
 }
 
+// Debe coincidir con MEAL_TYPES de @recetario/shared (lo comprueba un test).
+enum TipoComida {
+  Desayuno
+  Almuerzo
+  Comida
+  Merienda
+  Cena
+}
+
 // Las recetas son públicas: las ve cualquier usuario. `usuarioId` guarda el autor; si el autor se da
 // de baja, la receta se conserva (queda sin autor). Solo el administrador puede borrarlas.
 model Receta {
   id                   Int    @id @default(autoincrement())
   usuarioId            Int?   @map("usuario_id")
   nombre               String
-  tipoComida           String @map("tipo_comida")
+  tipoComida           TipoComida @map("tipo_comida")
   tiempoPreparacionMin Int    @map("tiempo_preparacion_min")
   descripcion          String @default("")
 
@@ -161,7 +170,7 @@ model EntradaCalendario {
   id           Int    @id @default(autoincrement())
   calendarioId Int    @map("calendario_id")
   diaSemana    String @map("dia_semana")
-  tipoComida   String @map("tipo_comida")
+  tipoComida   TipoComida @map("tipo_comida")
   recetaId     Int?   @map("receta_id")
 
   calendario CalendarioSemanal @relation(fields: [calendarioId], references: [id], onDelete: Cascade)
