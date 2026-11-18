@@ -7,13 +7,15 @@ import { optionalUserId, requireAdmin, requireUserId, ROL_ADMIN } from '../lib/a
 import { recipeKcal, UNITS } from '../lib/nutrition.js'
 import { sendError, type ErrorCode } from '../lib/errors.js'
 import { idParams, validate } from '../lib/validate.js'
+import { imageExists, imageUrl, IMAGE_FILE_RE, MAX_RECIPE_IMAGES, MAX_STEP_IMAGES } from '../lib/storage.js'
 
 export const recipesRouter = Router()
 
 const include = {
   usuario: { select: { id: true, nombre: true } },
   ingredientes: { include: { ingrediente: true }, orderBy: { ingredienteId: 'asc' as const } },
-  pasos: { orderBy: { orden: 'asc' as const } },
+  pasos: { orderBy: { orden: 'asc' as const }, include: { imagenes: { orderBy: { orden: 'asc' as const } } } },
+  imagenes: { where: { pasoId: null }, orderBy: { orden: 'asc' as const } },
 }
 
 type RecipeRow = NonNullable<Awaited<ReturnType<typeof findRecipe>>>
@@ -35,7 +37,8 @@ function toApi(r: RecipeRow) {
       quantity: i.cantidad,
       unit: i.unidad,
     })),
-    steps: r.pasos.map((p) => ({ text: p.texto })),
+    images: r.imagenes.map((i) => imageUrl(i.archivo)),
+    steps: r.pasos.map((p) => ({ text: p.texto, images: p.imagenes.map((i) => imageUrl(i.archivo)) })),
   }
 }
 
@@ -105,6 +108,8 @@ const ingredientSchema = z.object({
   unit: z.string().refine((u) => UNITS.includes(u)),
 })
 
+const imageFile = z.string().regex(IMAGE_FILE_RE)
+
 const createSchema = z.object({
   name: z.string().trim().min(1, 'RECIPE_NAME_REQUIRED'),
   mealType: mealTypeSchema,
@@ -115,9 +120,17 @@ const createSchema = z.object({
       ingredientSchema.refine((i) => (i.ingredientId === undefined) !== (i.proposed === undefined)),
     )
     .min(1, 'INGREDIENTS_REQUIRED'),
+  // File names returned by POST /recipes/images.
+  images: z.array(imageFile).max(MAX_RECIPE_IMAGES).default([]),
+  // A step is plain text or `{ text, images }`; empty steps are dropped.
   steps: z
-    .array(z.string())
-    .transform((steps) => steps.map((s) => s.trim()).filter(Boolean))
+    .array(z.union([z.string(), z.object({ text: z.string(), images: z.array(imageFile).max(MAX_STEP_IMAGES).default([]) })]))
+    .transform((steps) =>
+      steps
+        .map((s) => (typeof s === 'string' ? { text: s, images: [] as string[] } : s))
+        .map((s) => ({ ...s, text: s.text.trim() }))
+        .filter((s) => s.text),
+    )
     .refine((steps) => steps.length > 0, 'STEPS_REQUIRED'),
 })
 
@@ -128,6 +141,8 @@ const recipeBody = {
     mealType: 'INVALID_MEAL_TYPE' as const,
     prepTimeMin: 'INVALID_PREP_TIME' as const,
     'ingredients.*': 'INVALID_INGREDIENT' as const,
+    images: 'INVALID_IMAGES' as const,
+    steps: 'INVALID_IMAGES' as const,
   },
 }
 
@@ -158,7 +173,7 @@ async function resolveIngredients(tx: Tx, items: z.infer<typeof ingredientSchema
 
 function sendWriteError(res: Response, e: unknown, fallback: ErrorCode) {
   const code = e instanceof Error ? e.message : ''
-  if (code === 'INGREDIENT_NOT_FOUND' || code === 'DUPLICATE_INGREDIENT') sendError(res, 400, code)
+  if (code === 'INGREDIENT_NOT_FOUND' || code === 'DUPLICATE_INGREDIENT' || code === 'IMAGE_NOT_FOUND') sendError(res, 400, code)
   else sendError(res, 500, fallback)
 }
 
@@ -166,12 +181,15 @@ function sendWriteError(res: Response, e: unknown, fallback: ErrorCode) {
 recipesRouter.post('/recipes', validate({ body: recipeBody }), async (req, res) => {
   const usuarioId = requireUserId(req, res)
   if (usuarioId === null) return
-  const { name, mealType, prepTimeMin, description, steps, ingredients: items } = req.body
+  const { name, mealType, prepTimeMin, description, steps, images, ingredients: items } = req.body
 
   try {
+    for (const file of [...images, ...steps.flatMap((s) => s.images)]) {
+      if (!(await imageExists(file))) return sendError(res, 400, 'IMAGE_NOT_FOUND')
+    }
     const created = await prisma.$transaction(async (tx) => {
       const rows = await resolveIngredients(tx, items, usuarioId)
-      return tx.receta.create({
+      const recipe = await tx.receta.create({
         data: {
           usuarioId,
           nombre: name,
@@ -179,10 +197,20 @@ recipesRouter.post('/recipes', validate({ body: recipeBody }), async (req, res) 
           tiempoPreparacionMin: prepTimeMin,
           descripcion: description,
           ingredientes: { create: rows },
-          pasos: { create: steps.map((texto, i) => ({ orden: i + 1, texto })) },
+          pasos: { create: steps.map((s, i) => ({ orden: i + 1, texto: s.text })) },
         },
         include,
       })
+      // Photos go in apart: the recipe's have no step (`paso_id` null), each step's point to its row.
+      const photos = [
+        ...images.map((archivo, n) => ({ recetaId: recipe.id, pasoId: null, orden: n + 1, archivo })),
+        ...steps.flatMap((s, i) =>
+          s.images.map((archivo, n) => ({ recetaId: recipe.id, pasoId: recipe.pasos[i].id, orden: n + 1, archivo })),
+        ),
+      ]
+      if (photos.length === 0) return recipe
+      await tx.imagenReceta.createMany({ data: photos })
+      return tx.receta.findUniqueOrThrow({ where: { id: recipe.id }, include })
     })
     res.status(201).json(toApi(created))
   } catch (e) {
@@ -214,7 +242,7 @@ recipesRouter.put('/recipes/:id', validate({ params: idParams, body: recipeBody 
           tiempoPreparacionMin: prepTimeMin,
           descripcion: description,
           ingredientes: { deleteMany: {}, create: rows },
-          pasos: { deleteMany: {}, create: steps.map((texto, i) => ({ orden: i + 1, texto })) },
+          pasos: { deleteMany: {}, create: steps.map((s, i) => ({ orden: i + 1, texto: s.text })) },
         },
         include,
       })

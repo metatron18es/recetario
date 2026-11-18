@@ -33,6 +33,11 @@ const MESSAGES = {
   RECIPE_UPDATE_FAILED: 'Could not update the recipe',
   RECIPE_IN_USE: 'The recipe is used in calendars; confirm with force=true to delete it',
   RECIPE_DELETE_FAILED: 'Could not delete the recipe',
+  IMAGE_TYPE_NOT_ALLOWED: 'Only jpg, png and webp images are allowed',
+  IMAGE_TOO_LARGE: 'The image exceeds the maximum size',
+  IMAGE_UPLOAD_FAILED: 'Could not save the image',
+  IMAGE_NOT_FOUND: 'An image file does not exist; upload it first',
+  INVALID_IMAGES: 'Invalid image list or too many images',
   INGREDIENTS_LOAD_FAILED: 'Could not load ingredients',
 } as const
 

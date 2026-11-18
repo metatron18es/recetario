@@ -20,3 +20,6 @@ dist/
 !docs/entregas/*.pdf
 skills-lock.json
 .vercel
+
+# Fotos subidas en local (lib/storage.ts)
+backend/uploads/

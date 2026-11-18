@@ -20,7 +20,8 @@ const receta = (extra = {}) => ({
     { ingredienteId: 1, cantidad: 200, unidad: 'g', ingrediente: { nombre: 'Quinoa', calorias100g: 120 } },
     { ingredienteId: 2, cantidad: 1, unidad: 'cda', ingrediente: { nombre: 'Aceite', calorias100g: 900 } },
   ],
-  pasos: [{ orden: 1, texto: 'Cocer' }],
+  imagenes: [],
+  pasos: [{ id: 1, orden: 1, texto: 'Cocer', imagenes: [] }],
   ...extra,
 })
 
@@ -90,7 +91,7 @@ describe('GET /api/recipes/:id', () => {
     const res = await request(createApp()).get('/api/recipes/1')
     expect(res.status).toBe(200)
     expect(res.body.ingredients[0]).toEqual({ ingredientId: 1, name: 'Quinoa', quantity: 200, unit: 'g' })
-    expect(res.body.steps).toEqual([{ text: 'Cocer' }])
+    expect(res.body.steps).toEqual([{ text: 'Cocer', images: [] }])
   })
 
   it('404 if missing and 400 on invalid id', async () => {
