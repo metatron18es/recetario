@@ -37,7 +37,7 @@ export async function requireAdmin(req: Request, res: Response, next: NextFuncti
 }
 
 // Id of the user in the JWT cookie, or null if there is no valid session. For public routes that vary by user.
-export function optionalUserId(req: Request): number | null {
+export function optionalUserId(req: Request<any, any, any, any>): number | null {
   const token = /(?:^|;\s*)token=([^;]+)/.exec(req.headers.cookie ?? '')?.[1]
   if (!token) return null
   try {
@@ -49,7 +49,7 @@ export function optionalUserId(req: Request): number | null {
 }
 
 // Id of the session user; sends 401 and returns null when there is no valid session.
-export function requireUserId(req: Request, res: Response): number | null {
+export function requireUserId(req: Request<any, any, any, any>, res: Response): number | null {
   const id = optionalUserId(req)
   if (id === null) sendError(res, 401, 'NOT_AUTHENTICATED')
   return id

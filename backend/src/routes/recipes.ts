@@ -6,6 +6,7 @@ import { prisma } from '../lib/prisma.js'
 import { optionalUserId, requireAdmin, requireUserId, ROL_ADMIN } from '../lib/auth.js'
 import { recipeKcal, UNITS } from '../lib/nutrition.js'
 import { sendError, type ErrorCode } from '../lib/errors.js'
+import { idParams, validate } from '../lib/validate.js'
 
 export const recipesRouter = Router()
 
@@ -47,14 +48,10 @@ const listSchema = z.object({
 })
 
 // US-08: public paginated list. `mine=true` returns only the session user's recipes.
-recipesRouter.get('/recipes', async (req, res) => {
-  const parsed = listSchema.safeParse(req.query)
-  if (!parsed.success) {
-    const badMeal = parsed.error.issues.some((i) => i.path[0] === 'mealType')
-    sendError(res, 400, badMeal ? 'INVALID_MEAL_TYPE' : 'INVALID_PAGINATION')
-    return
-  }
-  const { page, limit, mine, q, mealType } = parsed.data
+const listQuery = { schema: listSchema, fallback: 'INVALID_PAGINATION' as const, fields: { mealType: 'INVALID_MEAL_TYPE' as const } }
+
+recipesRouter.get('/recipes', validate({ query: listQuery }), async (req, res) => {
+  const { page, limit, mine, q, mealType } = req.query
 
   let where: Prisma.RecetaWhereInput = {}
   if (mine === 'true') {
@@ -86,12 +83,8 @@ recipesRouter.get('/recipes', async (req, res) => {
 })
 
 // US-08: public detail with ingredients, steps and kcal.
-recipesRouter.get('/recipes/:id', async (req, res) => {
+recipesRouter.get('/recipes/:id', validate({ params: idParams }), async (req, res) => {
   const id = Number(req.params.id)
-  if (!Number.isInteger(id) || id < 1) {
-    sendError(res, 400, 'INVALID_ID')
-    return
-  }
   try {
     const recipe = await findRecipe(id)
     if (!recipe) {
@@ -113,34 +106,32 @@ const ingredientSchema = z.object({
 })
 
 const createSchema = z.object({
-  name: z.string().trim().min(1),
-  mealType: z.string(),
+  name: z.string().trim().min(1, 'RECIPE_NAME_REQUIRED'),
+  mealType: mealTypeSchema,
   prepTimeMin: z.number().int().positive(),
   description: z.string().default(''),
-  ingredients: z.array(z.any()),
-  steps: z.array(z.string()),
+  ingredients: z
+    .array(
+      ingredientSchema.refine((i) => (i.ingredientId === undefined) !== (i.proposed === undefined)),
+    )
+    .min(1, 'INGREDIENTS_REQUIRED'),
+  steps: z
+    .array(z.string())
+    .transform((steps) => steps.map((s) => s.trim()).filter(Boolean))
+    .refine((steps) => steps.length > 0, 'STEPS_REQUIRED'),
 })
 
-type Tx = Parameters<Parameters<typeof prisma.$transaction>[0]>[0]
-
-// Validates the body shared by create and edit. Returns the error code, or the clean data.
-function parseRecipeBody(raw: unknown) {
-  const body = createSchema.safeParse(raw)
-  if (!body.success) {
-    const field = body.error.issues[0]?.path[0]
-    return { error: (field === 'name' ? 'RECIPE_NAME_REQUIRED' : field === 'prepTimeMin' ? 'INVALID_PREP_TIME' : 'INVALID_RECIPE_BODY') as ErrorCode }
-  }
-  const { name, mealType, prepTimeMin, description } = body.data
-  if (!mealTypeSchema.safeParse(mealType).success) return { error: 'INVALID_MEAL_TYPE' as ErrorCode }
-  const steps = body.data.steps.map((s) => s.trim()).filter(Boolean)
-  if (body.data.ingredients.length === 0) return { error: 'INGREDIENTS_REQUIRED' as ErrorCode }
-  if (steps.length === 0) return { error: 'STEPS_REQUIRED' as ErrorCode }
-  const items = z.array(ingredientSchema).safeParse(body.data.ingredients)
-  if (!items.success || items.data.some((i) => (i.ingredientId === undefined) === (i.proposed === undefined))) {
-    return { error: 'INVALID_INGREDIENT' as ErrorCode }
-  }
-  return { data: { name, mealType, prepTimeMin, description, steps, items: items.data } }
+const recipeBody = {
+  schema: createSchema,
+  fallback: 'INVALID_RECIPE_BODY' as const,
+  fields: {
+    mealType: 'INVALID_MEAL_TYPE' as const,
+    prepTimeMin: 'INVALID_PREP_TIME' as const,
+    'ingredients.*': 'INVALID_INGREDIENT' as const,
+  },
 }
+
+type Tx = Parameters<Parameters<typeof prisma.$transaction>[0]>[0]
 
 // Resolves existing ingredients and creates the proposed ones (pending admin validation).
 async function resolveIngredients(tx: Tx, items: z.infer<typeof ingredientSchema>[], usuarioId: number) {
@@ -172,13 +163,10 @@ function sendWriteError(res: Response, e: unknown, fallback: ErrorCode) {
 }
 
 // US-05: any signed-in user creates a recipe; it is public and linked to its author.
-recipesRouter.post('/recipes', async (req, res) => {
+recipesRouter.post('/recipes', validate({ body: recipeBody }), async (req, res) => {
   const usuarioId = requireUserId(req, res)
   if (usuarioId === null) return
-
-  const parsed = parseRecipeBody(req.body)
-  if (parsed.error) return sendError(res, 400, parsed.error)
-  const { name, mealType, prepTimeMin, description, steps, items } = parsed.data
+  const { name, mealType, prepTimeMin, description, steps, ingredients: items } = req.body
 
   try {
     const created = await prisma.$transaction(async (tx) => {
@@ -203,15 +191,11 @@ recipesRouter.post('/recipes', async (req, res) => {
 })
 
 // US-06: only the author or the admin edits a recipe; the whole recipe is replaced.
-recipesRouter.put('/recipes/:id', async (req, res) => {
+recipesRouter.put('/recipes/:id', validate({ params: idParams, body: recipeBody }), async (req, res) => {
   const usuarioId = requireUserId(req, res)
   if (usuarioId === null) return
   const id = Number(req.params.id)
-  if (!Number.isInteger(id) || id < 1) return sendError(res, 400, 'INVALID_ID')
-
-  const parsed = parseRecipeBody(req.body)
-  if (parsed.error) return sendError(res, 400, parsed.error)
-  const { name, mealType, prepTimeMin, description, steps, items } = parsed.data
+  const { name, mealType, prepTimeMin, description, steps, ingredients: items } = req.body
 
   try {
     const current = await prisma.receta.findUnique({ where: { id }, select: { usuarioId: true } })
@@ -243,9 +227,10 @@ recipesRouter.put('/recipes/:id', async (req, res) => {
 
 // US-07: only the admin deletes. If calendars use the recipe, answer 409 with the usage count
 // until the client repeats the call with ?force=true; the calendar cells are emptied (SetNull).
-recipesRouter.delete('/recipes/:id', requireAdmin, async (req, res) => {
+const deleteQuery = { schema: z.object({ force: z.string().optional() }).passthrough(), fallback: 'INVALID_ID' as const }
+
+recipesRouter.delete('/recipes/:id', requireAdmin, validate({ params: idParams, query: deleteQuery }), async (req, res) => {
   const id = Number(req.params.id)
-  if (!Number.isInteger(id) || id < 1) return sendError(res, 400, 'INVALID_ID')
   try {
     if (!(await prisma.receta.findUnique({ where: { id }, select: { id: true } }))) {
       return sendError(res, 404, 'RECIPE_NOT_FOUND')
