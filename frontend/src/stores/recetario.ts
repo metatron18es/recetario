@@ -278,6 +278,23 @@ function seedCalendario(): EntradaCalendario[] {
   return entradas
 }
 
+// Receta de la API → receta del store. Las fotos aún no viajan por la API (#87): se conservan las locales de la misma receta.
+function recetaDesdeApi(r: RecetaApi, previa?: Receta): Receta {
+  return {
+    id: r.id,
+    nombre: r.name,
+    tipoComida: r.mealType as TipoComida,
+    tiempoPreparacionMin: r.prepTimeMin,
+    descripcion: r.description,
+    kcal: r.kcal,
+    ingredientes: r.ingredients.map((i) => ({ ingredienteId: i.ingredientId, cantidad: i.quantity, unidad: i.unit })),
+    pasos: r.steps.map((p, i) => ({ texto: p.text, ...(previa?.pasos[i]?.imagenes?.length ? { imagenes: previa.pasos[i].imagenes } : {}) })),
+    gradiente: previa?.gradiente ?? 'linear-gradient(135deg,var(--leaf),var(--green))',
+    imagenes: previa?.imagenes ?? [IMAGEN_PLACEHOLDER],
+    autorId: r.author?.id ?? null,
+  }
+}
+
 export const useRecetarioStore = defineStore('recetario', {
   state: () => ({
     usuario: { id: 1, nombre: 'María López', email: 'maria.lopez@email.com' },
@@ -359,6 +376,18 @@ export const useRecetarioStore = defineStore('recetario', {
         if (actual) Object.assign(actual, nuevo)
         else this.ingredientes.push({ id: i.id, ...nuevo })
       }
+    },
+    // US-08: las recetas del store pasan a ser las de la API (sustituye a las de ejemplo).
+    reemplazarRecetasApi(lista: RecetaApi[]) {
+      const previas = new Map(this.recetas.map((r) => [r.id, r]))
+      this.recetas = lista.map((r) => recetaDesdeApi(r, previas.get(r.id)))
+    },
+    // US-08: inserta o actualiza una receta (detalle abierto por enlace directo).
+    guardarRecetaApi(r: RecetaApi) {
+      const index = this.recetas.findIndex((x) => x.id === r.id)
+      const nueva = recetaDesdeApi(r, this.recetas[index])
+      if (index === -1) this.recetas.push(nueva)
+      else this.recetas[index] = nueva
     },
     // US-05: guarda en el store la receta que ha creado la API (para verla en lista y detalle).
     anadirRecetaApi(r: RecetaApi, datos: { imagenes: string[]; pasos: PasoPreparacion[] }) {
