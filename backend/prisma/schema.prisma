@@ -121,6 +121,7 @@ model Receta {
   usuario      Usuario?            @relation(fields: [usuarioId], references: [id], onDelete: SetNull)
   ingredientes RecetaIngrediente[]
   pasos        PasoReceta[]
+  imagenes     ImagenReceta[]
   entradas     EntradaCalendario[]
 
   @@map("receta")
@@ -147,10 +148,26 @@ model PasoReceta {
   orden    Int
   texto    String
 
-  receta Receta @relation(fields: [recetaId], references: [id], onDelete: Cascade)
+  receta   Receta         @relation(fields: [recetaId], references: [id], onDelete: Cascade)
+  imagenes ImagenReceta[]
 
   @@unique([recetaId, orden])
   @@map("paso_receta")
+}
+
+// Foto de una receta (pasoId null) o de uno de sus pasos. `archivo` es el nombre del fichero
+// en el almacenamiento (ver lib/storage.ts), no una ruta ni una URL.
+model ImagenReceta {
+  id       Int    @id @default(autoincrement())
+  recetaId Int    @map("receta_id")
+  pasoId   Int?   @map("paso_id")
+  orden    Int
+  archivo  String
+
+  receta Receta      @relation(fields: [recetaId], references: [id], onDelete: Cascade)
+  paso   PasoReceta? @relation(fields: [pasoId], references: [id], onDelete: Cascade)
+
+  @@map("imagen_receta")
 }
 
 // --- Planificación semanal --------------------------------------------------

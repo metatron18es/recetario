@@ -30,7 +30,8 @@ const updated = {
   descripcion: '',
   usuario: { id: 7, nombre: 'Ana' },
   ingredientes: [{ ingredienteId: 1, cantidad: 100, unidad: 'g', ingrediente: { nombre: 'Quinoa', calorias100g: 120 } }],
-  pasos: [{ orden: 1, texto: 'Mezclar' }],
+  imagenes: [],
+  pasos: [{ id: 1, orden: 1, texto: 'Mezclar', imagenes: [] }],
 }
 const put = (body: object, sub = '7', id = 9) => request(createApp()).put(`/api/recipes/${id}`).set('Cookie', cookie(sub)).send(body)
 
