@@ -127,3 +127,24 @@ export async function crearReceta(datos: NuevaRecetaApi): Promise<RecetaApi> {
   if (!res.ok) throw new Error(textoDeError(body.error?.code))
   return body
 }
+
+// US-08: lista pública; la API pagina (máx. 50), así que se piden todas las páginas.
+export async function listarRecetas(): Promise<RecetaApi[]> {
+  const limit = 50
+  const todas: RecetaApi[] = []
+  for (let page = 1; ; page++) {
+    const res = await fetch(`${API_URL}/api/recipes?page=${page}&limit=${limit}`, { credentials: 'include' })
+    const body = await res.json().catch(() => ({}))
+    if (!res.ok) throw new Error(textoDeError(body.error?.code))
+    todas.push(...body.recipes)
+    if (todas.length >= body.total || body.recipes.length === 0) return todas
+  }
+}
+
+// US-08: detalle público; la API responde 404 si no existe.
+export async function obtenerReceta(id: number): Promise<RecetaApi> {
+  const res = await fetch(`${API_URL}/api/recipes/${id}`, { credentials: 'include' })
+  const body = await res.json().catch(() => ({}))
+  if (!res.ok) throw new Error(textoDeError(body.error?.code))
+  return body
+}

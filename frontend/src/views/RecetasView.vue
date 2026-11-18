@@ -5,15 +5,28 @@ import TpEmptyState from '../components/molecules/tp-empty-state.vue'
 import TpButton from '../components/atoms/tp-button.vue'
 import TpRecipeCard from '../components/molecules/tp-recipe-card.vue'
 import TpPageHeader from '../components/molecules/tp-page-header.vue'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { MEAL_TYPES } from '@recetario/shared'
 import { useRecetarioStore, type TipoComida } from '../stores/recetario'
 import { sesion } from '../lib/sesion'
+import { listarRecetas } from '../lib/api'
 
 const store = useRecetarioStore()
 const filtro = ref<'Todas' | TipoComida>('Todas')
 const filtros: ('Todas' | TipoComida)[] = ['Todas', ...MEAL_TYPES]
 const busqueda = ref('')
+const cargando = ref(true)
+const error = ref('')
+
+onMounted(async () => {
+  try {
+    store.reemplazarRecetasApi(await listarRecetas())
+  } catch (e) {
+    error.value = e instanceof Error ? e.message : 'No se han podido cargar las recetas.'
+  } finally {
+    cargando.value = false
+  }
+})
 
 const recetasFiltradas = computed(() => {
   return store.recetas.filter((r) => {
@@ -42,7 +55,9 @@ const recetasFiltradas = computed(() => {
       <tp-recipe-card v-for="receta in recetasFiltradas" :key="receta.id" :recipe="receta" />
     </div>
 
-    <tp-empty-state v-if="recetasFiltradas.length === 0">No hay recetas que coincidan con la búsqueda.</tp-empty-state>
+    <tp-empty-state v-if="cargando">Cargando recetas…</tp-empty-state>
+    <tp-empty-state v-else-if="error">{{ error }}</tp-empty-state>
+    <tp-empty-state v-else-if="recetasFiltradas.length === 0">No hay recetas que coincidan con la búsqueda.</tp-empty-state>
   </div>
 </template>
 

@@ -8,9 +8,10 @@ import TpStepList from '../components/molecules/tp-step-list.vue'
 import TpButton from '../components/atoms/tp-button.vue'
 import TpChip from '../components/atoms/tp-chip.vue'
 import TpNotification from '../components/molecules/tp-notification.vue'
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { sesion } from '../lib/sesion'
+import { listarIngredientes, obtenerReceta } from '../lib/api'
 import { useRecetarioStore } from '../stores/recetario'
 
 const props = defineProps<{ id: number }>()
@@ -18,6 +19,20 @@ const store = useRecetarioStore()
 const router = useRouter()
 
 const receta = computed(() => store.recetaPorId(props.id))
+const cargando = ref(true)
+
+// US-08: el detalle se pide a la API (también al entrar por enlace directo); si falla, se muestra lo que haya en el store.
+onMounted(async () => {
+  try {
+    const [api, catalogo] = await Promise.all([obtenerReceta(props.id), listarIngredientes()])
+    store.cargarCatalogo(catalogo)
+    store.guardarRecetaApi(api)
+  } catch {
+    // Sin API o receta inexistente: se queda lo que haya en el store (o el aviso "no se ha encontrado").
+  } finally {
+    cargando.value = false
+  }
+})
 
 const ingredientesTexto = computed(
   () =>
@@ -83,7 +98,7 @@ function editarReceta() {
       </div>
     </div>
   </div>
-  <div v-else class="page">
+  <div v-else-if="!cargando" class="page">
     <tp-empty-state>
       No se ha encontrado esta receta.
       <template #action><tp-button variant="link" to="/recetas">Volver a mis recetas</tp-button></template>
